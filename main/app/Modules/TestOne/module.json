@@ -1,0 +1,13 @@
+{
+    "name": "TestOne",
+    "alias": "testone",
+    "description": "",
+    "keywords": [],
+    "order": 0,
+    "providers": [
+        "App\\Modules\\TestOne\\Providers\\TestOneServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}
