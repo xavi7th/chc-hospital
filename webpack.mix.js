@@ -1,16 +1,15 @@
 const mix = require( 'laravel-mix' );
 require( 'laravel-mix-svelte' );
 
-// mix.setPublicPath( './public_html' );
+mix.setPublicPath( './public_html' );
 
-let glob = require( 'glob' );
 let fs = require( 'fs-extra' );
 
-let modules = fs.readdirSync( './app/Modules' ); // Make sure the path of your modules are correct
+let modules = fs.readdirSync( './main/app/Modules' ); // Make sure the path of your modules are correct
 
 if ( modules && modules.length > 0 ) {
     modules.forEach( ( module ) => {
-        let path = `./app/Modules/${module}/webpack.mix.js`;
+        let path = `./main/app/Modules/${module}/webpack.mix.js`;
         if ( fs.existsSync( path ) ) {
             require( path );
         }
@@ -28,44 +27,26 @@ if ( modules && modules.length > 0 ) {
  |
  */
 
+mix.babelConfig( {
+    plugins: [ '@babel/plugin-syntax-dynamic-import' ],
+} );
 
-mix.js( 'resources/js/app.js', 'public/js' )
-    .sass( 'resources/sass/app.scss', 'public/css' )
-    .options( {
-        output: {
-            chunkFilename: 'js/[name].js?id=[chunkhash]',
+mix.options( {
+        // output: {
+        //     chunkFilename: 'js/[name].js?id=[chunkhash]',
+        // },
+        // processCssUrls: false,
+        fileLoaderDirs: {
+            images: 'img'
         },
-        resolve: {
-            alias: {
-                '@': path.resolve( 'resources/js' )
-            }
-        }
+        // postCss: [
+        //     require( 'postcss-fixes' )(), // add fallbacks for rem units and other fixes
+        //     require( 'cssnano' )( {
+        //         'calc': false // already included in postcss-fixes
+        //     } ),
+        // ]
     } )
+    .version()
+    .sourceMaps()
     .svelte();
-
-// mix
-//     .sourceMaps()
-// .options( {
-//         // processCssUrls: false,
-//         // purifyCss: {
-//         //     paths: paths,
-//         //     purifyOptions: {
-//         //         whitelist: [ '*datepicker*', '*owl*', '*sweetalert*' ],
-//         //         // extensions: ['html', 'php', 'js', 'php'],
-//         //         info: true,
-//         //         rejected: true,
-//         //     }
-//         // },
-//         fileLoaderDirs: {
-//             images: 'img',
-//             // fonts: 'web-fonts'
-//         },
-//         postCss: [
-//             require( 'postcss-fixes' )(), // add fallbacks for rem units and other fixes
-//         ],
-//         // plugins: [
-//         //     new webpack.IgnorePlugin( /^\.\/locale$/, /moment$/ )
-//         // ]
-//     } )
-//     .version();
-// mix.extract();
+// .extract( [ 'sweetalert2', 'lodash' ] );

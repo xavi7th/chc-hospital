@@ -1,10 +1,12 @@
-// Fonts
-@import url('https://fonts.googleapis.com/css?family=Nunito');
-
 // Variables
 @import 'variables';
 
 /* Make clicks pass-through */
+
+body {
+    background-color: #eee;
+}
+
 #nprogress {
     pointer-events: none;
 }

@@ -4,7 +4,7 @@
  * building robust, powerful web applications using Svelte and Laravel.
  */
 
-// require('./bootstrap');
+import '@public-assets/js/bootstrap'
 
 import {
     InertiaApp
@@ -16,6 +16,6 @@ new InertiaApp( {
     target: app,
     props: {
         initialPage: JSON.parse( app.dataset.page ),
-        resolveComponent: name => require( `./Pages/${name}` ).default //import( `./Pages/${name}.svelte` ).then( module => module.default ),
+        resolveComponent: name => import( /* webpackChunkName: "public" */ `./Pages/${name}.svelte` ).then( module => module.default ),
     },
 } )
