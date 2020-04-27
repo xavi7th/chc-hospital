@@ -1,4 +1,5 @@
 <?php
+use App\Modules\PublicPages\Http\Controllers\PublicPagesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -11,6 +12,4 @@
 |
 */
 
-Route::prefix('publicpages')->group(function() {
-    Route::get('/', 'PublicPagesController@index');
-});
+PublicPagesController::routes();

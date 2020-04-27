@@ -1,4 +1,6 @@
 {
-    "TestOne": true,
-    "PublicPages": true
+    "PublicPages": true,
+    "AppUser": true,
+    "SuperAdmin": true,
+    "Admin": true
 }

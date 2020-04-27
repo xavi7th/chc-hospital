@@ -1,0 +1,10 @@
+// Variables
+@import 'variables';
+
+/* Make clicks pass-through */
+
+body {
+    background-color: #f2e;
+}
+
+@import '@public-assets/sass/nprogress';

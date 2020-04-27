@@ -16,6 +16,6 @@ new InertiaApp( {
     target: app,
     props: {
         initialPage: JSON.parse( app.dataset.page ),
-        resolveComponent: name => import( /* webpackChunkName: "public" */ `./Pages/${name}.svelte` ).then( module => module.default ),
+        resolveComponent: name => import( /* webpackChunkName: "js/public" */ `./Pages/${name}.svelte` ).then( module => module.default ),
     },
 } )

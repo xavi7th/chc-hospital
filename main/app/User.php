@@ -2,14 +2,53 @@
 
 namespace App;
 
+use App\Modules\Admin\Models\Admin;
+use Illuminate\Support\Facades\Auth;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Notifications\Notifiable;
+use App\Modules\SuperAdmin\Models\SuperAdmin;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Modules\SuperAdmin\Models\ActivityLog;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Modules\AppUser\Models\AppUser;
 
-class User extends Authenticatable implements JWTSubject
+/**
+ * App\User
+ *
+ * @property int $id
+ * @property string $name
+ * @property string $email
+ * @property \Illuminate\Support\Carbon|null $email_verified_at
+ * @property string $password
+ * @property string|null $remember_token
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Modules\SuperAdmin\Models\ActivityLog[] $activities
+ * @property-read int|null $activities_count
+ * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
+ * @property-read int|null $notifications_count
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User newQuery()
+ * @method static \Illuminate\Database\Query\Builder|\App\User onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereEmail($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereEmailVerifiedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User wherePassword($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereRememberToken($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\User withTrashed()
+ * @method static \Illuminate\Database\Query\Builder|\App\User withoutTrashed()
+ * @mixin \Eloquent
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereDeletedAt($value)
+ */
+class User extends Authenticatable //implements JWTSubject
 {
-	use Notifiable;
+	use Notifiable, SoftDeletes;
 
 	/**
 	 * The attributes that are mass assignable.
@@ -37,6 +76,56 @@ class User extends Authenticatable implements JWTSubject
 	protected $casts = [
 		'email_verified_at' => 'datetime',
 	];
+
+
+	public function activities()
+	{
+		return $this->morphMany(ActivityLog::class, 'user')->latest();
+	}
+
+	public function setPasswordAttribute($value)
+	{
+		$this->attributes['password'] = bcrypt($value);
+	}
+
+	/**
+	 * Check if the currently authenticated user's status
+	 *
+	 * @return bool
+	 */
+
+	public function isAppUser(): bool
+	{
+		return $this instanceof AppUser;
+	}
+
+	public function isAdmin(): bool
+	{
+		return $this instanceof Admin;
+	}
+
+	public function isSuperAdmin(): bool
+	{
+		return $this instanceof SuperAdmin;
+	}
+
+	/**
+	 * Returns the dashboard route of the authenticated user
+	 *
+	 * @return void
+	 */
+	public function dashboardRoute(): string
+	{
+		if ($this->isAppUser()) {
+			return  'appuser.dashboard';
+		} else if ($this->isAdmin()) {
+			return 'admin.dashboard';
+		} else if ($this->isSuperAdmin()) {
+			return 'superadmin.dashboard';
+		} else {
+			return 'app.login';
+		}
+	}
 
 
 

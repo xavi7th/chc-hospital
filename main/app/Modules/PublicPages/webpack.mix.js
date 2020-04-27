@@ -46,5 +46,9 @@ mix.webpackConfig( {
 // mix.copyDirectory( __dirname + '/Resources/img', 'public_html/img' );
 // mix.copyDirectory( __dirname + '/Resources/fonts', 'public_html/fonts' );
 
-mix.js( __dirname + '/Resources/js/app.js', 'js/app.js' )
-    .sass( __dirname + '/Resources/sass/app.scss', 'css/app.css' );
+
+if ( [ 'buildcss' ].includes( process.env.npm_config_section ) ) {
+    mix.sass( __dirname + '/Resources/sass/app.scss', 'css/app.css' )
+} else {
+    mix.js( __dirname + '/Resources/js/app.js', 'js/app.js' )
+}

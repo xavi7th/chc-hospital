@@ -1,5 +1,9 @@
 <?php
 
+use App\Modules\Admin\Models\Admin;
+use App\Modules\SuperAdmin\Models\SuperAdmin;
+use App\Modules\AppUser\Models\AppUser;
+
 return [
 
 	/*
@@ -14,7 +18,7 @@ return [
     */
 
 	'defaults' => [
-		'guard' => 'web',
+		'guard' => 'app_user',
 		'passwords' => 'users',
 	],
 
@@ -36,9 +40,18 @@ return [
     */
 
 	'guards' => [
-		'web' => [
+
+		'app_user' => [
 			'driver' => 'session',
 			'provider' => 'users',
+		],
+		'admin' => [
+			'driver' => 'session',
+			'provider' => 'admins',
+		],
+		'super_admin' => [
+			'driver' => 'session',
+			'provider' => 'super_admins',
 		],
 
 		'api' => [
@@ -46,7 +59,7 @@ return [
 			'provider' => 'users',
 			'hash' => false,
 		],
-		'jwt_api' => [
+		'app_user_api' => [
 			'driver' => 'jwt',
 			'provider' => 'users',
 		],
@@ -72,7 +85,15 @@ return [
 	'providers' => [
 		'users' => [
 			'driver' => 'eloquent',
-			'model' => App\User::class,
+			'model' => AppUser::class,
+		],
+		'admins' => [
+			'driver' => 'eloquent',
+			'model' => Admin::class,
+		],
+		'super_admins' => [
+			'driver' => 'eloquent',
+			'model' => SuperAdmin::class,
 		],
 
 		// 'users' => [

@@ -3,8 +3,10 @@
 namespace App\Providers;
 
 use Inertia\Inertia;
-use Illuminate\Support\ServiceProvider;
 use Nwidart\Modules\Facades\Module;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -16,7 +18,10 @@ class AppServiceProvider extends ServiceProvider
 	public function register()
 	{
 		//
+
 	}
+
+
 
 	/**
 	 * Bootstrap any application services.
