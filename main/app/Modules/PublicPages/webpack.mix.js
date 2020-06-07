@@ -11,35 +11,40 @@ mix.webpackConfig( {
     },
 } )
 
-// mix.scripts( [
-//     __dirname + '/Resources/js/vendor/jquery-3.2.1.min.js',
-//     __dirname + '/Resources/js/vendor/popper.min.js',
-//     __dirname + '/Resources/js/vendor/bootstrap.min.js',
-//     __dirname + '/Resources/js/vendor/simplebar.min.js',
-//     __dirname + '/Resources/js/vendor/jquery.dataTables.min.js',
-//     __dirname + '/Resources/js/vendor/dataTables.responsive.min.js',
-//     __dirname + '/Resources/js/vendor/chartjs.min.js',
-//     __dirname + '/Resources/js/vendor/morris.min.js',
-//     __dirname + '/Resources/js/vendor/jquery.sparkline.min.js',
-//     __dirname + '/Resources/js/vendor/js/jquery.peity.min.js',
-//     __dirname + '/Resources/js/vendor/raphael.min.js',
-// ], 'public_html/js/admin-app-vendor.js' );
-
-
-// mix.scripts( [
-//     __dirname + '/Resources/js/vendor/index.js'
-// ], 'public_html/js/admin-dashboard.js' );
-
-// mix.scripts( [
-//     __dirname + '/Resources/js/vendor/main.js'
-// ], 'public_html/js/admin-nav.js' );
-
-// mix.copyDirectory( __dirname + '/Resources/img', 'public_html/img' );
-// mix.copyDirectory( __dirname + '/Resources/fonts', 'public_html/fonts' );
-
-
 if ( [ 'buildcss' ].includes( process.env.npm_config_section ) ) {
+    mix.copyDirectory( __dirname + '/Resources/img', 'public_html/img' );
+    mix.copyDirectory( __dirname + '/Resources/fonts', 'public_html/fonts' );
+
     mix.sass( __dirname + '/Resources/sass/app.scss', 'css/app.css' )
 } else {
+    mix.scripts( [
+        __dirname + '/Resources/js/vendor/lightbox-plus-jquery.min.js',
+        __dirname + '/Resources/js/vendor/jquery-1.11.1.min.js',
+        __dirname + '/Resources/js/vendor/bootstrap.min.js',
+        __dirname + '/Resources/js/vendor/jquery.bxslider.min.js',
+        __dirname + '/Resources/js/vendor/jquery.appear.js',
+        __dirname + '/Resources/js/vendor/jquery.countTo.js',
+        __dirname + '/Resources/js/vendor/owl.carousel.min.js',
+        __dirname + '/Resources/js/vendor/validate.js',
+        __dirname + '/Resources/js/vendor/jquery.mixitup.min.js',
+        __dirname + '/Resources/js/vendor/jquery.fancybox.pack.js',
+        __dirname + '/Resources/js/vendor/jquery.easing.min.js',
+        __dirname + '/Resources/js/vendor/isotope.pkgd.min.js',
+        __dirname + '/Resources/js/vendor/jquery-ui.js',
+        __dirname + '/Resources/js/vendor/jquery.themepunch.tools.min.js',
+        __dirname + '/Resources/js/vendor/jquery.themepunch.revolution.min.js',
+        __dirname + '/Resources/js/vendor/revolution.extension.actions.min.js',
+        __dirname + '/Resources/js/vendor/revolution.extension.carousel.min.js',
+        __dirname + '/Resources/js/vendor/revolution.extension.kenburn.min.js',
+        __dirname + '/Resources/js/vendor/revolution.extension.layeranimation.min.js',
+        __dirname + '/Resources/js/vendor/revolution.extension.migration.min.js',
+        __dirname + '/Resources/js/vendor/revolution.extension.navigation.min.js',
+        __dirname + '/Resources/js/vendor/revolution.extension.parallax.min.js',
+        __dirname + '/Resources/js/vendor/revolution.extension.slideanims.min.js',
+        __dirname + '/Resources/js/vendor/revolution.extension.video.min.js',
+    ], 'public_html/js/admin-app-vendor.js' );
+
+    mix.scripts( __dirname + '/Resources/js/vendor/custom.js', 'public_html/js/app-init-06-06-20.js' );
+
     mix.js( __dirname + '/Resources/js/app.js', 'js/app.js' )
 }
