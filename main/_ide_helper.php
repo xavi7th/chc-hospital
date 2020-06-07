@@ -3,7 +3,7 @@
 
 /**
  * A helper file for Laravel, to provide autocomplete information to your IDE
- * Generated for Laravel 7.7.1 on 2020-04-27 11:48:52.
+ * Generated for Laravel 7.14.1 on 2020-06-07 11:27:03.
  *
  * This file should not be included in your code, only analyzed by your IDE!
  *
@@ -1847,7 +1847,7 @@ namespace Illuminate\Support\Facades {
         /**
          * Get the currently authenticated user.
          *
-         * @return \App\User|null 
+         * @return \App\Modules\AppUser\Models\AppUser|null 
          * @static 
          */ 
         public static function user()
@@ -1885,7 +1885,7 @@ namespace Illuminate\Support\Facades {
          * Log the given user ID into the application without sessions or cookies.
          *
          * @param mixed $id
-         * @return \App\User|false 
+         * @return \App\Modules\AppUser\Models\AppUser|false 
          * @static 
          */ 
         public static function onceUsingId($id)
@@ -1954,7 +1954,7 @@ namespace Illuminate\Support\Facades {
          *
          * @param mixed $id
          * @param bool $remember
-         * @return \App\User|false 
+         * @return \App\Modules\AppUser\Models\AppUser|false 
          * @static 
          */ 
         public static function loginUsingId($id, $remember = false)
@@ -2033,7 +2033,7 @@ namespace Illuminate\Support\Facades {
         /**
          * Get the last user we attempted to authenticate.
          *
-         * @return \App\User 
+         * @return \App\Modules\AppUser\Models\AppUser 
          * @static 
          */ 
         public static function getLastAttempted()
@@ -2144,7 +2144,7 @@ namespace Illuminate\Support\Facades {
         /**
          * Return the currently cached user.
          *
-         * @return \App\User|null 
+         * @return \App\Modules\AppUser\Models\AppUser|null 
          * @static 
          */ 
         public static function getUser()
@@ -2194,7 +2194,7 @@ namespace Illuminate\Support\Facades {
         /**
          * Determine if current user is authenticated. If not, throw an exception.
          *
-         * @return \App\User 
+         * @return \App\Modules\AppUser\Models\AppUser 
          * @throws \Illuminate\Auth\AuthenticationException
          * @static 
          */ 
@@ -2666,14 +2666,15 @@ namespace Illuminate\Support\Facades {
          * Compile a class component opening.
          *
          * @param string $component
+         * @param string $alias
          * @param string $data
          * @param string $hash
          * @return string 
          * @static 
          */ 
-        public static function compileClassComponentOpening($component, $data, $hash)
+        public static function compileClassComponentOpening($component, $alias, $data, $hash)
         {
-                        return \Illuminate\View\Compilers\BladeCompiler::compileClassComponentOpening($component, $data, $hash);
+                        return \Illuminate\View\Compilers\BladeCompiler::compileClassComponentOpening($component, $alias, $data, $hash);
         }
         
         /**
@@ -2698,6 +2699,19 @@ namespace Illuminate\Support\Facades {
         public static function sanitizeComponentAttribute($value)
         {
                         return \Illuminate\View\Compilers\BladeCompiler::sanitizeComponentAttribute($value);
+        }
+        
+        /**
+         * Compile Blade echos into valid PHP.
+         *
+         * @param string $value
+         * @return string 
+         * @static 
+         */ 
+        public static function compileEchos($value)
+        {
+                        /** @var \Illuminate\View\Compilers\BladeCompiler $instance */
+                        return $instance->compileEchos($value);
         }
          
     }
@@ -2946,7 +2960,7 @@ namespace Illuminate\Support\Facades {
         /**
          * Assert if a job was dispatched based on a truth-test callback.
          *
-         * @param string $command
+         * @param string|\Closure $command
          * @param callable|int|null $callback
          * @return void 
          * @static 
@@ -2974,7 +2988,7 @@ namespace Illuminate\Support\Facades {
         /**
          * Determine if a job was dispatched based on a truth-test callback.
          *
-         * @param string $command
+         * @param string|\Closure $command
          * @param callable|null $callback
          * @return void 
          * @static 
@@ -2988,7 +3002,7 @@ namespace Illuminate\Support\Facades {
         /**
          * Assert if a job was dispatched after the response was sent based on a truth-test callback.
          *
-         * @param string $command
+         * @param string|\Closure $command
          * @param callable|int|null $callback
          * @return void 
          * @static 
@@ -3016,7 +3030,7 @@ namespace Illuminate\Support\Facades {
         /**
          * Determine if a job was dispatched based on a truth-test callback.
          *
-         * @param string $command
+         * @param string|\Closure $command
          * @param callable|null $callback
          * @return void 
          * @static 
@@ -3977,7 +3991,7 @@ namespace Illuminate\Support\Facades {
          * @param string $key
          * @param mixed $default
          * @param string|null $path
-         * @return \Symfony\Component\HttpFoundation\Cookie 
+         * @return \Symfony\Component\HttpFoundation\Cookie|null 
          * @static 
          */ 
         public static function queued($key, $default = null, $path = null)
@@ -4244,6 +4258,20 @@ namespace Illuminate\Support\Facades {
         {
                         /** @var \Illuminate\Database\DatabaseManager $instance */
                         return $instance->reconnect($name);
+        }
+        
+        /**
+         * Set the default database connection for the callback execution.
+         *
+         * @param string $name
+         * @param callable $callback
+         * @return mixed 
+         * @static 
+         */ 
+        public static function usingConnection($name, $callback)
+        {
+                        /** @var \Illuminate\Database\DatabaseManager $instance */
+                        return $instance->usingConnection($name, $callback);
         }
         
         /**
@@ -5445,7 +5473,7 @@ namespace Illuminate\Support\Facades {
         /**
          * Assert if an event was dispatched based on a truth-test callback.
          *
-         * @param string $event
+         * @param string|\Closure $event
          * @param callable|int|null $callback
          * @return void 
          * @static 
@@ -5473,7 +5501,7 @@ namespace Illuminate\Support\Facades {
         /**
          * Determine if an event was dispatched based on a truth-test callback.
          *
-         * @param string $event
+         * @param string|\Closure $event
          * @param callable|null $callback
          * @return void 
          * @static 
@@ -5790,6 +5818,19 @@ namespace Illuminate\Support\Facades {
         {
                         /** @var \Illuminate\Filesystem\Filesystem $instance */
                         return $instance->extension($path);
+        }
+        
+        /**
+         * Guess the file extension from the mime-type of a given file.
+         *
+         * @param string $path
+         * @return string|null 
+         * @static 
+         */ 
+        public static function guessExtension($path)
+        {
+                        /** @var \Illuminate\Filesystem\Filesystem $instance */
+                        return $instance->guessExtension($path);
         }
         
         /**
@@ -6537,32 +6578,33 @@ namespace Illuminate\Support\Facades {
     /**
      * 
      *
-     * @method static \Illuminate\Http\Client\PendingRequest asJson()
+     * @method static \Illuminate\Http\Client\PendingRequest accept(string $contentType)
+     * @method static \Illuminate\Http\Client\PendingRequest acceptJson()
      * @method static \Illuminate\Http\Client\PendingRequest asForm()
-     * @method static \Illuminate\Http\Client\PendingRequest attach(string $name, string $contents, string|null $filename = null, array $headers = [])
+     * @method static \Illuminate\Http\Client\PendingRequest asJson()
      * @method static \Illuminate\Http\Client\PendingRequest asMultipart()
+     * @method static \Illuminate\Http\Client\PendingRequest attach(string $name, string $contents, string|null $filename = null, array $headers = [])
+     * @method static \Illuminate\Http\Client\PendingRequest beforeSending(callable $callback)
      * @method static \Illuminate\Http\Client\PendingRequest bodyFormat(string $format)
      * @method static \Illuminate\Http\Client\PendingRequest contentType(string $contentType)
-     * @method static \Illuminate\Http\Client\PendingRequest acceptJson()
-     * @method static \Illuminate\Http\Client\PendingRequest accept(string $contentType)
      * @method static \Illuminate\Http\Client\PendingRequest retry(int $times, int $sleep = 0)
-     * @method static \Illuminate\Http\Client\PendingRequest withHeaders(array $headers)
+     * @method static \Illuminate\Http\Client\PendingRequest stub(callable $callback)
+     * @method static \Illuminate\Http\Client\PendingRequest timeout(int $seconds)
      * @method static \Illuminate\Http\Client\PendingRequest withBasicAuth(string $username, string $password)
-     * @method static \Illuminate\Http\Client\PendingRequest withDigestAuth(string $username, string $password)
-     * @method static \Illuminate\Http\Client\PendingRequest withToken(string $token, string $type = 'Bearer')
      * @method static \Illuminate\Http\Client\PendingRequest withCookies(array $cookies, string $domain)
+     * @method static \Illuminate\Http\Client\PendingRequest withDigestAuth(string $username, string $password)
+     * @method static \Illuminate\Http\Client\PendingRequest withHeaders(array $headers)
+     * @method static \Illuminate\Http\Client\PendingRequest withOptions(array $options)
+     * @method static \Illuminate\Http\Client\PendingRequest withToken(string $token, string $type = 'Bearer')
      * @method static \Illuminate\Http\Client\PendingRequest withoutRedirecting()
      * @method static \Illuminate\Http\Client\PendingRequest withoutVerifying()
-     * @method static \Illuminate\Http\Client\PendingRequest timeout(int $seconds)
-     * @method static \Illuminate\Http\Client\PendingRequest withOptions(array $options)
-     * @method static \Illuminate\Http\Client\PendingRequest beforeSending(callable $callback)
-     * @method static \Illuminate\Http\Client\Response get(string $url, array $query = [])
-     * @method static \Illuminate\Http\Client\Response post(string $url, array $data = [])
-     * @method static \Illuminate\Http\Client\Response patch(string $url, array $data = [])
-     * @method static \Illuminate\Http\Client\Response put(string $url, array $data = [])
      * @method static \Illuminate\Http\Client\Response delete(string $url, array $data = [])
+     * @method static \Illuminate\Http\Client\Response get(string $url, array $query = [])
+     * @method static \Illuminate\Http\Client\Response head(string $url, array $query = [])
+     * @method static \Illuminate\Http\Client\Response patch(string $url, array $data = [])
+     * @method static \Illuminate\Http\Client\Response post(string $url, array $data = [])
+     * @method static \Illuminate\Http\Client\Response put(string $url, array $data = [])
      * @method static \Illuminate\Http\Client\Response send(string $method, string $url, array $options = [])
-     * @method static \Illuminate\Http\Client\PendingRequest stub(callable $callback)
      * @see \Illuminate\Http\Client\Factory
      */ 
     class Http {
@@ -7426,7 +7468,7 @@ namespace Illuminate\Support\Facades {
         /**
          * Assert if a mailable was sent based on a truth-test callback.
          *
-         * @param string $mailable
+         * @param string|\Closure $mailable
          * @param callable|int|null $callback
          * @return void 
          * @static 
@@ -7466,7 +7508,7 @@ namespace Illuminate\Support\Facades {
         /**
          * Assert if a mailable was queued based on a truth-test callback.
          *
-         * @param string $mailable
+         * @param string|\Closure $mailable
          * @param callable|int|null $callback
          * @return void 
          * @static 
@@ -7801,7 +7843,7 @@ namespace Illuminate\Support\Facades {
          * Assert if a notification was sent based on a truth-test callback.
          *
          * @param mixed $notifiable
-         * @param string $notification
+         * @param string|\Closure $notification
          * @param callable|null $callback
          * @return void 
          * @throws \Exception
@@ -7832,7 +7874,7 @@ namespace Illuminate\Support\Facades {
          * Determine if a notification was sent based on a truth-test callback.
          *
          * @param mixed $notifiable
-         * @param string $notification
+         * @param string|\Closure $notification
          * @param callable|null $callback
          * @return void 
          * @throws \Exception
@@ -7943,8 +7985,8 @@ namespace Illuminate\Support\Facades {
     /**
      * 
      *
-     * @method static string sendResetLink(array $credentials)
      * @method static mixed reset(array $credentials, \Closure $callback)
+     * @method static string sendResetLink(array $credentials)
      * @see \Illuminate\Auth\Passwords\PasswordBroker
      */ 
     class Password {
@@ -8170,7 +8212,7 @@ namespace Illuminate\Support\Facades {
         /**
          * Assert if a job was pushed based on a truth-test callback.
          *
-         * @param string $job
+         * @param string|\Closure $job
          * @param callable|int|null $callback
          * @return void 
          * @static 
@@ -8185,7 +8227,7 @@ namespace Illuminate\Support\Facades {
          * Assert if a job was pushed based on a truth-test callback.
          *
          * @param string $queue
-         * @param string $job
+         * @param string|\Closure $job
          * @param callable|null $callback
          * @return void 
          * @static 
@@ -8228,7 +8270,7 @@ namespace Illuminate\Support\Facades {
         /**
          * Determine if a job was pushed based on a truth-test callback.
          *
-         * @param string $job
+         * @param string|\Closure $job
          * @param callable|null $callback
          * @return void 
          * @static 
@@ -8647,6 +8689,40 @@ namespace Illuminate\Support\Facades {
         }
         
         /**
+         * Create a new redirect response to a signed named route.
+         *
+         * @param string $route
+         * @param mixed $parameters
+         * @param \DateTimeInterface|\DateInterval|int|null $expiration
+         * @param int $status
+         * @param array $headers
+         * @return \Illuminate\Http\RedirectResponse 
+         * @static 
+         */ 
+        public static function signedRoute($route, $parameters = [], $expiration = null, $status = 302, $headers = [])
+        {
+                        /** @var \Illuminate\Routing\Redirector $instance */
+                        return $instance->signedRoute($route, $parameters, $expiration, $status, $headers);
+        }
+        
+        /**
+         * Create a new redirect response to a signed named route.
+         *
+         * @param string $route
+         * @param \DateTimeInterface|\DateInterval|int|null $expiration
+         * @param mixed $parameters
+         * @param int $status
+         * @param array $headers
+         * @return \Illuminate\Http\RedirectResponse 
+         * @static 
+         */ 
+        public static function temporarySignedRoute($route, $expiration, $parameters = [], $status = 302, $headers = [])
+        {
+                        /** @var \Illuminate\Routing\Redirector $instance */
+                        return $instance->temporarySignedRoute($route, $expiration, $parameters, $status, $headers);
+        }
+        
+        /**
          * Create a new redirect response to a controller action.
          *
          * @param string|array $action
@@ -8984,7 +9060,7 @@ namespace Illuminate\Support\Facades {
         /**
          * Get the client user agent.
          *
-         * @return string 
+         * @return string|null 
          * @static 
          */ 
         public static function userAgent()
@@ -10200,8 +10276,8 @@ namespace Illuminate\Support\Facades {
         
         /**
          * Gets the preferred format for the response by inspecting, in the following order:
-         *   * the request format set using setRequestFormat
-         *   * the values of the Accept HTTP header
+         *   * the request format set using setRequestFormat;
+         *   * the values of the Accept HTTP header.
          * 
          * Note that if you use this method, you should send the "Vary: Accept" header
          * in the response to prevent any issues with intermediary HTTP caches.
@@ -10296,6 +10372,19 @@ namespace Illuminate\Support\Facades {
             //Method inherited from \Symfony\Component\HttpFoundation\Request            
                         /** @var \Illuminate\Http\Request $instance */
                         return $instance->isXmlHttpRequest();
+        }
+        
+        /**
+         * Checks whether the client browser prefers safe content or not according to RFC8674.
+         *
+         * @see https://tools.ietf.org/html/rfc8674
+         * @static 
+         */ 
+        public static function preferSafeContent()
+        {
+            //Method inherited from \Symfony\Component\HttpFoundation\Request            
+                        /** @var \Illuminate\Http\Request $instance */
+                        return $instance->preferSafeContent();
         }
         
         /**
@@ -11159,13 +11248,13 @@ namespace Illuminate\Support\Facades {
     /**
      * 
      *
-     * @method static \Illuminate\Routing\RouteRegistrar prefix(string  $prefix)
-     * @method static \Illuminate\Routing\RouteRegistrar where(array  $where)
-     * @method static \Illuminate\Routing\RouteRegistrar middleware(array|string|null $middleware)
      * @method static \Illuminate\Routing\RouteRegistrar as(string $value)
      * @method static \Illuminate\Routing\RouteRegistrar domain(string $value)
+     * @method static \Illuminate\Routing\RouteRegistrar middleware(array|string|null $middleware)
      * @method static \Illuminate\Routing\RouteRegistrar name(string $value)
      * @method static \Illuminate\Routing\RouteRegistrar namespace(string $value)
+     * @method static \Illuminate\Routing\RouteRegistrar prefix(string  $prefix)
+     * @method static \Illuminate\Routing\RouteRegistrar where(array  $where)
      * @see \Illuminate\Routing\Router
      */ 
     class Route {
@@ -12065,6 +12154,16 @@ namespace Illuminate\Support\Facades {
          *
          * @static 
          */ 
+        public static function inertia($uri, $component, $props = [])
+        {
+                        return \Illuminate\Routing\Router::inertia($uri, $component, $props);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */ 
         public static function auth($options = [])
         {
                         return \Illuminate\Routing\Router::auth($options);
@@ -12098,16 +12197,6 @@ namespace Illuminate\Support\Facades {
         public static function emailVerification()
         {
                         return \Illuminate\Routing\Router::emailVerification();
-        }
-        
-        /**
-         * 
-         *
-         * @static 
-         */ 
-        public static function inertia($uri, $component, $props = [])
-        {
-                        return \Illuminate\Routing\Router::inertia($uri, $component, $props);
         }
         
         /**
@@ -12452,6 +12541,30 @@ namespace Illuminate\Support\Facades {
      * @see \Illuminate\Session\Store
      */ 
     class Session {
+        
+        /**
+         * Determine if requests for the same session should wait for each to finish before executing.
+         *
+         * @return bool 
+         * @static 
+         */ 
+        public static function shouldBlock()
+        {
+                        /** @var \Illuminate\Session\SessionManager $instance */
+                        return $instance->shouldBlock();
+        }
+        
+        /**
+         * Get the name of the cache store / driver that should be used to acquire session locks.
+         *
+         * @return string|null 
+         * @static 
+         */ 
+        public static function blockDriver()
+        {
+                        /** @var \Illuminate\Session\SessionManager $instance */
+                        return $instance->blockDriver();
+        }
         
         /**
          * Get the session configuration.
@@ -14814,7 +14927,7 @@ namespace Illuminate\Support\Facades {
         /**
          * Start a component rendering process.
          *
-         * @param \Illuminate\View\View|string $view
+         * @param \Illuminate\View\View|\Closure|string $view
          * @param array $data
          * @return void 
          * @static 
@@ -15273,271 +15386,6 @@ namespace Illuminate\Support {
      *
      */ 
     class Str {
-         
-    }
- 
-}
-
-namespace Facade\Ignition\Facades { 
-
-    /**
-     * Class Flare.
-     *
-     * @see \Facade\FlareClient\Flare
-     */ 
-    class Flare {
-        
-        /**
-         * 
-         *
-         * @static 
-         */ 
-        public static function register($apiKey, $apiSecret = null, $contextDetector = null, $container = null)
-        {
-                        return \Facade\FlareClient\Flare::register($apiKey, $apiSecret, $contextDetector, $container);
-        }
-        
-        /**
-         * 
-         *
-         * @static 
-         */ 
-        public static function getMiddleware()
-        {
-                        /** @var \Facade\FlareClient\Flare $instance */
-                        return $instance->getMiddleware();
-        }
-        
-        /**
-         * 
-         *
-         * @static 
-         */ 
-        public static function registerFlareHandlers()
-        {
-                        /** @var \Facade\FlareClient\Flare $instance */
-                        return $instance->registerFlareHandlers();
-        }
-        
-        /**
-         * 
-         *
-         * @static 
-         */ 
-        public static function registerExceptionHandler()
-        {
-                        /** @var \Facade\FlareClient\Flare $instance */
-                        return $instance->registerExceptionHandler();
-        }
-        
-        /**
-         * 
-         *
-         * @static 
-         */ 
-        public static function registerErrorHandler()
-        {
-                        /** @var \Facade\FlareClient\Flare $instance */
-                        return $instance->registerErrorHandler();
-        }
-        
-        /**
-         * 
-         *
-         * @static 
-         */ 
-        public static function registerMiddleware($callable)
-        {
-                        /** @var \Facade\FlareClient\Flare $instance */
-                        return $instance->registerMiddleware($callable);
-        }
-        
-        /**
-         * 
-         *
-         * @static 
-         */ 
-        public static function getMiddlewares()
-        {
-                        /** @var \Facade\FlareClient\Flare $instance */
-                        return $instance->getMiddlewares();
-        }
-        
-        /**
-         * 
-         *
-         * @static 
-         */ 
-        public static function glow($name, $messageLevel = 'info', $metaData = [])
-        {
-                        /** @var \Facade\FlareClient\Flare $instance */
-                        return $instance->glow($name, $messageLevel, $metaData);
-        }
-        
-        /**
-         * 
-         *
-         * @static 
-         */ 
-        public static function handleException($throwable)
-        {
-                        /** @var \Facade\FlareClient\Flare $instance */
-                        return $instance->handleException($throwable);
-        }
-        
-        /**
-         * 
-         *
-         * @static 
-         */ 
-        public static function handleError($code, $message, $file = '', $line = 0)
-        {
-                        /** @var \Facade\FlareClient\Flare $instance */
-                        return $instance->handleError($code, $message, $file, $line);
-        }
-        
-        /**
-         * 
-         *
-         * @static 
-         */ 
-        public static function applicationPath($applicationPath)
-        {
-                        /** @var \Facade\FlareClient\Flare $instance */
-                        return $instance->applicationPath($applicationPath);
-        }
-        
-        /**
-         * 
-         *
-         * @static 
-         */ 
-        public static function report($throwable, $callback = null)
-        {
-                        /** @var \Facade\FlareClient\Flare $instance */
-                        return $instance->report($throwable, $callback);
-        }
-        
-        /**
-         * 
-         *
-         * @static 
-         */ 
-        public static function reportMessage($message, $logLevel, $callback = null)
-        {
-                        /** @var \Facade\FlareClient\Flare $instance */
-                        return $instance->reportMessage($message, $logLevel, $callback);
-        }
-        
-        /**
-         * 
-         *
-         * @static 
-         */ 
-        public static function sendTestReport($throwable)
-        {
-                        /** @var \Facade\FlareClient\Flare $instance */
-                        return $instance->sendTestReport($throwable);
-        }
-        
-        /**
-         * 
-         *
-         * @static 
-         */ 
-        public static function reset()
-        {
-                        /** @var \Facade\FlareClient\Flare $instance */
-                        return $instance->reset();
-        }
-        
-        /**
-         * 
-         *
-         * @static 
-         */ 
-        public static function anonymizeIp()
-        {
-                        /** @var \Facade\FlareClient\Flare $instance */
-                        return $instance->anonymizeIp();
-        }
-        
-        /**
-         * 
-         *
-         * @static 
-         */ 
-        public static function createReport($throwable)
-        {
-                        /** @var \Facade\FlareClient\Flare $instance */
-                        return $instance->createReport($throwable);
-        }
-        
-        /**
-         * 
-         *
-         * @static 
-         */ 
-        public static function createReportFromMessage($message, $logLevel)
-        {
-                        /** @var \Facade\FlareClient\Flare $instance */
-                        return $instance->createReportFromMessage($message, $logLevel);
-        }
-        
-        /**
-         * 
-         *
-         * @static 
-         */ 
-        public static function stage($stage)
-        {
-                        /** @var \Facade\FlareClient\Flare $instance */
-                        return $instance->stage($stage);
-        }
-        
-        /**
-         * 
-         *
-         * @static 
-         */ 
-        public static function messageLevel($messageLevel)
-        {
-                        /** @var \Facade\FlareClient\Flare $instance */
-                        return $instance->messageLevel($messageLevel);
-        }
-        
-        /**
-         * 
-         *
-         * @static 
-         */ 
-        public static function getGroup($groupName = 'context', $default = [])
-        {
-                        /** @var \Facade\FlareClient\Flare $instance */
-                        return $instance->getGroup($groupName, $default);
-        }
-        
-        /**
-         * 
-         *
-         * @static 
-         */ 
-        public static function context($key, $value)
-        {
-                        /** @var \Facade\FlareClient\Flare $instance */
-                        return $instance->context($key, $value);
-        }
-        
-        /**
-         * 
-         *
-         * @static 
-         */ 
-        public static function group($groupName, $properties)
-        {
-                        /** @var \Facade\FlareClient\Flare $instance */
-                        return $instance->group($groupName, $properties);
-        }
          
     }
  
@@ -16132,6 +15980,580 @@ namespace Nwidart\Modules\Facades {
             //Method inherited from \Nwidart\Modules\FileRepository            
                         return \Nwidart\Modules\Laravel\LaravelFileRepository::hasMacro($name);
         }
+         
+    }
+ 
+}
+
+namespace Tymon\JWTAuth\Facades { 
+
+    /**
+     * 
+     *
+     */ 
+    class JWTAuth {
+        
+        /**
+         * Attempt to authenticate the user and return the token.
+         *
+         * @param array $credentials
+         * @return false|string 
+         * @static 
+         */ 
+        public static function attempt($credentials)
+        {
+                        /** @var \Tymon\JWTAuth\JWTAuth $instance */
+                        return $instance->attempt($credentials);
+        }
+        
+        /**
+         * Authenticate a user via a token.
+         *
+         * @return \Tymon\JWTAuth\Contracts\JWTSubject|false 
+         * @static 
+         */ 
+        public static function authenticate()
+        {
+                        /** @var \Tymon\JWTAuth\JWTAuth $instance */
+                        return $instance->authenticate();
+        }
+        
+        /**
+         * Alias for authenticate().
+         *
+         * @return \Tymon\JWTAuth\Contracts\JWTSubject|false 
+         * @static 
+         */ 
+        public static function toUser()
+        {
+                        /** @var \Tymon\JWTAuth\JWTAuth $instance */
+                        return $instance->toUser();
+        }
+        
+        /**
+         * Get the authenticated user.
+         *
+         * @return \Tymon\JWTAuth\Contracts\JWTSubject 
+         * @static 
+         */ 
+        public static function user()
+        {
+                        /** @var \Tymon\JWTAuth\JWTAuth $instance */
+                        return $instance->user();
+        }
+        
+        /**
+         * Generate a token for a given subject.
+         *
+         * @param \Tymon\JWTAuth\Contracts\JWTSubject $subject
+         * @return string 
+         * @static 
+         */ 
+        public static function fromSubject($subject)
+        {
+            //Method inherited from \Tymon\JWTAuth\JWT            
+                        /** @var \Tymon\JWTAuth\JWTAuth $instance */
+                        return $instance->fromSubject($subject);
+        }
+        
+        /**
+         * Alias to generate a token for a given user.
+         *
+         * @param \Tymon\JWTAuth\Contracts\JWTSubject $user
+         * @return string 
+         * @static 
+         */ 
+        public static function fromUser($user)
+        {
+            //Method inherited from \Tymon\JWTAuth\JWT            
+                        /** @var \Tymon\JWTAuth\JWTAuth $instance */
+                        return $instance->fromUser($user);
+        }
+        
+        /**
+         * Refresh an expired token.
+         *
+         * @param bool $forceForever
+         * @param bool $resetClaims
+         * @return string 
+         * @static 
+         */ 
+        public static function refresh($forceForever = false, $resetClaims = false)
+        {
+            //Method inherited from \Tymon\JWTAuth\JWT            
+                        /** @var \Tymon\JWTAuth\JWTAuth $instance */
+                        return $instance->refresh($forceForever, $resetClaims);
+        }
+        
+        /**
+         * Invalidate a token (add it to the blacklist).
+         *
+         * @param bool $forceForever
+         * @return \Tymon\JWTAuth\JWTAuth 
+         * @static 
+         */ 
+        public static function invalidate($forceForever = false)
+        {
+            //Method inherited from \Tymon\JWTAuth\JWT            
+                        /** @var \Tymon\JWTAuth\JWTAuth $instance */
+                        return $instance->invalidate($forceForever);
+        }
+        
+        /**
+         * Alias to get the payload, and as a result checks that
+         * the token is valid i.e. not expired or blacklisted.
+         *
+         * @throws \Tymon\JWTAuth\Exceptions\JWTException
+         * @return \Tymon\JWTAuth\Payload 
+         * @static 
+         */ 
+        public static function checkOrFail()
+        {
+            //Method inherited from \Tymon\JWTAuth\JWT            
+                        /** @var \Tymon\JWTAuth\JWTAuth $instance */
+                        return $instance->checkOrFail();
+        }
+        
+        /**
+         * Check that the token is valid.
+         *
+         * @param bool $getPayload
+         * @return \Tymon\JWTAuth\Payload|bool 
+         * @static 
+         */ 
+        public static function check($getPayload = false)
+        {
+            //Method inherited from \Tymon\JWTAuth\JWT            
+                        /** @var \Tymon\JWTAuth\JWTAuth $instance */
+                        return $instance->check($getPayload);
+        }
+        
+        /**
+         * Get the token.
+         *
+         * @return \Tymon\JWTAuth\Token|null 
+         * @static 
+         */ 
+        public static function getToken()
+        {
+            //Method inherited from \Tymon\JWTAuth\JWT            
+                        /** @var \Tymon\JWTAuth\JWTAuth $instance */
+                        return $instance->getToken();
+        }
+        
+        /**
+         * Parse the token from the request.
+         *
+         * @throws \Tymon\JWTAuth\Exceptions\JWTException
+         * @return \Tymon\JWTAuth\JWTAuth 
+         * @static 
+         */ 
+        public static function parseToken()
+        {
+            //Method inherited from \Tymon\JWTAuth\JWT            
+                        /** @var \Tymon\JWTAuth\JWTAuth $instance */
+                        return $instance->parseToken();
+        }
+        
+        /**
+         * Get the raw Payload instance.
+         *
+         * @return \Tymon\JWTAuth\Payload 
+         * @static 
+         */ 
+        public static function getPayload()
+        {
+            //Method inherited from \Tymon\JWTAuth\JWT            
+                        /** @var \Tymon\JWTAuth\JWTAuth $instance */
+                        return $instance->getPayload();
+        }
+        
+        /**
+         * Alias for getPayload().
+         *
+         * @return \Tymon\JWTAuth\Payload 
+         * @static 
+         */ 
+        public static function payload()
+        {
+            //Method inherited from \Tymon\JWTAuth\JWT            
+                        /** @var \Tymon\JWTAuth\JWTAuth $instance */
+                        return $instance->payload();
+        }
+        
+        /**
+         * Convenience method to get a claim value.
+         *
+         * @param string $claim
+         * @return mixed 
+         * @static 
+         */ 
+        public static function getClaim($claim)
+        {
+            //Method inherited from \Tymon\JWTAuth\JWT            
+                        /** @var \Tymon\JWTAuth\JWTAuth $instance */
+                        return $instance->getClaim($claim);
+        }
+        
+        /**
+         * Create a Payload instance.
+         *
+         * @param \Tymon\JWTAuth\Contracts\JWTSubject $subject
+         * @return \Tymon\JWTAuth\Payload 
+         * @static 
+         */ 
+        public static function makePayload($subject)
+        {
+            //Method inherited from \Tymon\JWTAuth\JWT            
+                        /** @var \Tymon\JWTAuth\JWTAuth $instance */
+                        return $instance->makePayload($subject);
+        }
+        
+        /**
+         * Check if the subject model matches the one saved in the token.
+         *
+         * @param string|object $model
+         * @return bool 
+         * @static 
+         */ 
+        public static function checkSubjectModel($model)
+        {
+            //Method inherited from \Tymon\JWTAuth\JWT            
+                        /** @var \Tymon\JWTAuth\JWTAuth $instance */
+                        return $instance->checkSubjectModel($model);
+        }
+        
+        /**
+         * Set the token.
+         *
+         * @param \Tymon\JWTAuth\Token|string $token
+         * @return \Tymon\JWTAuth\JWTAuth 
+         * @static 
+         */ 
+        public static function setToken($token)
+        {
+            //Method inherited from \Tymon\JWTAuth\JWT            
+                        /** @var \Tymon\JWTAuth\JWTAuth $instance */
+                        return $instance->setToken($token);
+        }
+        
+        /**
+         * Unset the current token.
+         *
+         * @return \Tymon\JWTAuth\JWTAuth 
+         * @static 
+         */ 
+        public static function unsetToken()
+        {
+            //Method inherited from \Tymon\JWTAuth\JWT            
+                        /** @var \Tymon\JWTAuth\JWTAuth $instance */
+                        return $instance->unsetToken();
+        }
+        
+        /**
+         * Set the request instance.
+         *
+         * @param \Illuminate\Http\Request $request
+         * @return \Tymon\JWTAuth\JWTAuth 
+         * @static 
+         */ 
+        public static function setRequest($request)
+        {
+            //Method inherited from \Tymon\JWTAuth\JWT            
+                        /** @var \Tymon\JWTAuth\JWTAuth $instance */
+                        return $instance->setRequest($request);
+        }
+        
+        /**
+         * Set whether the subject should be "locked".
+         *
+         * @param bool $lock
+         * @return \Tymon\JWTAuth\JWTAuth 
+         * @static 
+         */ 
+        public static function lockSubject($lock)
+        {
+            //Method inherited from \Tymon\JWTAuth\JWT            
+                        /** @var \Tymon\JWTAuth\JWTAuth $instance */
+                        return $instance->lockSubject($lock);
+        }
+        
+        /**
+         * Get the Manager instance.
+         *
+         * @return \Tymon\JWTAuth\Manager 
+         * @static 
+         */ 
+        public static function manager()
+        {
+            //Method inherited from \Tymon\JWTAuth\JWT            
+                        /** @var \Tymon\JWTAuth\JWTAuth $instance */
+                        return $instance->manager();
+        }
+        
+        /**
+         * Get the Parser instance.
+         *
+         * @return \Tymon\JWTAuth\Http\Parser\Parser 
+         * @static 
+         */ 
+        public static function parser()
+        {
+            //Method inherited from \Tymon\JWTAuth\JWT            
+                        /** @var \Tymon\JWTAuth\JWTAuth $instance */
+                        return $instance->parser();
+        }
+        
+        /**
+         * Get the Payload Factory.
+         *
+         * @return \Tymon\JWTAuth\Factory 
+         * @static 
+         */ 
+        public static function factory()
+        {
+            //Method inherited from \Tymon\JWTAuth\JWT            
+                        /** @var \Tymon\JWTAuth\JWTAuth $instance */
+                        return $instance->factory();
+        }
+        
+        /**
+         * Get the Blacklist.
+         *
+         * @return \Tymon\JWTAuth\Blacklist 
+         * @static 
+         */ 
+        public static function blacklist()
+        {
+            //Method inherited from \Tymon\JWTAuth\JWT            
+                        /** @var \Tymon\JWTAuth\JWTAuth $instance */
+                        return $instance->blacklist();
+        }
+        
+        /**
+         * Set the custom claims.
+         *
+         * @param array $customClaims
+         * @return \Tymon\JWTAuth\JWTAuth 
+         * @static 
+         */ 
+        public static function customClaims($customClaims)
+        {
+            //Method inherited from \Tymon\JWTAuth\JWT            
+                        /** @var \Tymon\JWTAuth\JWTAuth $instance */
+                        return $instance->customClaims($customClaims);
+        }
+        
+        /**
+         * Alias to set the custom claims.
+         *
+         * @param array $customClaims
+         * @return \Tymon\JWTAuth\JWTAuth 
+         * @static 
+         */ 
+        public static function claims($customClaims)
+        {
+            //Method inherited from \Tymon\JWTAuth\JWT            
+                        /** @var \Tymon\JWTAuth\JWTAuth $instance */
+                        return $instance->claims($customClaims);
+        }
+        
+        /**
+         * Get the custom claims.
+         *
+         * @return array 
+         * @static 
+         */ 
+        public static function getCustomClaims()
+        {
+            //Method inherited from \Tymon\JWTAuth\JWT            
+                        /** @var \Tymon\JWTAuth\JWTAuth $instance */
+                        return $instance->getCustomClaims();
+        }
+         
+    }
+
+    /**
+     * 
+     *
+     */ 
+    class JWTFactory {
+        
+        /**
+         * Create the Payload instance.
+         *
+         * @param bool $resetClaims
+         * @return \Tymon\JWTAuth\Payload 
+         * @static 
+         */ 
+        public static function make($resetClaims = false)
+        {
+                        /** @var \Tymon\JWTAuth\Factory $instance */
+                        return $instance->make($resetClaims);
+        }
+        
+        /**
+         * Empty the claims collection.
+         *
+         * @return \Tymon\JWTAuth\Factory 
+         * @static 
+         */ 
+        public static function emptyClaims()
+        {
+                        /** @var \Tymon\JWTAuth\Factory $instance */
+                        return $instance->emptyClaims();
+        }
+        
+        /**
+         * Build and get the Claims Collection.
+         *
+         * @return \Tymon\JWTAuth\Claims\Collection 
+         * @static 
+         */ 
+        public static function buildClaimsCollection()
+        {
+                        /** @var \Tymon\JWTAuth\Factory $instance */
+                        return $instance->buildClaimsCollection();
+        }
+        
+        /**
+         * Get a Payload instance with a claims collection.
+         *
+         * @param \Tymon\JWTAuth\Claims\Collection $claims
+         * @return \Tymon\JWTAuth\Payload 
+         * @static 
+         */ 
+        public static function withClaims($claims)
+        {
+                        /** @var \Tymon\JWTAuth\Factory $instance */
+                        return $instance->withClaims($claims);
+        }
+        
+        /**
+         * Set the default claims to be added to the Payload.
+         *
+         * @param array $claims
+         * @return \Tymon\JWTAuth\Factory 
+         * @static 
+         */ 
+        public static function setDefaultClaims($claims)
+        {
+                        /** @var \Tymon\JWTAuth\Factory $instance */
+                        return $instance->setDefaultClaims($claims);
+        }
+        
+        /**
+         * Helper to set the ttl.
+         *
+         * @param int $ttl
+         * @return \Tymon\JWTAuth\Factory 
+         * @static 
+         */ 
+        public static function setTTL($ttl)
+        {
+                        /** @var \Tymon\JWTAuth\Factory $instance */
+                        return $instance->setTTL($ttl);
+        }
+        
+        /**
+         * Helper to get the ttl.
+         *
+         * @return int 
+         * @static 
+         */ 
+        public static function getTTL()
+        {
+                        /** @var \Tymon\JWTAuth\Factory $instance */
+                        return $instance->getTTL();
+        }
+        
+        /**
+         * Get the default claims.
+         *
+         * @return array 
+         * @static 
+         */ 
+        public static function getDefaultClaims()
+        {
+                        /** @var \Tymon\JWTAuth\Factory $instance */
+                        return $instance->getDefaultClaims();
+        }
+        
+        /**
+         * Get the PayloadValidator instance.
+         *
+         * @return \Tymon\JWTAuth\Validators\PayloadValidator 
+         * @static 
+         */ 
+        public static function validator()
+        {
+                        /** @var \Tymon\JWTAuth\Factory $instance */
+                        return $instance->validator();
+        }
+        
+        /**
+         * Set the custom claims.
+         *
+         * @param array $customClaims
+         * @return \Tymon\JWTAuth\Factory 
+         * @static 
+         */ 
+        public static function customClaims($customClaims)
+        {
+                        /** @var \Tymon\JWTAuth\Factory $instance */
+                        return $instance->customClaims($customClaims);
+        }
+        
+        /**
+         * Alias to set the custom claims.
+         *
+         * @param array $customClaims
+         * @return \Tymon\JWTAuth\Factory 
+         * @static 
+         */ 
+        public static function claims($customClaims)
+        {
+                        /** @var \Tymon\JWTAuth\Factory $instance */
+                        return $instance->claims($customClaims);
+        }
+        
+        /**
+         * Get the custom claims.
+         *
+         * @return array 
+         * @static 
+         */ 
+        public static function getCustomClaims()
+        {
+                        /** @var \Tymon\JWTAuth\Factory $instance */
+                        return $instance->getCustomClaims();
+        }
+        
+        /**
+         * Set the refresh flow flag.
+         *
+         * @param bool $refreshFlow
+         * @return \Tymon\JWTAuth\Factory 
+         * @static 
+         */ 
+        public static function setRefreshFlow($refreshFlow = true)
+        {
+                        /** @var \Tymon\JWTAuth\Factory $instance */
+                        return $instance->setRefreshFlow($refreshFlow);
+        }
+         
+    }
+ 
+}
+
+namespace danielme85\LaravelLogToDB { 
+
+    /**
+     * Class LogToDb
+     *
+     * @package danielme85\LaravelLogToDB
+     */ 
+    class LogToDB {
          
     }
  
@@ -16743,574 +17165,265 @@ namespace Barryvdh\Debugbar {
  
 }
 
-namespace danielme85\LaravelLogToDB { 
+namespace Facade\Ignition\Facades { 
 
     /**
-     * Class LogToDb
+     * Class Flare.
      *
-     * @package danielme85\LaravelLogToDB
+     * @see \Facade\FlareClient\Flare
      */ 
-    class LogToDB {
-         
-    }
- 
-}
-
-namespace Tymon\JWTAuth\Facades { 
-
-    /**
-     * 
-     *
-     */ 
-    class JWTAuth {
+    class Flare {
         
         /**
-         * Attempt to authenticate the user and return the token.
+         * 
          *
-         * @param array $credentials
-         * @return false|string 
          * @static 
          */ 
-        public static function attempt($credentials)
+        public static function register($apiKey, $apiSecret = null, $contextDetector = null, $container = null)
         {
-                        /** @var \Tymon\JWTAuth\JWTAuth $instance */
-                        return $instance->attempt($credentials);
+                        return \Facade\FlareClient\Flare::register($apiKey, $apiSecret, $contextDetector, $container);
         }
         
         /**
-         * Authenticate a user via a token.
+         * 
          *
-         * @return \Tymon\JWTAuth\Contracts\JWTSubject|false 
          * @static 
          */ 
-        public static function authenticate()
+        public static function getMiddleware()
         {
-                        /** @var \Tymon\JWTAuth\JWTAuth $instance */
-                        return $instance->authenticate();
+                        /** @var \Facade\FlareClient\Flare $instance */
+                        return $instance->getMiddleware();
         }
         
         /**
-         * Alias for authenticate().
+         * 
          *
-         * @return \Tymon\JWTAuth\Contracts\JWTSubject|false 
          * @static 
          */ 
-        public static function toUser()
+        public static function registerFlareHandlers()
         {
-                        /** @var \Tymon\JWTAuth\JWTAuth $instance */
-                        return $instance->toUser();
+                        /** @var \Facade\FlareClient\Flare $instance */
+                        return $instance->registerFlareHandlers();
         }
         
         /**
-         * Get the authenticated user.
+         * 
          *
-         * @return \Tymon\JWTAuth\Contracts\JWTSubject 
          * @static 
          */ 
-        public static function user()
+        public static function registerExceptionHandler()
         {
-                        /** @var \Tymon\JWTAuth\JWTAuth $instance */
-                        return $instance->user();
+                        /** @var \Facade\FlareClient\Flare $instance */
+                        return $instance->registerExceptionHandler();
         }
         
         /**
-         * Generate a token for a given subject.
+         * 
          *
-         * @param \Tymon\JWTAuth\Contracts\JWTSubject $subject
-         * @return string 
          * @static 
          */ 
-        public static function fromSubject($subject)
+        public static function registerErrorHandler()
         {
-            //Method inherited from \Tymon\JWTAuth\JWT            
-                        /** @var \Tymon\JWTAuth\JWTAuth $instance */
-                        return $instance->fromSubject($subject);
+                        /** @var \Facade\FlareClient\Flare $instance */
+                        return $instance->registerErrorHandler();
         }
         
         /**
-         * Alias to generate a token for a given user.
+         * 
          *
-         * @param \Tymon\JWTAuth\Contracts\JWTSubject $user
-         * @return string 
          * @static 
          */ 
-        public static function fromUser($user)
+        public static function registerMiddleware($callable)
         {
-            //Method inherited from \Tymon\JWTAuth\JWT            
-                        /** @var \Tymon\JWTAuth\JWTAuth $instance */
-                        return $instance->fromUser($user);
+                        /** @var \Facade\FlareClient\Flare $instance */
+                        return $instance->registerMiddleware($callable);
         }
         
         /**
-         * Refresh an expired token.
+         * 
          *
-         * @param bool $forceForever
-         * @param bool $resetClaims
-         * @return string 
          * @static 
          */ 
-        public static function refresh($forceForever = false, $resetClaims = false)
+        public static function getMiddlewares()
         {
-            //Method inherited from \Tymon\JWTAuth\JWT            
-                        /** @var \Tymon\JWTAuth\JWTAuth $instance */
-                        return $instance->refresh($forceForever, $resetClaims);
+                        /** @var \Facade\FlareClient\Flare $instance */
+                        return $instance->getMiddlewares();
         }
         
         /**
-         * Invalidate a token (add it to the blacklist).
+         * 
          *
-         * @param bool $forceForever
-         * @return \Tymon\JWTAuth\JWTAuth 
          * @static 
          */ 
-        public static function invalidate($forceForever = false)
+        public static function glow($name, $messageLevel = 'info', $metaData = [])
         {
-            //Method inherited from \Tymon\JWTAuth\JWT            
-                        /** @var \Tymon\JWTAuth\JWTAuth $instance */
-                        return $instance->invalidate($forceForever);
+                        /** @var \Facade\FlareClient\Flare $instance */
+                        return $instance->glow($name, $messageLevel, $metaData);
         }
         
         /**
-         * Alias to get the payload, and as a result checks that
-         * the token is valid i.e. not expired or blacklisted.
+         * 
          *
-         * @throws \Tymon\JWTAuth\Exceptions\JWTException
-         * @return \Tymon\JWTAuth\Payload 
          * @static 
          */ 
-        public static function checkOrFail()
+        public static function handleException($throwable)
         {
-            //Method inherited from \Tymon\JWTAuth\JWT            
-                        /** @var \Tymon\JWTAuth\JWTAuth $instance */
-                        return $instance->checkOrFail();
+                        /** @var \Facade\FlareClient\Flare $instance */
+                        return $instance->handleException($throwable);
         }
         
         /**
-         * Check that the token is valid.
+         * 
          *
-         * @param bool $getPayload
-         * @return \Tymon\JWTAuth\Payload|bool 
          * @static 
          */ 
-        public static function check($getPayload = false)
+        public static function handleError($code, $message, $file = '', $line = 0)
         {
-            //Method inherited from \Tymon\JWTAuth\JWT            
-                        /** @var \Tymon\JWTAuth\JWTAuth $instance */
-                        return $instance->check($getPayload);
+                        /** @var \Facade\FlareClient\Flare $instance */
+                        return $instance->handleError($code, $message, $file, $line);
         }
         
         /**
-         * Get the token.
+         * 
          *
-         * @return \Tymon\JWTAuth\Token|null 
          * @static 
          */ 
-        public static function getToken()
+        public static function applicationPath($applicationPath)
         {
-            //Method inherited from \Tymon\JWTAuth\JWT            
-                        /** @var \Tymon\JWTAuth\JWTAuth $instance */
-                        return $instance->getToken();
+                        /** @var \Facade\FlareClient\Flare $instance */
+                        return $instance->applicationPath($applicationPath);
         }
         
         /**
-         * Parse the token from the request.
+         * 
          *
-         * @throws \Tymon\JWTAuth\Exceptions\JWTException
-         * @return \Tymon\JWTAuth\JWTAuth 
          * @static 
          */ 
-        public static function parseToken()
+        public static function report($throwable, $callback = null)
         {
-            //Method inherited from \Tymon\JWTAuth\JWT            
-                        /** @var \Tymon\JWTAuth\JWTAuth $instance */
-                        return $instance->parseToken();
+                        /** @var \Facade\FlareClient\Flare $instance */
+                        return $instance->report($throwable, $callback);
         }
         
         /**
-         * Get the raw Payload instance.
+         * 
          *
-         * @return \Tymon\JWTAuth\Payload 
          * @static 
          */ 
-        public static function getPayload()
+        public static function reportMessage($message, $logLevel, $callback = null)
         {
-            //Method inherited from \Tymon\JWTAuth\JWT            
-                        /** @var \Tymon\JWTAuth\JWTAuth $instance */
-                        return $instance->getPayload();
+                        /** @var \Facade\FlareClient\Flare $instance */
+                        return $instance->reportMessage($message, $logLevel, $callback);
         }
         
         /**
-         * Alias for getPayload().
+         * 
          *
-         * @return \Tymon\JWTAuth\Payload 
          * @static 
          */ 
-        public static function payload()
+        public static function sendTestReport($throwable)
         {
-            //Method inherited from \Tymon\JWTAuth\JWT            
-                        /** @var \Tymon\JWTAuth\JWTAuth $instance */
-                        return $instance->payload();
+                        /** @var \Facade\FlareClient\Flare $instance */
+                        return $instance->sendTestReport($throwable);
         }
         
         /**
-         * Convenience method to get a claim value.
+         * 
          *
-         * @param string $claim
-         * @return mixed 
          * @static 
          */ 
-        public static function getClaim($claim)
+        public static function reset()
         {
-            //Method inherited from \Tymon\JWTAuth\JWT            
-                        /** @var \Tymon\JWTAuth\JWTAuth $instance */
-                        return $instance->getClaim($claim);
+                        /** @var \Facade\FlareClient\Flare $instance */
+                        return $instance->reset();
         }
         
         /**
-         * Create a Payload instance.
+         * 
          *
-         * @param \Tymon\JWTAuth\Contracts\JWTSubject $subject
-         * @return \Tymon\JWTAuth\Payload 
          * @static 
          */ 
-        public static function makePayload($subject)
+        public static function anonymizeIp()
         {
-            //Method inherited from \Tymon\JWTAuth\JWT            
-                        /** @var \Tymon\JWTAuth\JWTAuth $instance */
-                        return $instance->makePayload($subject);
+                        /** @var \Facade\FlareClient\Flare $instance */
+                        return $instance->anonymizeIp();
         }
         
         /**
-         * Check if the subject model matches the one saved in the token.
+         * 
          *
-         * @param string|object $model
-         * @return bool 
          * @static 
          */ 
-        public static function checkSubjectModel($model)
+        public static function createReport($throwable)
         {
-            //Method inherited from \Tymon\JWTAuth\JWT            
-                        /** @var \Tymon\JWTAuth\JWTAuth $instance */
-                        return $instance->checkSubjectModel($model);
+                        /** @var \Facade\FlareClient\Flare $instance */
+                        return $instance->createReport($throwable);
         }
         
         /**
-         * Set the token.
+         * 
          *
-         * @param \Tymon\JWTAuth\Token|string $token
-         * @return \Tymon\JWTAuth\JWTAuth 
          * @static 
          */ 
-        public static function setToken($token)
+        public static function createReportFromMessage($message, $logLevel)
         {
-            //Method inherited from \Tymon\JWTAuth\JWT            
-                        /** @var \Tymon\JWTAuth\JWTAuth $instance */
-                        return $instance->setToken($token);
+                        /** @var \Facade\FlareClient\Flare $instance */
+                        return $instance->createReportFromMessage($message, $logLevel);
         }
         
         /**
-         * Unset the current token.
+         * 
          *
-         * @return \Tymon\JWTAuth\JWTAuth 
          * @static 
          */ 
-        public static function unsetToken()
+        public static function stage($stage)
         {
-            //Method inherited from \Tymon\JWTAuth\JWT            
-                        /** @var \Tymon\JWTAuth\JWTAuth $instance */
-                        return $instance->unsetToken();
+                        /** @var \Facade\FlareClient\Flare $instance */
+                        return $instance->stage($stage);
         }
         
         /**
-         * Set the request instance.
+         * 
          *
-         * @param \Illuminate\Http\Request $request
-         * @return \Tymon\JWTAuth\JWTAuth 
          * @static 
          */ 
-        public static function setRequest($request)
+        public static function messageLevel($messageLevel)
         {
-            //Method inherited from \Tymon\JWTAuth\JWT            
-                        /** @var \Tymon\JWTAuth\JWTAuth $instance */
-                        return $instance->setRequest($request);
+                        /** @var \Facade\FlareClient\Flare $instance */
+                        return $instance->messageLevel($messageLevel);
         }
         
         /**
-         * Set whether the subject should be "locked".
+         * 
          *
-         * @param bool $lock
-         * @return \Tymon\JWTAuth\JWTAuth 
          * @static 
          */ 
-        public static function lockSubject($lock)
+        public static function getGroup($groupName = 'context', $default = [])
         {
-            //Method inherited from \Tymon\JWTAuth\JWT            
-                        /** @var \Tymon\JWTAuth\JWTAuth $instance */
-                        return $instance->lockSubject($lock);
+                        /** @var \Facade\FlareClient\Flare $instance */
+                        return $instance->getGroup($groupName, $default);
         }
         
         /**
-         * Get the Manager instance.
+         * 
          *
-         * @return \Tymon\JWTAuth\Manager 
          * @static 
          */ 
-        public static function manager()
+        public static function context($key, $value)
         {
-            //Method inherited from \Tymon\JWTAuth\JWT            
-                        /** @var \Tymon\JWTAuth\JWTAuth $instance */
-                        return $instance->manager();
+                        /** @var \Facade\FlareClient\Flare $instance */
+                        return $instance->context($key, $value);
         }
         
         /**
-         * Get the Parser instance.
+         * 
          *
-         * @return \Tymon\JWTAuth\Http\Parser\Parser 
          * @static 
          */ 
-        public static function parser()
+        public static function group($groupName, $properties)
         {
-            //Method inherited from \Tymon\JWTAuth\JWT            
-                        /** @var \Tymon\JWTAuth\JWTAuth $instance */
-                        return $instance->parser();
-        }
-        
-        /**
-         * Get the Payload Factory.
-         *
-         * @return \Tymon\JWTAuth\Factory 
-         * @static 
-         */ 
-        public static function factory()
-        {
-            //Method inherited from \Tymon\JWTAuth\JWT            
-                        /** @var \Tymon\JWTAuth\JWTAuth $instance */
-                        return $instance->factory();
-        }
-        
-        /**
-         * Get the Blacklist.
-         *
-         * @return \Tymon\JWTAuth\Blacklist 
-         * @static 
-         */ 
-        public static function blacklist()
-        {
-            //Method inherited from \Tymon\JWTAuth\JWT            
-                        /** @var \Tymon\JWTAuth\JWTAuth $instance */
-                        return $instance->blacklist();
-        }
-        
-        /**
-         * Set the custom claims.
-         *
-         * @param array $customClaims
-         * @return \Tymon\JWTAuth\JWTAuth 
-         * @static 
-         */ 
-        public static function customClaims($customClaims)
-        {
-            //Method inherited from \Tymon\JWTAuth\JWT            
-                        /** @var \Tymon\JWTAuth\JWTAuth $instance */
-                        return $instance->customClaims($customClaims);
-        }
-        
-        /**
-         * Alias to set the custom claims.
-         *
-         * @param array $customClaims
-         * @return \Tymon\JWTAuth\JWTAuth 
-         * @static 
-         */ 
-        public static function claims($customClaims)
-        {
-            //Method inherited from \Tymon\JWTAuth\JWT            
-                        /** @var \Tymon\JWTAuth\JWTAuth $instance */
-                        return $instance->claims($customClaims);
-        }
-        
-        /**
-         * Get the custom claims.
-         *
-         * @return array 
-         * @static 
-         */ 
-        public static function getCustomClaims()
-        {
-            //Method inherited from \Tymon\JWTAuth\JWT            
-                        /** @var \Tymon\JWTAuth\JWTAuth $instance */
-                        return $instance->getCustomClaims();
-        }
-         
-    }
-
-    /**
-     * 
-     *
-     */ 
-    class JWTFactory {
-        
-        /**
-         * Create the Payload instance.
-         *
-         * @param bool $resetClaims
-         * @return \Tymon\JWTAuth\Payload 
-         * @static 
-         */ 
-        public static function make($resetClaims = false)
-        {
-                        /** @var \Tymon\JWTAuth\Factory $instance */
-                        return $instance->make($resetClaims);
-        }
-        
-        /**
-         * Empty the claims collection.
-         *
-         * @return \Tymon\JWTAuth\Factory 
-         * @static 
-         */ 
-        public static function emptyClaims()
-        {
-                        /** @var \Tymon\JWTAuth\Factory $instance */
-                        return $instance->emptyClaims();
-        }
-        
-        /**
-         * Build and get the Claims Collection.
-         *
-         * @return \Tymon\JWTAuth\Claims\Collection 
-         * @static 
-         */ 
-        public static function buildClaimsCollection()
-        {
-                        /** @var \Tymon\JWTAuth\Factory $instance */
-                        return $instance->buildClaimsCollection();
-        }
-        
-        /**
-         * Get a Payload instance with a claims collection.
-         *
-         * @param \Tymon\JWTAuth\Claims\Collection $claims
-         * @return \Tymon\JWTAuth\Payload 
-         * @static 
-         */ 
-        public static function withClaims($claims)
-        {
-                        /** @var \Tymon\JWTAuth\Factory $instance */
-                        return $instance->withClaims($claims);
-        }
-        
-        /**
-         * Set the default claims to be added to the Payload.
-         *
-         * @param array $claims
-         * @return \Tymon\JWTAuth\Factory 
-         * @static 
-         */ 
-        public static function setDefaultClaims($claims)
-        {
-                        /** @var \Tymon\JWTAuth\Factory $instance */
-                        return $instance->setDefaultClaims($claims);
-        }
-        
-        /**
-         * Helper to set the ttl.
-         *
-         * @param int $ttl
-         * @return \Tymon\JWTAuth\Factory 
-         * @static 
-         */ 
-        public static function setTTL($ttl)
-        {
-                        /** @var \Tymon\JWTAuth\Factory $instance */
-                        return $instance->setTTL($ttl);
-        }
-        
-        /**
-         * Helper to get the ttl.
-         *
-         * @return int 
-         * @static 
-         */ 
-        public static function getTTL()
-        {
-                        /** @var \Tymon\JWTAuth\Factory $instance */
-                        return $instance->getTTL();
-        }
-        
-        /**
-         * Get the default claims.
-         *
-         * @return array 
-         * @static 
-         */ 
-        public static function getDefaultClaims()
-        {
-                        /** @var \Tymon\JWTAuth\Factory $instance */
-                        return $instance->getDefaultClaims();
-        }
-        
-        /**
-         * Get the PayloadValidator instance.
-         *
-         * @return \Tymon\JWTAuth\Validators\PayloadValidator 
-         * @static 
-         */ 
-        public static function validator()
-        {
-                        /** @var \Tymon\JWTAuth\Factory $instance */
-                        return $instance->validator();
-        }
-        
-        /**
-         * Set the custom claims.
-         *
-         * @param array $customClaims
-         * @return \Tymon\JWTAuth\Factory 
-         * @static 
-         */ 
-        public static function customClaims($customClaims)
-        {
-                        /** @var \Tymon\JWTAuth\Factory $instance */
-                        return $instance->customClaims($customClaims);
-        }
-        
-        /**
-         * Alias to set the custom claims.
-         *
-         * @param array $customClaims
-         * @return \Tymon\JWTAuth\Factory 
-         * @static 
-         */ 
-        public static function claims($customClaims)
-        {
-                        /** @var \Tymon\JWTAuth\Factory $instance */
-                        return $instance->claims($customClaims);
-        }
-        
-        /**
-         * Get the custom claims.
-         *
-         * @return array 
-         * @static 
-         */ 
-        public static function getCustomClaims()
-        {
-                        /** @var \Tymon\JWTAuth\Factory $instance */
-                        return $instance->getCustomClaims();
-        }
-        
-        /**
-         * Set the refresh flow flag.
-         *
-         * @param bool $refreshFlow
-         * @return \Tymon\JWTAuth\Factory 
-         * @static 
-         */ 
-        public static function setRefreshFlow($refreshFlow = true)
-        {
-                        /** @var \Tymon\JWTAuth\Factory $instance */
-                        return $instance->setRefreshFlow($refreshFlow);
+                        /** @var \Facade\FlareClient\Flare $instance */
+                        return $instance->group($groupName, $properties);
         }
          
     }
@@ -19029,6 +19142,20 @@ namespace  {
             }
          
             /**
+             * Add an "or where in raw" clause for integer values to the query.
+             *
+             * @param string $column
+             * @param \Illuminate\Contracts\Support\Arrayable|array $values
+             * @return \Illuminate\Database\Query\Builder 
+             * @static 
+             */ 
+            public static function orWhereIntegerInRaw($column, $values)
+            {
+                                /** @var \Illuminate\Database\Query\Builder $instance */
+                                return $instance->orWhereIntegerInRaw($column, $values);
+            }
+         
+            /**
              * Add a "where not in raw" clause for integer values to the query.
              *
              * @param string $column
@@ -19041,6 +19168,20 @@ namespace  {
             {
                                 /** @var \Illuminate\Database\Query\Builder $instance */
                                 return $instance->whereIntegerNotInRaw($column, $values, $boolean);
+            }
+         
+            /**
+             * Add an "or where not in raw" clause for integer values to the query.
+             *
+             * @param string $column
+             * @param \Illuminate\Contracts\Support\Arrayable|array $values
+             * @return \Illuminate\Database\Query\Builder 
+             * @static 
+             */ 
+            public static function orWhereIntegerNotInRaw($column, $values)
+            {
+                                /** @var \Illuminate\Database\Query\Builder $instance */
+                                return $instance->orWhereIntegerNotInRaw($column, $values);
             }
          
             /**
@@ -20417,17 +20558,17 @@ namespace  {
 
     class View extends \Illuminate\Support\Facades\View {}
 
-    class Flare extends \Facade\Ignition\Facades\Flare {}
-
     class Module extends \Nwidart\Modules\Facades\Module {}
-
-    class Debugbar extends \Barryvdh\Debugbar\Facade {}
-
-    class LogToDB extends \danielme85\LaravelLogToDB\LogToDB {}
 
     class JWTAuth extends \Tymon\JWTAuth\Facades\JWTAuth {}
 
     class JWTFactory extends \Tymon\JWTAuth\Facades\JWTFactory {}
+
+    class LogToDB extends \danielme85\LaravelLogToDB\LogToDB {}
+
+    class Debugbar extends \Barryvdh\Debugbar\Facade {}
+
+    class Flare extends \Facade\Ignition\Facades\Flare {}
 
     class Iseed extends \Orangehill\Iseed\Facades\Iseed {}
  
@@ -20437,6 +20578,7 @@ namespace  {
 namespace {
 
 
+use Illuminate\Contracts\Support\DeferringDisplayableValue;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
@@ -20681,12 +20823,16 @@ if (! function_exists('e')) {
     /**
      * Encode HTML special characters in a string.
      *
-     * @param  \Illuminate\Contracts\Support\Htmlable|string  $value
+     * @param  \Illuminate\Contracts\Support\DeferringDisplayableValue|\Illuminate\Contracts\Support\Htmlable|string  $value
      * @param  bool  $doubleEncode
      * @return string
      */
     function e($value, $doubleEncode = true)
     {
+        if ($value instanceof DeferringDisplayableValue) {
+            $value = $value->resolveDisplayableValue();
+        }
+
         if ($value instanceof Htmlable) {
             return $value->toHtml();
         }

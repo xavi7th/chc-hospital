@@ -1,23 +1,13 @@
-/*
- |--------------------------------------------------------------------------
- | Mix Asset Management
- |--------------------------------------------------------------------------
- |
- | Mix provides a clean, fluent API for defining some Webpack build steps
- | for your Laravel application. By default, we are compiling the Sass
- | file for the application as well as bundling up all the JS files.
- |
- */
-
-
-const mix = require( 'laravel-mix' );
-require( 'laravel-mix-svelte' );
-
-mix.setPublicPath( './public_html' );
-
 let fs = require( 'fs-extra' );
+let modules = fs.readdirSync( './main/app/Modules' );
+const mix = require( 'laravel-mix' );
+const {
+    CleanWebpackPlugin
+} = require( 'clean-webpack-plugin' );
 
-let modules = fs.readdirSync( './main/app/Modules' ); // Make sure the path of your modules are correct
+require( 'laravel-mix-merge-manifest' );
+require( 'laravel-mix-svelte' );
+mix.setPublicPath( './public_html' );
 
 if ( modules && modules.length > 0 ) {
     modules.forEach( ( module ) => {
@@ -28,27 +18,36 @@ if ( modules && modules.length > 0 ) {
     } );
 }
 
-// mix.webpackConfig( {
-//     entry: {
-//         main: [
-//             './main/app/Modules/PublicPages/Resources/sass/app.scss',
-//             './main/app/Modules/AppUser/Resources/sass/app.scss',
-//             './main/app/Modules/TestOne/Resources/sass/app.scss'
-//         ]
-//     }
-// } );
+// console.log( process.env );
+
+mix.webpackConfig( {
+    output: {
+        filename: "[name].[chunkhash].js",
+        chunkFilename: "[name].[chunkhash].js",
+    },
+    plugins: [
+        new CleanWebpackPlugin( {
+            dry: false,
+            cleanOnceBeforeBuildPatterns: [ 'css/*', '/img/*', 'fonts/*' ] //, './mix-manifest.json']
+
+        } ),
+    ]
+} );
 
 mix.options( {
-        // processCssUrls: false,
         fileLoaderDirs: {
             images: 'img'
         },
         postCss: [
-            require( 'postcss-fixes' )(), // add fallbacks for rem units and other fixes
+            require( 'postcss-fixes' )(),
             require( 'cssnano' )( {
-                'calc': false // already included in postcss-fixes
+                discardComments: {
+                    removeAll: true
+                },
+                normalizeWhitespace: mix.inProduction(),
+                calc: false,
+                cssDeclarationSorter: true
             } ),
         ]
     } )
     .mergeManifest()
-    .version();

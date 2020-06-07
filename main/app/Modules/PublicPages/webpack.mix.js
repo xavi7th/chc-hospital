@@ -1,21 +1,12 @@
-const dotenvExpand = require( 'dotenv-expand' );
-const config = require( 'dotenv' ).config( {
-    path: __dirname + '/../../../.env',
-    // debug: true
-} );
-dotenvExpand( config );
-
-// console.log( config );
-
 const mix = require( 'laravel-mix' );
-require( 'laravel-mix-merge-manifest' );
 
 mix.webpackConfig( {
     resolve: {
         extensions: [ '.js', '.svelte', '.json' ],
         alias: {
-            '@public-pages': __dirname + '/Resources/js/Pages',
-            '@public-assets': __dirname + '/Resources'
+            '@p-pages': __dirname + '/Resources/js/Pages',
+            '@p-shared': __dirname + '/Resources/js/Shared',
+            '@p-assets': __dirname + '/Resources'
         },
     },
 } )

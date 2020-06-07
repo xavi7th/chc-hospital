@@ -9,6 +9,9 @@
         <script src="{{ mix('/js/manifest.js') }}"></script>
         <script src="{{ mix('/js/vendor.js') }}"></script>
         <script src="{{ mix('/js/admin.js') }}" defer></script>
+
+        <meta name="twitter:title" content="{{ $title ?? 'Welcome to ' . config('app.name') }}">
+
         {{-- @php dump($page) @endphp --}}
     </head>
 

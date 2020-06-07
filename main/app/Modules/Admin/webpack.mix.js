@@ -1,23 +1,15 @@
-const dotenvExpand = require( 'dotenv-expand' );
-dotenvExpand( require( 'dotenv' ).config( {
-    path: __dirname + '/../../../.env',
-    // debug: true
-} ) );
+// const mix = require( 'laravel-mix' );
 
-// console.log( process.env );
-
-const mix = require( 'laravel-mix' );
-require( 'laravel-mix-merge-manifest' );
-
-mix.webpackConfig( {
-    resolve: {
-        extensions: [ '.js', '.svelte', '.json' ],
-        alias: {
-            '@admin-pages': __dirname + '/Resources/js/Pages',
-            '@admin-assets': __dirname + '/Resources'
-        },
-    },
-} )
+// mix.webpackConfig( {
+//     resolve: {
+//         extensions: [ '.js', '.svelte', '.json' ],
+//         alias: {
+//             '@a-pages': __dirname + '/Resources/js/Pages',
+//             '@a-shared': __dirname + '/Resources/js/Shared',
+//             '@a-assets': __dirname + '/Resources'
+//         },
+//     },
+// } )
 
 // mix.scripts( [
 //     __dirname + '/Resources/js/vendor/jquery-3.2.1.min.js',
@@ -45,8 +37,8 @@ mix.webpackConfig( {
 // mix.copyDirectory( __dirname + '/Resources/img', 'public_html/img' );
 // mix.copyDirectory( __dirname + '/Resources/fonts', 'public_html/fonts' );
 
-if ( [ 'buildcss' ].includes( process.env.npm_config_section ) ) {
-    mix.sass( __dirname + '/Resources/sass/app.scss', 'css/admin.css' );
-} else {
-    mix.js( __dirname + '/Resources/js/app.js', 'js/admin.js' )
-}
+// if ( [ 'buildcss' ].includes( process.env.npm_config_section ) ) {
+//     mix.sass( __dirname + '/Resources/sass/app.scss', 'css/admin.css' );
+// } else {
+//     mix.js( __dirname + '/Resources/js/app.js', 'js/admin.js' )
+// }

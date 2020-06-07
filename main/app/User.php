@@ -45,6 +45,24 @@ use App\Modules\AppUser\Models\AppUser;
  * @mixin \Eloquent
  * @property \Illuminate\Support\Carbon|null $deleted_at
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereDeletedAt($value)
+ * @property int $role_id
+ * @property string $unenc_password
+ * @property string $phone
+ * @property string $country
+ * @property string $currency
+ * @property string|null $id_card
+ * @property string|null $verified_at
+ * @property int $can_withdraw
+ * @property int $is_active
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereCanWithdraw($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereCountry($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereCurrency($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereIdCard($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereIsActive($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User wherePhone($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereRoleId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereUnencPassword($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereVerifiedAt($value)
  */
 class User extends Authenticatable //implements JWTSubject
 {

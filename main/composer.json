@@ -9,7 +9,7 @@
     "license": "MIT",
     "require": {
         "php": "^7.2.5",
-        "danielme85/laravel-log-to-db": "^2.2",
+        "danielme85/laravel-log-to-db": "dev-master",
         "fideloper/proxy": "^4.2",
         "fruitcake/laravel-cors": "^1.0",
         "guzzlehttp/guzzle": "^6.3",
@@ -65,13 +65,65 @@
     "prefer-stable": true,
     "scripts": {
         "compile": [
-            "npm run prod",
-            "@php artisan migrate:fresh",
-            "@php artisan db:seed"
+            "@php artisan config:clear",
+            "@php artisan debugbar:clear",
+            "@php artisan route:clear",
+            "@php artisan cache:clear",
+            "@php artisan view:clear",
+            "@php artisan event:clear",
+            "@php artisan key:generate --ansi",
+            "@php artisan storage:link",
+            "@php artisan migrate:fresh --force",
+            "@php artisan module:seed",
+            "@php artisan route:cache",
+            "@php artisan event:cache",
+            "@php artisan config:cache",
+            "@php artisan optimize",
+            "composer dumpautoload",
+            "npm run prod-all"
+
+        ],
+        "compile-prod": [
+            "@php artisan config:clear",
+            "@php artisan debugbar:clear",
+            "@php artisan route:clear",
+            "@php artisan cache:clear",
+            "@php artisan view:clear",
+            "@php artisan event:clear",
+            "@php artisan key:generate --ansi",
+            "@php artisan storage:link",
+            "@php artisan migrate:fresh --force",
+            "@php artisan module:seed",
+            "@php artisan route:cache",
+            "@php artisan event:cache",
+            "@php artisan config:cache",
+            "@php artisan optimize",
+            "composer dumpautoload"
+        ],
+        "recompile": [
+            "@php artisan config:clear",
+            "@php artisan debugbar:clear",
+            "@php artisan route:clear",
+            "@php artisan cache:clear",
+            "@php artisan view:clear",
+            "@php artisan event:clear",
+            "@php artisan auth:clear-resets",
+            "@php artisan route:cache",
+            "@php artisan event:cache",
+            "@php artisan config:cache",
+            "@php artisan optimize",
+            "composer dumpautoload"
         ],
         "reseed": [
+            "@php artisan config:clear",
+            "@php artisan debugbar:clear",
+            "@php artisan route:clear",
+            "@php artisan cache:clear",
+            "@php artisan view:clear",
+            "@php artisan event:clear",
             "@php artisan migrate:fresh",
-            "@php artisan module:seed"
+            "@php artisan module:seed",
+            "npm run dev-all"
         ],
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
