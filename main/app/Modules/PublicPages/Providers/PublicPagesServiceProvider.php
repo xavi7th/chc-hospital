@@ -3,6 +3,7 @@
 namespace App\Modules\PublicPages\Providers;
 
 use Inertia\Inertia;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\ServiceProvider;
@@ -55,13 +56,16 @@ class PublicPagesServiceProvider extends ServiceProvider
 
     Inertia::share([
       'app' => [
-        'name' => config('app.name')
+        'name' => config('app.name'),
+        'whatsapp' => config('app.whatsapp'),
+        'address' => config('app.address'),
+        'phone' => config('app.phone'),
+        'email' => config('app.email'),
       ],
-      'auth' => function () {
-        return [
-          'user' => Auth::user() ? Auth::user() : (object)[],
-        ];
+      'routes' => function (Request $request) {
+        return optional($request->user())->get_navigation_routes() ?? get_related_routes('app.', ['GET'], true);
       },
+      'isInertiaRequest' => (bool)request()->header('X-Inertia'),
       'flash' => function () {
         return [
           'success' => Session::get('success'),

@@ -8,24 +8,27 @@
 
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
-        <meta name="twitter:title" content="{{ $title ?? 'Welcome to ' . config('app.name') }}">
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <meta name="format-detection" content="telephone=yes">
         <meta name="description"
-            content="Capitol Hill Clinic/Hospital is a multi-functional hospital, Situated at Ranyo’s Place, Warri, Nigeria. Our Medical Center is an all purpose general specialist practice enclave with non partnership group practice encompassing surgery, obstetrics etc." />
+            content="{{$description ?? 'Capitol Hill Clinic/Hospital is a multi-functional hospital, Situated at Ranyo’s Place, Warri, Nigeria. Our Medical Center is an all purpose general specialist practice enclave with non partnership group practice encompassing surgery, obstetrics etc.'}}" />
         <meta name="keywords"
-            content="hospital, clinic, laboratory, surgery, capitol hill hospital, warri, delta state, nigeria, specialist, medical" />
-        <meta name="author" content="Codekago Interactive" />
+            content="{{$keywords ?? 'hospital, clinic, laboratory, surgery, capitol hill hospital, warri, delta state, nigeria, specialist, medical'}}" />
+        <meta name="author" content="Minds&Machines and Codekago Interactive" />
 
-        <meta property="og:title" content="Capitol Hill Clinic/Hospital" />
+        <meta property="og:title" content="{{$title ?? 'Welcome to ' . config('app.name')}}" />
         <meta property="og:description"
-            content="Capitol Hill Clinic/Hospital is a multi-functional hospital, Situated at Ranyo’s Place, Warri, Nigeria. Our Medical Center is an all purpose general specialist practice enclave with non partnership group practice encompassing surgery, obstetrics etc." />
-        <meta property="og:image" content="/img/resources/logo.png" />
-        <meta property="og:url" content="https://capitolhillhospitals.com.ng/" />
+            content="{{$description ?? 'Capitol Hill Clinic/Hospital is a multi-functional hospital, Situated at Ranyo’s Place, Warri, Nigeria. Our Medical Center is an all purpose general specialist practice enclave with non partnership group practice encompassing surgery, obstetrics etc.'}}" />
+        <meta property="og:image" content="{{$ogImg ?? '/img/resources/logo.png'}}" />
+        <meta property="og:url" content="{{url()->full() ?? 'https://capitolhillhospitals.com.ng/'}}" />
         <meta property="og:type" content="website" />
         <meta property="og:locale" content="en_GB" />
 
-        <link rel="canonical" href="https://capitolhillhospitals.com.ng" />
+        <meta name="twitter:title" content="{{ $title ?? 'Welcome to ' . config('app.name') }}">
+
+
+        <link rel="canonical" href="{{$canonicalUrl ?? url()->current()}}" />
+
         <link href="{{ mix('/css/app.css') }}" rel="stylesheet" />
 
         <script src="{{ mix('/js/admin-app-vendor.js') }}" defer async></script>

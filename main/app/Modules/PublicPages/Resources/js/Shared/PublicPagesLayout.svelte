@@ -13,7 +13,7 @@
   let isLoaded = false,
     pageLoaded = false;
 
-  $: ({ isInertiaRequest, app } = $page);
+  $: ({ isInertiaRequest, app, routes } = $page);
 
   console.log($page);
 
@@ -31,7 +31,7 @@
 {/if}
 
 {#if !route().current('app.login.show')}
-  <Header />
+  <Header {routes} />
 {/if}
 
 {#if !route().current('app.home') && !route().current('app.login.show')}

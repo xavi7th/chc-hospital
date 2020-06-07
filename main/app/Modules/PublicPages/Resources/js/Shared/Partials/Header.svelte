@@ -1,3 +1,9 @@
+<script>
+  import { InertiaLink } from "@inertiajs/inertia-svelte";
+  import route from "ziggy";
+  export let routes;
+</script>
+
 <section class="top-bar">
   <div class="container">
 
@@ -10,6 +16,7 @@
     <!-- /.left-text -->
 
     <div class="social-icons pull-right">
+
       <ul>
         <li>
           <a
@@ -96,30 +103,41 @@
     <div class="navigation pull-left">
       <div class="nav-header">
         <ul>
-          <li>
-            <a class="active" href="home">Home</a>
-          </li>
-          <li>
-            <a href="about">About Us</a>
-          </li>
-          <li>
-            <a href="services">Services</a>
-          </li>
-          <li>
-            <a href="facilities">Facilities</a>
-          </li>
-          <li>
-            <a href="careers">Careers</a>
-          </li>
-          <li>
-            <a href="news">News</a>
-          </li>
-          <li>
-            <a href="quality-policy">Quality Policy</a>
-          </li>
-          <li>
-            <a href="contact">Contact Us</a>
-          </li>
+          {#each Object.entries(routes) as [route_name, route_cont]}
+            {#if route_cont.length == 1}
+              <li class:active={route().current(route_cont[0].name)}>
+                <InertiaLink href={route(route_cont[0].name)}>
+                  {route_cont[0].menu_name}
+                </InertiaLink>
+              </li>
+            {:else if route_cont.length > 1}
+              <li>
+                <a href>
+                  <span class="yay-icon">
+                    <span
+                      stroke-width="1.5"
+                      data-feather={route_cont[0].icon} />
+                  </span>
+                  <span>{route_name}</span>
+                  <span class="rui-yaybar-circle" />
+                  <span class="yay-icon-collapse">
+                    <span
+                      data-feather="chevron-right"
+                      class="rui-icon rui-icon-collapse rui-icon-stroke-1_5" />
+                  </span>
+                </a>
+                <ul class="yay-submenu dropdown-triangle">
+                  {#each route_cont as elem}
+                    <li class:active={route().current(elem.name)}>
+                      <InertiaLink href={route(elem.name)}>
+                        {elem.menu_name}
+                      </InertiaLink>
+                    </li>
+                  {/each}
+                </ul>
+              </li>
+            {/if}
+          {/each}
         </ul>
       </div>
       <div class="nav-footer">
