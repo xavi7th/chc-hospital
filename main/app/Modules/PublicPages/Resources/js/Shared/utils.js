@@ -68,3 +68,16 @@ import {range} from './range.js';
         }
     } );
 }
+
+export let truncateString = ( str, num, stripHtml = true ) => {
+    if ( str.length <= num ) {
+        if ( stripHtml ) {
+            return str.replace( /(<([^>]+)>)/ig, "" )
+        }
+        return str
+    }
+    if ( stripHtml ) {
+        return str.replace( /(<([^>]+)>)/ig, "" ).slice( 0, num ) + '...'
+    }
+    return str.slice( 0, num ) + '...'
+}

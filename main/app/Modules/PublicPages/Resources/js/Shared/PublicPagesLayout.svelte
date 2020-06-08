@@ -30,19 +30,15 @@
   <PageLoader transparent={true} />
 {/if}
 
-{#if !route().current('app.login.show')}
-  <Header {routes} />
-{/if}
+<Header {routes} />
 
-{#if !route().current('app.home') && !route().current('app.login.show')}
+{#if !route().current('app.home')}
   <PageTitle {title} />
 {/if}
 
 <slot />
 
-{#if !route().current('app.login.show')}
-  <Footer appName={app.name} />
-{/if}
+<Footer appName={app.name} />
 
 {#if isLoaded}
   <script src="/js/app-init-06-06-20.js">

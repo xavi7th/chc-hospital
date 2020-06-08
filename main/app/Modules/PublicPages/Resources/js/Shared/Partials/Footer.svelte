@@ -163,7 +163,7 @@
     <p>Copyright {new Date().getFullYear()} {appName}. All Rights Reserved</p>
     <p>
       Developed By
-      <a href="http://codekago.com.ng" target="_blank">Codekago Interactive</a>
+      <a href="#" target="_blank">Minds &amp; Machines</a>
     </p>
   </div>
 </section>

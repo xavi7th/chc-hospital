@@ -55,7 +55,7 @@
   <div class="container">
     <div class="logo pull-left">
       <a href="home">
-        <img src="img/resources/logo.png" alt="Logo" />
+        <img src="/img/resources/logo.png" alt="Logo" />
       </a>
     </div>
     <div class="header-right-info pull-right clearfix">

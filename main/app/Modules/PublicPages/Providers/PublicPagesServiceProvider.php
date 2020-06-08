@@ -58,9 +58,17 @@ class PublicPagesServiceProvider extends ServiceProvider
       'app' => [
         'name' => config('app.name'),
         'whatsapp' => config('app.whatsapp'),
-        'address' => config('app.address'),
         'phone' => config('app.phone'),
         'email' => config('app.email'),
+        'email2' => config('app.email2'),
+        'email3' => config('app.email3'),
+        'email4' => config('app.email4'),
+        'phone1' => config('app.phone1'),
+        'phone2' => config('app.phone2'),
+        'phone3' => config('app.phone3'),
+        'phone4' => config('app.phone4'),
+        'address1' => config('app.address1'),
+        'address2' => config('app.address2'),
       ],
       'routes' => function (Request $request) {
         return optional($request->user())->get_navigation_routes() ?? get_related_routes('app.', ['GET'], true);

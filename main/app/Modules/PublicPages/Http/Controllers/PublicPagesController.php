@@ -3,14 +3,10 @@
 namespace App\Modules\PublicPages\Http\Controllers;
 
 use Inertia\Inertia;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use App\Modules\Admin\Models\Admin;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Modules\AppUser\Models\AppUser;
-use App\Modules\SuperAdmin\Models\SuperAdmin;
-use App\Modules\AppUser\Http\Controllers\LoginController;
 
 class PublicPagesController extends Controller
 {
@@ -45,10 +41,16 @@ class PublicPagesController extends Controller
       Route::get('/about-us', [self::class, 'showAboutPage'])->name('app.about_us');
       Route::get('/our-services', [self::class, 'showServicesPage'])->name('app.services');
       Route::get('/our-facilities', [self::class, 'showFacilitiesPage'])->name('app.facilities');
-      Route::get('/work-with-us', [self::class, 'showCareerPage'])->name('app.careers');
+      Route::get('/work-with-us', [self::class, 'showCareerPage'])->name('app.career');
       Route::get('/news', [self::class, 'showNewsPage'])->name('app.news');
       Route::get('/our-quality-policy', [self::class, 'showQualityPolicyPage'])->name('app.quality_policy');
+      Route::get('/our-team', [self::class, 'showTeamPage'])->name('app.our_team');
       Route::get('/contact-us', [self::class, 'showContactPage'])->name('app.contact_us');
+
+      Route::get('/message-from-our-md', [self::class, 'showMDMessagePage'])->name('app.message_from_md')->defaults('ex', self::__e(true));
+      Route::get('/book-an-appointment', [self::class, 'bookAppointment'])->name('app.book_appointment')->defaults('ex', self::__e(true));
+
+      Route::get('/services/{service}', [self::class, 'viewServiceItem'])->name('app.service')->defaults('ex', self::__e(true));
     });
   }
 
@@ -66,6 +68,13 @@ class PublicPagesController extends Controller
   {
     return Inertia::render('About')->withViewData([
       'title' => 'About Capitol Hill Hospital/Clinic Warri',
+    ]);
+  }
+
+  public function showMDMessagePage(Request $request)
+  {
+    return Inertia::render('MDMessage')->withViewData([
+      'title' => 'Message from our MD/CEO',
     ]);
   }
 
@@ -108,6 +117,27 @@ class PublicPagesController extends Controller
   public function showContactPage(Request $request)
   {
     return Inertia::render('Contact')->withViewData([
+      'title' => 'About Capitol Hill Hospital/Clinic Warri',
+    ]);
+  }
+
+  public function showTeamPage(Request $request)
+  {
+    return Inertia::render('Team')->withViewData([
+      'title' => 'About Capitol Hill Hospital/Clinic Warri',
+    ]);
+  }
+
+  public function bookAppointment(Request $request)
+  {
+    return Inertia::render('Appointment')->withViewData([
+      'title' => 'About Capitol Hill Hospital/Clinic Warri',
+    ]);
+  }
+
+  public function viewServiceItem($service)
+  {
+    return Inertia::render('Services/' . Str::studly($service))->withViewData([
       'title' => 'About Capitol Hill Hospital/Clinic Warri',
     ]);
   }

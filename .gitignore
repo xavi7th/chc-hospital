@@ -40,3 +40,6 @@ _ide_helper_models.php
 Old Site
 Old.sql
 jsconfig.json
+.jsbeautifyrc
+svelte.config.js
+.jshintrc

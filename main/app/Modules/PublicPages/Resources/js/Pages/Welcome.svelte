@@ -1,6 +1,7 @@
 <script>
   import { page, InertiaLink } from "@inertiajs/inertia-svelte";
   import Layout from "@p-shared/PublicPagesLayout";
+  import route from 'ziggy';
 </script>
 
 <Layout title="Welcome">
@@ -10,7 +11,7 @@
       <ul>
         <li data-transition="parallaxvertical">
           <img
-            src="img/slides/slide2.jpg"
+            src="/img/slides/slide2.jpg"
             alt=""
             width="1920"
             height="705"
@@ -106,7 +107,7 @@
         </li>
         <li data-transition="parallaxvertical">
           <img
-            src="img/slides/slide3.png"
+            src="/img/slides/slide3.png"
             alt=""
             width="1920"
             height="705"
@@ -186,7 +187,7 @@
 
         <li data-transition="parallaxvertical">
           <img
-            src="img/slides/slide4.jpg"
+            src="/img/slides/slide4.jpg"
             alt=""
             width="1920"
             height="705"
@@ -264,7 +265,7 @@
 
         <li data-transition="parallaxvertical">
           <img
-            src="img/slides/slide6.jpg"
+            src="/img/slides/slide6.jpg"
             alt=""
             width="1920"
             height="705"
@@ -346,7 +347,7 @@
 
         <li data-transition="parallaxvertical">
           <img
-            src="img/slides/slide5.jpg"
+            src="/img/slides/slide5.jpg"
             alt=""
             width="1920"
             height="705"
@@ -449,7 +450,7 @@
       <div class="clearfix">
         <div
           class="call-to-action-corner col-md-4"
-          style="background-image: url(img/call-to-action/open.jpg);">
+          style="background-image: url(/img/call-to-action/open.jpg);">
           <div class="single-call-to-action open-hours">
             <div class="icon-box">
               <div class="inner-box">
@@ -479,7 +480,7 @@
         </div>
         <div
           class="call-to-action-center col-md-4"
-          style="background-image: url(img/call-to-action/appoint.jpg);">
+          style="background-image: url(/img/call-to-action/appoint.jpg);">
           <div class="single-call-to-action">
             <div class="icon-box">
               <div class="inner-box">
@@ -493,13 +494,13 @@
                 <br />
                 today or book a appoinment
               </p>
-              <a href="appointment" class="thm-btn inverse">Book Now</a>
+              <InertiaLink href="{route('app.book_appointment')}" class="thm-btn inverse">Book Now</InertiaLink>
             </div>
           </div>
         </div>
         <div
           class="call-to-action-corner col-md-4"
-          style="background-image: url(img/call-to-action/specialist.png);">
+          style="background-image: url(/img/call-to-action/specialist.png);">
           <div class="single-call-to-action">
             <div class="icon-box">
               <div class="inner-box">
@@ -582,7 +583,7 @@
         <div class="col-md-6 hidden-md hidden-sm hidden-xs">
           <img
             class="full-image pull-right"
-            src="img/resources/full.jpg"
+            src="/img/resources/full.jpg"
             alt="" />
         </div>
         <div class="col-lg-6 col-md-12">
@@ -655,13 +656,13 @@
         <div class="col-md-6 hidden-md">
           <div class="img-masonary">
             <div class="img-w1">
-              <img src="img/faq/7.jpg" height="450" width="280" alt="" />
+              <img src="/img/faq/7.jpg" height="450" width="280" alt="" />
             </div>
             <div class="img-w1 img-h1">
-              <img src="img/faq/8.jpg" height="450" width="280" alt="" />
+              <img src="/img/faq/8.jpg" height="450" width="280" alt="" />
             </div>
             <div class="img-w1 img-h1">
-              <img src="img/faq/9.jpg" height="450" width="280" alt="" />
+              <img src="/img/faq/9.jpg" height="450" width="280" alt="" />
             </div>
           </div>
         </div>
@@ -878,13 +879,13 @@
         <div class="col-md-6 hidden-md">
           <div class="img-masonary">
             <div class="img-w1">
-              <img src="img/faq/4.jpg" height="450" width="280" alt="" />
+              <img src="/img/faq/4.jpg" height="450" width="280" alt="" />
             </div>
             <div class="img-w1 img-h1">
-              <img src="img/faq/5.jpg" height="450" width="280" alt="" />
+              <img src="/img/faq/5.jpg" height="450" width="280" alt="" />
             </div>
             <div class="img-w1 img-h1">
-              <img src="img/faq/6.jpg" height="450" width="280" alt="" />
+              <img src="/img/faq/6.jpg" height="450" width="280" alt="" />
             </div>
           </div>
         </div>
@@ -905,13 +906,13 @@
         <div class="col-md-3 col-sm-6" style="padding: 0px">
           <div class="single-blog-post">
             <div class="img-box">
-              <img src="img/gallery/1.jpg" alt="" />
+              <img src="/img/gallery/1.jpg" alt="" />
               <div class="overlay">
                 <div class="box">
                   <div class="content">
                     <ul>
                       <li>
-                        <a href="img/gallery/1.jpg" data-lightbox="example-set">
+                        <a href="/img/gallery/1.jpg" data-lightbox="example-set">
                           <img class="example-image" alt/>
                           <i class="fa fa-link" />
                         </a>
@@ -927,13 +928,13 @@
         <div class="col-md-3 col-sm-6" style="padding: 0px">
           <div class="single-blog-post">
             <div class="img-box">
-              <img src="img/gallery/2.jpg" alt="" />
+              <img src="/img/gallery/2.jpg" alt="" />
               <div class="overlay">
                 <div class="box">
                   <div class="content">
                     <ul>
                       <li>
-                        <a href="img/gallery/2.jpg" data-lightbox="example-set">
+                        <a href="/img/gallery/2.jpg" data-lightbox="example-set">
                           <img class="example-image" alt />
                           <i class="fa fa-link" />
                         </a>
@@ -950,13 +951,13 @@
         <div class="col-md-3 col-sm-6" style="padding: 0px">
           <div class="single-blog-post">
             <div class="img-box">
-              <img src="img/gallery/3.jpg" alt="" />
+              <img src="/img/gallery/3.jpg" alt="" />
               <div class="overlay">
                 <div class="box">
                   <div class="content">
                     <ul>
                       <li>
-                        <a href="img/gallery/3.jpg" data-lightbox="example-set">
+                        <a href="/img/gallery/3.jpg" data-lightbox="example-set">
                           <img class="example-image" alt />
                           <i class="fa fa-link" />
                         </a>
@@ -972,58 +973,13 @@
         <div class="col-md-3 col-sm-6" style="padding: 0px">
           <div class="single-blog-post">
             <div class="img-box">
-              <img src="img/gallery/4.jpg" alt="" />
+              <img src="/img/gallery/4.jpg" alt="" />
               <div class="overlay">
                 <div class="box">
                   <div class="content">
                     <ul>
                       <li>
-                        <a href="img/gallery/4.jpg" data-lightbox="example-set">
-                          <img class="example-image" alt />
-                          <i class="fa fa-link" />
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-          </div>
-        </div>
-
-        <div class="col-md-3 col-sm-6" style="padding: 0px">
-          <div class="single-blog-post">
-            <div class="img-box">
-              <img src="img/gallery/5.jpg" alt="" />
-              <div class="overlay">
-                <div class="box">
-                  <div class="content">
-                    <ul>
-                      <li>
-                        <a href="img/gallery/5.jpg" data-lightbox="example-set">
-                          <img class="example-image" alt />
-                          <i class="fa fa-link" />
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-          </div>
-        </div>
-        <div class="col-md-3 col-sm-6" style="padding: 0px">
-          <div class="single-blog-post">
-            <div class="img-box">
-              <img src="img/gallery/6.jpg" alt="" />
-              <div class="overlay">
-                <div class="box">
-                  <div class="content">
-                    <ul>
-                      <li>
-                        <a href="img/gallery/6.jpg" data-lightbox="example-set">
+                        <a href="/img/gallery/4.jpg" data-lightbox="example-set">
                           <img class="example-image" alt />
                           <i class="fa fa-link" />
                         </a>
@@ -1040,13 +996,13 @@
         <div class="col-md-3 col-sm-6" style="padding: 0px">
           <div class="single-blog-post">
             <div class="img-box">
-              <img src="img/gallery/7.jpg" alt="" />
+              <img src="/img/gallery/5.jpg" alt="" />
               <div class="overlay">
                 <div class="box">
                   <div class="content">
                     <ul>
                       <li>
-                        <a href="img/gallery/7.jpg" data-lightbox="example-set">
+                        <a href="/img/gallery/5.jpg" data-lightbox="example-set">
                           <img class="example-image" alt />
                           <i class="fa fa-link" />
                         </a>
@@ -1062,36 +1018,13 @@
         <div class="col-md-3 col-sm-6" style="padding: 0px">
           <div class="single-blog-post">
             <div class="img-box">
-              <img src="img/gallery/8.jpg" alt="" />
+              <img src="/img/gallery/6.jpg" alt="" />
               <div class="overlay">
                 <div class="box">
                   <div class="content">
                     <ul>
                       <li>
-                        <a href="img/gallery/8.jpg" data-lightbox="example-set">
-                          <img class="example-image" alt />
-                          <i class="fa fa-link" />
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-          </div>
-        </div>
-
-        <div class="col-md-3 col-sm-6" style="padding: 0px">
-          <div class="single-blog-post">
-            <div class="img-box">
-              <img src="img/gallery/9.jpg" alt="" />
-              <div class="overlay">
-                <div class="box">
-                  <div class="content">
-                    <ul>
-                      <li>
-                        <a href="img/gallery/9.jpg" data-lightbox="example-set">
+                        <a href="/img/gallery/6.jpg" data-lightbox="example-set">
                           <img class="example-image" alt />
                           <i class="fa fa-link" />
                         </a>
@@ -1108,14 +1041,82 @@
         <div class="col-md-3 col-sm-6" style="padding: 0px">
           <div class="single-blog-post">
             <div class="img-box">
-              <img src="img/gallery/10.jpg" alt="" />
+              <img src="/img/gallery/7.jpg" alt="" />
+              <div class="overlay">
+                <div class="box">
+                  <div class="content">
+                    <ul>
+                      <li>
+                        <a href="/img/gallery/7.jpg" data-lightbox="example-set">
+                          <img class="example-image" alt />
+                          <i class="fa fa-link" />
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <div class="col-md-3 col-sm-6" style="padding: 0px">
+          <div class="single-blog-post">
+            <div class="img-box">
+              <img src="/img/gallery/8.jpg" alt="" />
+              <div class="overlay">
+                <div class="box">
+                  <div class="content">
+                    <ul>
+                      <li>
+                        <a href="/img/gallery/8.jpg" data-lightbox="example-set">
+                          <img class="example-image" alt />
+                          <i class="fa fa-link" />
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="col-md-3 col-sm-6" style="padding: 0px">
+          <div class="single-blog-post">
+            <div class="img-box">
+              <img src="/img/gallery/9.jpg" alt="" />
+              <div class="overlay">
+                <div class="box">
+                  <div class="content">
+                    <ul>
+                      <li>
+                        <a href="/img/gallery/9.jpg" data-lightbox="example-set">
+                          <img class="example-image" alt />
+                          <i class="fa fa-link" />
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="col-md-3 col-sm-6" style="padding: 0px">
+          <div class="single-blog-post">
+            <div class="img-box">
+              <img src="/img/gallery/10.jpg" alt="" />
               <div class="overlay">
                 <div class="box">
                   <div class="content">
                     <ul>
                       <li>
                         <a
-                          href="img/gallery/10.jpg"
+                          href="/img/gallery/10.jpg"
                           data-lightbox="example-set">
                           <img class="example-image" alt />
                           <i class="fa fa-link" />
@@ -1132,14 +1133,14 @@
         <div class="col-md-3 col-sm-6" style="padding: 0px">
           <div class="single-blog-post">
             <div class="img-box">
-              <img src="img/gallery/11.jpg" alt="" />
+              <img src="/img/gallery/11.jpg" alt="" />
               <div class="overlay">
                 <div class="box">
                   <div class="content">
                     <ul>
                       <li>
                         <a
-                          href="img/gallery/11.jpg"
+                          href="/img/gallery/11.jpg"
                           data-lightbox="example-set">
                           <img class="example-image" alt />
                           <i class="fa fa-link" />
@@ -1160,14 +1161,14 @@
           style="padding: 0px">
           <div class="single-blog-post">
             <div class="img-box">
-              <img src="img/gallery/12.jpg" alt="" />
+              <img src="/img/gallery/12.jpg" alt="" />
               <div class="overlay">
                 <div class="box">
                   <div class="content">
                     <ul>
                       <li>
                         <a
-                          href="img/gallery/12.jpg"
+                          href="/img/gallery/12.jpg"
                           data-lightbox="example-set">
                           <img class="example-image" alt />
                           <i class="fa fa-link" />
@@ -1391,7 +1392,7 @@
         <div class="col-md-4 col-sm-6">
           <div class="single-blog-post">
             <div class="img-box">
-              <img src="img/blog/1.jpg" alt="" />
+              <img src="/img/blog/1.jpg" alt="" />
 
             </div>
             <div class="content-box">
@@ -1423,7 +1424,7 @@
         <div class="col-md-4 col-sm-6">
           <div class="single-blog-post">
             <div class="img-box">
-              <img src="img/blog/2.jpg" alt="" />
+              <img src="/img/blog/2.jpg" alt="" />
 
             </div>
             <div class="content-box">
@@ -1457,7 +1458,7 @@
           col-sm-offset-3 col-xs-offset-0">
           <div class="single-blog-post">
             <div class="img-box">
-              <img src="img/blog/3.jpg" alt="" />
+              <img src="/img/blog/3.jpg" alt="" />
 
             </div>
             <div class="content-box">
@@ -1507,7 +1508,7 @@
           <div class="item">
             <div class="single-team-member">
               <div class="img-box">
-                <img src="img/team/1.jpg" alt="" />
+                <img src="/img/team/1.jpg" alt="" />
 
               </div>
 
@@ -1516,7 +1517,7 @@
           <div class="item">
             <div class="single-team-member">
               <div class="img-box">
-                <img src="img/team/2.jpg" alt="" />
+                <img src="/img/team/2.jpg" alt="" />
 
               </div>
 
@@ -1525,7 +1526,7 @@
           <div class="item">
             <div class="single-team-member">
               <div class="img-box">
-                <img src="img/team/3.jpg" alt="" />
+                <img src="/img/team/3.jpg" alt="" />
 
               </div>
 
@@ -1534,7 +1535,7 @@
           <div class="item">
             <div class="single-team-member">
               <div class="img-box">
-                <img src="img/team/4.jpg" alt="" />
+                <img src="/img/team/4.jpg" alt="" />
 
               </div>
 
@@ -1543,7 +1544,7 @@
           <div class="item">
             <div class="single-team-member">
               <div class="img-box">
-                <img src="img/team/5.jpg" alt="" />
+                <img src="/img/team/5.jpg" alt="" />
 
               </div>
 
@@ -1552,7 +1553,7 @@
           <div class="item">
             <div class="single-team-member">
               <div class="img-box">
-                <img src="img/team/6.jpg" alt="" />
+                <img src="/img/team/6.jpg" alt="" />
 
               </div>
 
@@ -1561,7 +1562,7 @@
           <div class="item">
             <div class="single-team-member">
               <div class="img-box">
-                <img src="img/team/7.jpg" alt="" />
+                <img src="/img/team/7.jpg" alt="" />
 
               </div>
 
@@ -1570,26 +1571,7 @@
           <div class="item">
             <div class="single-team-member">
               <div class="img-box">
-                <img src="img/team/8.jpg" alt="" />
-
-              </div>
-
-            </div>
-          </div>
-
-          <div class="item">
-            <div class="single-team-member">
-              <div class="img-box">
-                <img src="img/team/9.jpg" alt="" />
-
-              </div>
-
-            </div>
-          </div>
-          <div class="item">
-            <div class="single-team-member">
-              <div class="img-box">
-                <img src="img/team/10.jpg" alt="" />
+                <img src="/img/team/8.jpg" alt="" />
 
               </div>
 
@@ -1599,7 +1581,7 @@
           <div class="item">
             <div class="single-team-member">
               <div class="img-box">
-                <img src="img/team/11.jpg" alt="" />
+                <img src="/img/team/9.jpg" alt="" />
 
               </div>
 
@@ -1608,70 +1590,7 @@
           <div class="item">
             <div class="single-team-member">
               <div class="img-box">
-                <img src="img/team/12.jpg" alt="" />
-
-              </div>
-
-            </div>
-          </div>
-          <div class="item">
-            <div class="single-team-member">
-              <div class="img-box">
-                <img src="img/team/13.jpg" alt="" />
-
-              </div>
-
-            </div>
-          </div>
-          <div class="item">
-            <div class="single-team-member">
-              <div class="img-box">
-                <img src="img/team/14.jpg" alt="" />
-
-              </div>
-
-            </div>
-          </div>
-          <div class="item">
-            <div class="single-team-member">
-              <div class="img-box">
-                <img src="img/team/15.jpg" alt="" />
-
-              </div>
-
-            </div>
-          </div>
-          <div class="item">
-            <div class="single-team-member">
-              <div class="img-box">
-                <img src="img/team/16.jpg" alt="" />
-
-              </div>
-
-            </div>
-          </div>
-          <div class="item">
-            <div class="single-team-member">
-              <div class="img-box">
-                <img src="img/team/17.jpg" alt="" />
-
-              </div>
-
-            </div>
-          </div>
-          <div class="item">
-            <div class="single-team-member">
-              <div class="img-box">
-                <img src="img/team/18.jpg" alt="" />
-
-              </div>
-
-            </div>
-          </div>
-          <div class="item">
-            <div class="single-team-member">
-              <div class="img-box">
-                <img src="img/team/19.jpg" alt="" />
+                <img src="/img/team/10.jpg" alt="" />
 
               </div>
 
@@ -1681,7 +1600,79 @@
           <div class="item">
             <div class="single-team-member">
               <div class="img-box">
-                <img src="img/team/20.jpg" alt="" />
+                <img src="/img/team/11.jpg" alt="" />
+
+              </div>
+
+            </div>
+          </div>
+          <div class="item">
+            <div class="single-team-member">
+              <div class="img-box">
+                <img src="/img/team/12.jpg" alt="" />
+
+              </div>
+
+            </div>
+          </div>
+          <div class="item">
+            <div class="single-team-member">
+              <div class="img-box">
+                <img src="/img/team/13.jpg" alt="" />
+
+              </div>
+
+            </div>
+          </div>
+          <div class="item">
+            <div class="single-team-member">
+              <div class="img-box">
+                <img src="/img/team/14.jpg" alt="" />
+
+              </div>
+
+            </div>
+          </div>
+          <div class="item">
+            <div class="single-team-member">
+              <div class="img-box">
+                <img src="/img/team/15.jpg" alt="" />
+
+              </div>
+
+            </div>
+          </div>
+          <div class="item">
+            <div class="single-team-member">
+              <div class="img-box">
+                <img src="/img/team/16.jpg" alt="" />
+
+              </div>
+
+            </div>
+          </div>
+          <div class="item">
+            <div class="single-team-member">
+              <div class="img-box">
+                <img src="/img/team/17.jpg" alt="" />
+
+              </div>
+
+            </div>
+          </div>
+          <div class="item">
+            <div class="single-team-member">
+              <div class="img-box">
+                <img src="/img/team/18.jpg" alt="" />
+
+              </div>
+
+            </div>
+          </div>
+          <div class="item">
+            <div class="single-team-member">
+              <div class="img-box">
+                <img src="/img/team/19.jpg" alt="" />
 
               </div>
 
@@ -1691,70 +1682,7 @@
           <div class="item">
             <div class="single-team-member">
               <div class="img-box">
-                <img src="img/team/21.jpg" alt="" />
-
-              </div>
-
-            </div>
-          </div>
-          <div class="item">
-            <div class="single-team-member">
-              <div class="img-box">
-                <img src="img/team/22.jpg" alt="" />
-
-              </div>
-
-            </div>
-          </div>
-          <div class="item">
-            <div class="single-team-member">
-              <div class="img-box">
-                <img src="img/team/23.jpg" alt="" />
-
-              </div>
-
-            </div>
-          </div>
-          <div class="item">
-            <div class="single-team-member">
-              <div class="img-box">
-                <img src="img/team/24.jpg" alt="" />
-
-              </div>
-
-            </div>
-          </div>
-          <div class="item">
-            <div class="single-team-member">
-              <div class="img-box">
-                <img src="img/team/25.jpg" alt="" />
-
-              </div>
-
-            </div>
-          </div>
-          <div class="item">
-            <div class="single-team-member">
-              <div class="img-box">
-                <img src="img/team/26.jpg" alt="" />
-
-              </div>
-
-            </div>
-          </div>
-          <div class="item">
-            <div class="single-team-member">
-              <div class="img-box">
-                <img src="img/team/27.jpg" alt="" />
-
-              </div>
-
-            </div>
-          </div>
-          <div class="item">
-            <div class="single-team-member">
-              <div class="img-box">
-                <img src="img/team/28.jpg" alt="" />
+                <img src="/img/team/20.jpg" alt="" />
 
               </div>
 
@@ -1764,7 +1692,70 @@
           <div class="item">
             <div class="single-team-member">
               <div class="img-box">
-                <img src="img/team/29.jpg" alt="" />
+                <img src="/img/team/21.jpg" alt="" />
+
+              </div>
+
+            </div>
+          </div>
+          <div class="item">
+            <div class="single-team-member">
+              <div class="img-box">
+                <img src="/img/team/22.jpg" alt="" />
+
+              </div>
+
+            </div>
+          </div>
+          <div class="item">
+            <div class="single-team-member">
+              <div class="img-box">
+                <img src="/img/team/23.jpg" alt="" />
+
+              </div>
+
+            </div>
+          </div>
+          <div class="item">
+            <div class="single-team-member">
+              <div class="img-box">
+                <img src="/img/team/24.jpg" alt="" />
+
+              </div>
+
+            </div>
+          </div>
+          <div class="item">
+            <div class="single-team-member">
+              <div class="img-box">
+                <img src="/img/team/25.jpg" alt="" />
+
+              </div>
+
+            </div>
+          </div>
+          <div class="item">
+            <div class="single-team-member">
+              <div class="img-box">
+                <img src="/img/team/26.jpg" alt="" />
+
+              </div>
+
+            </div>
+          </div>
+          <div class="item">
+            <div class="single-team-member">
+              <div class="img-box">
+                <img src="/img/team/27.jpg" alt="" />
+
+              </div>
+
+            </div>
+          </div>
+          <div class="item">
+            <div class="single-team-member">
+              <div class="img-box">
+                <img src="/img/team/28.jpg" alt="" />
 
               </div>
 
@@ -1774,7 +1765,7 @@
           <div class="item">
             <div class="single-team-member">
               <div class="img-box">
-                <img src="img/team/30.jpg" alt="" />
+                <img src="/img/team/29.jpg" alt="" />
 
               </div>
 
@@ -1784,7 +1775,17 @@
           <div class="item">
             <div class="single-team-member">
               <div class="img-box">
-                <img src="img/team/31.jpg" alt="" />
+                <img src="/img/team/30.jpg" alt="" />
+
+              </div>
+
+            </div>
+          </div>
+
+          <div class="item">
+            <div class="single-team-member">
+              <div class="img-box">
+                <img src="/img/team/31.jpg" alt="" />
 
               </div>
 
@@ -1793,7 +1794,7 @@
           <div class="item">
             <div class="single-team-member">
               <div class="img-box">
-                <img src="img/team/32.jpg" alt="" />
+                <img src="/img/team/32.jpg" alt="" />
 
               </div>
 
