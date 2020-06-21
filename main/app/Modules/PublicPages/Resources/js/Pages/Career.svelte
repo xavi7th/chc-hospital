@@ -1,17 +1,58 @@
 <script>
   import { page, InertiaLink } from "@inertiajs/inertia-svelte";
+  import { Inertia } from "@inertiajs/inertia";
   import Layout from "@p-shared/PublicPagesLayout";
   import LatestNews from "@p-shared/Partials/LatestNews";
   import ReachUs from "@p-pages/Team/ReachUs";
-
+  import FlashMessage from "@p-shared/FlashMessage";
   import route from "ziggy";
-  $: ({ app } = $page);
+
+  $: ({ app, errors, flash } = $page);
 
   let uploadCV = () => {
     BlockToast.fire({
       text: "Uploading CV...."
     });
+
+    let formData = new FormData();
+
+    _.forEach(details, (val, key) => {
+      formData.append(key, val);
+    });
+
+    Inertia.post(
+      route("app.upload_cv"),
+      formData,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data"
+        }
+      },
+      {
+        preserveState: true,
+        preserveScroll: true
+      }
+    ).then(() => {
+      if (flash.success) {
+        // files = null;
+        details.cv = null;
+        details = {}
+
+        ToastLarge.fire({
+          title: "Successful!",
+          html: flash.success,
+          timer: 10000,
+        });
+      } else {
+        swal.close();
+      }
+    });
   };
+
+  let attachFile = e => {
+    details.cv = e.target.files[0];
+  };
+
   let details = {};
 </script>
 
@@ -1030,21 +1071,22 @@
     will-change: transform;
     transform: translateY(-50%);
   }
-  .form-validation {
+  :global(.form-validation) {
     position: absolute;
     right: 15px;
     top: 0;
     z-index: 11;
+    font-family: Oswald, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+      "Helvetica Neue", Arial, sans-serif;
     margin-top: 3px;
     font-size: 10px;
-    font-weight: 500;
     line-height: 12px;
     letter-spacing: 0;
-    color: #097703;
+    color: #ec1616;
     transition: 0.3s;
     transform: scale3d(1, 1, 1);
   }
-  .form-validation:empty {
+  :global(.form-validation:empty) {
     transform: scale3d(1, 0, 1);
   }
   .form-inline {
@@ -1401,45 +1443,47 @@
             </span>
           </h3>
 
+          <FlashMessage isGeneralError={true} />
+
           <form
             class="rd-form rd-mailform form-inline"
             on:submit|preventDefault={uploadCV}>
-            <div class="form-wrap " class:has-error={false}>
+
+            <div class="form-wrap " class:has-error={errors.full_name}>
               <input
                 bind:value={details.full_name}
                 class="form-input form-control-has-validation"
                 type="text"
                 placeholder="Full Name" />
-              {#if false}
-                <span class="form-validation">The text field is required.</span>
-              {/if}
+
+              <FlashMessage msg={errors.full_name} />
+
             </div>
-            <div class="form-wrap" class:has-error={false}>
+            <div class="form-wrap" class:has-error={errors.phone}>
               <input
                 bind:value={details.phone}
                 class="form-input form-control-has-validation"
                 type="text"
                 placeholder="Phone Number" />
-              {#if false}
-                <span class="form-validation">The text field is required.</span>
-              {/if}
+
+              <FlashMessage msg={errors.phone} />
             </div>
-            <div class="form-wrap " class:has-error={false}>
+            <div class="form-wrap " class:has-error={errors.position}>
               <input
                 bind:value={details.position}
                 class="form-input form-control-has-validation"
                 type="text"
                 placeholder="Interested Position" />
-              {#if false}
-                <span class="form-validation">The text field is required.</span>
-              {/if}
+
+              <FlashMessage msg={errors.position} />
             </div>
             <div class="form-wrap has-error">
               <input
-                bind:value={details.cv}
+                on:change={attachFile}
                 class="form-input form-control-has-validation"
                 type="file" />
-              <span class="form-validation">Upload your CV.</span>
+              <FlashMessage msg={errors.cv} />
+
             </div>
             <div class="form-button">
               <button class="button button-primary button-winona" type="submit">

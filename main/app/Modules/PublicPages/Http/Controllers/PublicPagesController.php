@@ -7,6 +7,9 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Storage;
+use App\Modules\PublicPages\Models\UploadedDocument;
 
 class PublicPagesController extends Controller
 {
@@ -47,6 +50,7 @@ class PublicPagesController extends Controller
       Route::get('/our-team', [self::class, 'showTeamPage'])->name('app.our_team');
       Route::get('/our-team-members', [self::class, 'showFullTeamPage'])->name('app.our_full_team')->defaults('ex', self::__e(true));
       Route::get('/contact-us', [self::class, 'showContactPage'])->name('app.contact_us');
+      Route::post('/upload-cv', [self::class, 'handleCVUpload'])->name('app.upload_cv')->defaults('ex', self::__e(true));
 
       Route::get('/message-from-our-md', [self::class, 'showMDMessagePage'])->name('app.message_from_md')->defaults('ex', self::__e(true));
       Route::get('/book-an-appointment', [self::class, 'bookAppointment'])->name('app.book_appointment')->defaults('ex', self::__e(true));
@@ -148,5 +152,33 @@ class PublicPagesController extends Controller
     return Inertia::render('Services/' . Str::studly($service))->withViewData([
       'title' => 'About Capitol Hill Hospital/Clinic Warri',
     ]);
+  }
+
+  public function handleCVUpload(Request $request)
+  {
+    // dd($request->all());
+
+    $validator = Validator::make($request->all(), [
+      'full_name' => 'required|max:50',
+      'phone' => 'required|max:20',
+      'position' => 'required|max:30',
+      'cv' => 'required|file',
+    ]);
+
+    if ($validator->fails()) {
+      return back()->withErrors($validator)
+        ->withError('There are errors in your submission');
+    }
+
+    $url = Storage::url($request->file('cv')->store('public/uploaded_cvs'));
+
+    UploadedDocument::create([
+      'full_name' => $request->full_name,
+      'phone' => $request->phone,
+      'position' => $request->position,
+      'cv' => $url
+    ]);
+
+    return back()->withSuccess('Your CV has been submitted successfully. A member of our HR team will contact you shortly');
   }
 }
