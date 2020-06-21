@@ -45,6 +45,7 @@ class PublicPagesController extends Controller
       Route::get('/news', [self::class, 'showNewsPage'])->name('app.news');
       Route::get('/our-quality-policy', [self::class, 'showQualityPolicyPage'])->name('app.quality_policy');
       Route::get('/our-team', [self::class, 'showTeamPage'])->name('app.our_team');
+      Route::get('/our-team-members', [self::class, 'showFullTeamPage'])->name('app.our_full_team')->defaults('ex', self::__e(true));
       Route::get('/contact-us', [self::class, 'showContactPage'])->name('app.contact_us');
 
       Route::get('/message-from-our-md', [self::class, 'showMDMessagePage'])->name('app.message_from_md')->defaults('ex', self::__e(true));
@@ -123,7 +124,14 @@ class PublicPagesController extends Controller
 
   public function showTeamPage(Request $request)
   {
-    return Inertia::render('Team')->withViewData([
+    return Inertia::render('Team/Team')->withViewData([
+      'title' => 'About Capitol Hill Hospital/Clinic Warri',
+    ]);
+  }
+
+  public function showFullTeamPage()
+  {
+    return Inertia::render('Team/AllTeamMembers')->withViewData([
       'title' => 'About Capitol Hill Hospital/Clinic Warri',
     ]);
   }

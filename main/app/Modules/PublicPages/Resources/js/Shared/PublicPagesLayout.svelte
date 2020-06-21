@@ -18,10 +18,6 @@
   console.log($page);
 
   export let title;
-
-  afterUpdate(() => {
-    isLoaded = true;
-  });
 </script>
 
 {#if !pageLoaded && !isInertiaRequest}
@@ -29,6 +25,11 @@
 {:else if !pageLoaded && isInertiaRequest}
   <PageLoader transparent={true} />
 {/if}
+
+<svelte:window
+  on:load|once={() => {
+    isLoaded = true;
+  }} />
 
 <Header {routes} />
 

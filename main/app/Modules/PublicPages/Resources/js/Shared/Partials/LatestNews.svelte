@@ -4,9 +4,10 @@
   import moment from "moment";
 
   let articles = [];
+  let randomPage = Math.floor(Math.random() * (+25 - +1)) + +1;
   axios
     .get(
-      "https://content.guardianapis.com/search?show-fields=thumbnail,body&q=hospital nigeria&page-size=3&api-key=c32411c3-597d-41db-907c-660d17ed905d"
+      `https://content.guardianapis.com/search?show-fields=thumbnail,body&q=(hospital AND nigeria)&page-size=3&page=${randomPage}&api-key=c32411c3-597d-41db-907c-660d17ed905d`
     )
     .then(({ data: { response: { results } } }) => {
       articles = results;
