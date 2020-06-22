@@ -27,10 +27,9 @@ class SuperAdminController extends Controller
       Route::prefix(SuperAdmin::DASHBOARD_ROUTE_PREFIX)->group(function () {
         LoginController::routes();
 
-        // Route::group(['middleware' => ['auth:super_admin']], function () {
-
-        Route::get('/', 'SuperAdminController@index')->name('superadmin.dashboard');
-        // });
+        Route::group(['middleware' => ['auth:super_admin']], function () {
+          Route::get('/', 'SuperAdminController@index')->name('superadmin.dashboard');
+        });
       });
     });
   }

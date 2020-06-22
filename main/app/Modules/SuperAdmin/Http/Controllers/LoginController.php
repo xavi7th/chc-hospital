@@ -50,7 +50,9 @@ class LoginController extends Controller
 
   public function showLoginForm()
   {
-    return Inertia::render('Login');
+    return Inertia::render('Login')->withViewData([
+      'title' => 'Login | ' . config('app.name') . ' Admin Dashboard'
+    ]);
   }
 
   /**

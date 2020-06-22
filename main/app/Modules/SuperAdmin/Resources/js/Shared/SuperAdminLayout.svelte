@@ -14,7 +14,8 @@
 
   let isLoaded = false,
     isMounted = false;
-  export let title;
+  export let title,
+    isAuth = false;
 
   onMount(() => {
     isMounted = true;
@@ -27,21 +28,53 @@
   }} />
 
 <div class="wrapper">
-  <Sidebar {routes} />
+  {#if isAuth}
+    <div class="auth-split">
+      <div class="auth-left">
+        <div class="auth-box-wrapper">
+          <div class="auth-logo">
+            <div class="logo">
+              <div class="logo-type logo-type-colored">
+                <a href="/">
+                  <img src="/img/logo.png" alt="{app.name} logo" />
+                </a>
+              </div>
+            </div>
+          </div>
+          <slot />
+        </div>
+      </div>
+      <div
+        class="auth-right"
+        style="background-image:url('/img/capitol-hill-auth.jpg')">
+        <div class="auth-content">
+          <div>
+            <h1 class="text-center">{title}</h1>
+            <p>
+              A product of Capitol Hill Hospital/Clinic Warri, Delta State.
+              Unauthorised access forbidden
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  {:else}
+    <Sidebar {routes} />
 
-  <Header />
+    <Header />
 
-  {#if isMounted}
-    <main
-      in:fly={{ x: -300, duration: 700, delay: 400 }}
-      out:fly={{ y: 30, duration: 400, delay: 0 }}>
+    {#if isMounted}
+      <main
+        in:fly={{ x: -300, duration: 700, delay: 400 }}
+        out:fly={{ y: 30, duration: 400, delay: 0 }}>
 
-      {#if title}
-        <PageTitle {title} appName={app.name} />
-      {/if}
+        {#if title}
+          <PageTitle {title} appName={app.name} />
+        {/if}
 
-      <slot />
-    </main>
+        <slot />
+      </main>
+    {/if}
   {/if}
 
 </div>
