@@ -3,7 +3,7 @@
 
 /**
  * A helper file for Laravel, to provide autocomplete information to your IDE
- * Generated for Laravel 7.14.1 on 2020-06-07 11:27:03.
+ * Generated for Laravel 7.14.1 on 2020-06-21 20:02:11.
  *
  * This file should not be included in your code, only analyzed by your IDE!
  *
@@ -1847,7 +1847,7 @@ namespace Illuminate\Support\Facades {
         /**
          * Get the currently authenticated user.
          *
-         * @return \App\Modules\AppUser\Models\AppUser|null 
+         * @return \App\User|null 
          * @static 
          */ 
         public static function user()
@@ -1885,7 +1885,7 @@ namespace Illuminate\Support\Facades {
          * Log the given user ID into the application without sessions or cookies.
          *
          * @param mixed $id
-         * @return \App\Modules\AppUser\Models\AppUser|false 
+         * @return \App\User|false 
          * @static 
          */ 
         public static function onceUsingId($id)
@@ -1954,7 +1954,7 @@ namespace Illuminate\Support\Facades {
          *
          * @param mixed $id
          * @param bool $remember
-         * @return \App\Modules\AppUser\Models\AppUser|false 
+         * @return \App\User|false 
          * @static 
          */ 
         public static function loginUsingId($id, $remember = false)
@@ -2033,7 +2033,7 @@ namespace Illuminate\Support\Facades {
         /**
          * Get the last user we attempted to authenticate.
          *
-         * @return \App\Modules\AppUser\Models\AppUser 
+         * @return \App\User 
          * @static 
          */ 
         public static function getLastAttempted()
@@ -2144,7 +2144,7 @@ namespace Illuminate\Support\Facades {
         /**
          * Return the currently cached user.
          *
-         * @return \App\Modules\AppUser\Models\AppUser|null 
+         * @return \App\User|null 
          * @static 
          */ 
         public static function getUser()
@@ -2194,7 +2194,7 @@ namespace Illuminate\Support\Facades {
         /**
          * Determine if current user is authenticated. If not, throw an exception.
          *
-         * @return \App\Modules\AppUser\Models\AppUser 
+         * @return \App\User 
          * @throws \Illuminate\Auth\AuthenticationException
          * @static 
          */ 
@@ -2302,26 +2302,6 @@ namespace Illuminate\Support\Facades {
         public static function hasMacro($name)
         {
                         return \Illuminate\Auth\SessionGuard::hasMacro($name);
-        }
-        
-        /**
-         * 
-         *
-         * @static 
-         */ 
-        public static function admin()
-        {
-                        return \Illuminate\Auth\SessionGuard::admin();
-        }
-        
-        /**
-         * 
-         *
-         * @static 
-         */ 
-        public static function appUser()
-        {
-                        return \Illuminate\Auth\SessionGuard::appUser();
         }
          
     }
@@ -10964,6 +10944,16 @@ namespace Illuminate\Support\Facades {
         public static function hasValidSignature($absolute = true)
         {
                         return \Illuminate\Http\Request::hasValidSignature($absolute);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function isApi()
+        {
+                        return \Illuminate\Http\Request::isApi();
         }
         
         /**

@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Modules\AppUser\Http\Controllers;
+namespace App\Modules\SuperAdmin\Http\Controllers;
 
 use App\User;
+use Inertia\Inertia;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -32,41 +33,24 @@ class LoginController extends Controller
    */
   protected $redirectTo = RouteServiceProvider::HOME;
 
-  /**
-   * Create a new controller instance.
-   *
-   * @return void
-   */
   public function __construct()
   {
     $this->middleware('guest')->except('logout');
+    Inertia::setRootView('superadmin::app');
   }
 
   static function routes()
   {
-    Route::group(['middleware' => 'web', 'namespace' => '\App\Modules\AppUser\Http\Controllers'], function () {
-      Route::view('/login', 'appuser::index')->middleware('guest')->name('app.login');
-      Route::post('login', 'LoginController@login')->name('app.login');
-      Route::post('logout', 'LoginController@logout')->name('app.logout')->middleware('auth');
+    Route::group(['middleware' => 'web'], function () {
+      Route::get('/login', [self::class, 'showLoginForm'])->middleware('guest')->name('superadmin.login');
+      Route::post('login', [self::class, 'login'])->name('superadmin.login.post');
+      Route::post('logout', [self::class, 'logout'])->name('superadmin.logout')->middleware('auth');
     });
   }
 
-
-
-  /**
-   * Get the token array structure.
-   *
-   * @param  string $token
-   *
-   * @return array api jwt token details
-   */
-  protected function respondWithToken($token)
+  public function showLoginForm()
   {
-    return [
-      'access_token' => $token,
-      'token_type' => 'bearer',
-      'expires_in' => $this->apiGuard()->factory()->getTTL() * 60
-    ];
+    return Inertia::render('Login');
   }
 
   /**
@@ -94,7 +78,6 @@ class LoginController extends Controller
     }
 
     if ($this->attemptLogin($request)) {
-
       return $this->sendLoginResponse($request);
     }
 
@@ -114,11 +97,7 @@ class LoginController extends Controller
    */
   protected function attemptLogin(Request $request)
   {
-    /**
-     * Try to log the user in from the lower guard to the higher guard
-     * ! is this safe?
-     */
-    return $rsp = ($u = Auth::guard('app_user')->attempt($this->credentials($request), $request->filled('remember'))) ?  $u : ($u = Auth::guard('admin')->attempt($this->credentials($request), $request->filled('remember'))) ?  $u : ($u = Auth::guard('super_admin')->attempt($this->credentials($request), $request->filled('remember'))) ?  $u : false;
+    return Auth::guard('super_admin')->attempt($this->credentials($request), $request->filled('remember'));
   }
 
   /**
@@ -132,18 +111,17 @@ class LoginController extends Controller
     $request->session()->regenerate();
 
     $this->clearLoginAttempts($request);
-    if ($response = $this->authenticated($request, $this->authenticatedGuard()->user())) {
+    if ($response = $this->authenticated($request, $this->guard()->user())) {
       return $response;
     }
 
-    return $request->wantsJson()
+    return $request->isApi()
       ? new Response('', 204)
       : redirect()->intended($this->redirectPath());
   }
 
   /**
    * The user has been authenticated. We can redirect them to where we want or leave empty for the redirectTo property to handle
-   * !Look into the implementation in version 7 and see what you want to change
    *
    * @param  \Illuminate\Http\Request  $request
    * @param  mixed  $user
@@ -172,25 +150,8 @@ class LoginController extends Controller
    */
   protected function guard()
   {
-    return Auth::guard('app_user');
+    return Auth::guard('super_admin');
   }
-
-  protected function apiGuard()
-  {
-    return Auth::guard('jwt_api');
-  }
-
-  protected function authenticatedGuard()
-  {
-    if (Auth('app_user')->check()) {
-      return Auth::guard('app_user');
-    } elseif (Auth('admin')->check()) {
-      return Auth::guard('admin');
-    } elseif (Auth('super_admin')->check()) {
-      return Auth::guard('super_admin');
-    }
-  }
-
 
   /**
    * Log the user out of the application.
@@ -204,13 +165,9 @@ class LoginController extends Controller
 
     $request->session()->invalidate();
 
-    try {
-      $this->apiGuard()->logout();
-    } catch (\Throwable $e) { }
-
-    if ($request->ajax() || $request->expectsJson()) {
+    if ($request->isApi()) {
       return response()->json(['rsp' => true], 200);
     }
-    return redirect()->route('admin.login');
+    return redirect()->route('superadmin.login');
   }
 }

@@ -1,12 +1,10 @@
 <?php
 
-use App\Modules\Admin\Models\Admin;
 use App\Modules\SuperAdmin\Models\SuperAdmin;
-use App\Modules\AppUser\Models\AppUser;
 
 return [
 
-	/*
+  /*
     |--------------------------------------------------------------------------
     | Authentication Defaults
     |--------------------------------------------------------------------------
@@ -17,12 +15,12 @@ return [
     |
     */
 
-	'defaults' => [
-		'guard' => 'app_user',
-		'passwords' => 'users',
-	],
+  'defaults' => [
+    'guard' => 'super_admin',
+    'passwords' => 'super_admins',
+  ],
 
-	/*
+  /*
     |--------------------------------------------------------------------------
     | Authentication Guards
     |--------------------------------------------------------------------------
@@ -39,33 +37,29 @@ return [
     |
     */
 
-	'guards' => [
+  'guards' => [
 
-		'app_user' => [
-			'driver' => 'session',
-			'provider' => 'users',
-		],
-		'admin' => [
-			'driver' => 'session',
-			'provider' => 'admins',
-		],
-		'super_admin' => [
-			'driver' => 'session',
-			'provider' => 'super_admins',
-		],
+    // 'app_user' => [
+    // 	'driver' => 'session',
+    // 	'provider' => 'users',
+    // ],
+    'super_admin' => [
+      'driver' => 'session',
+      'provider' => 'super_admins',
+    ],
 
-		'api' => [
-			'driver' => 'token',
-			'provider' => 'users',
-			'hash' => false,
-		],
-		'app_user_api' => [
-			'driver' => 'jwt',
-			'provider' => 'users',
-		],
-	],
+    'api' => [
+      'driver' => 'token',
+      'provider' => 'super_admins',
+      'hash' => false,
+    ],
+    // 'app_user_api' => [
+    // 	'driver' => 'jwt',
+    // 	'provider' => 'users',
+    // ],
+  ],
 
-	/*
+  /*
     |--------------------------------------------------------------------------
     | User Providers
     |--------------------------------------------------------------------------
@@ -82,27 +76,23 @@ return [
     |
     */
 
-	'providers' => [
-		'users' => [
-			'driver' => 'eloquent',
-			'model' => AppUser::class,
-		],
-		'admins' => [
-			'driver' => 'eloquent',
-			'model' => Admin::class,
-		],
-		'super_admins' => [
-			'driver' => 'eloquent',
-			'model' => SuperAdmin::class,
-		],
+  'providers' => [
+    // 'users' => [
+    // 	'driver' => 'eloquent',
+    // 	'model' => AppUser::class,
+    // ],
+    'super_admins' => [
+      'driver' => 'eloquent',
+      'model' => SuperAdmin::class,
+    ],
 
-		// 'users' => [
-		//     'driver' => 'database',
-		//     'table' => 'users',
-		// ],
-	],
+    // 'users' => [
+    //     'driver' => 'database',
+    //     'table' => 'users',
+    // ],
+  ],
 
-	/*
+  /*
     |--------------------------------------------------------------------------
     | Resetting Passwords
     |--------------------------------------------------------------------------
@@ -117,16 +107,16 @@ return [
     |
     */
 
-	'passwords' => [
-		'users' => [
-			'provider' => 'users',
-			'table' => 'password_resets',
-			'expire' => 60,
-			'throttle' => 60,
-		],
-	],
+  'passwords' => [
+    'super_admins' => [
+      'provider' => 'super_admins',
+      'table' => 'password_resets',
+      'expire' => 60,
+      'throttle' => 60,
+    ],
+  ],
 
-	/*
+  /*
     |--------------------------------------------------------------------------
     | Password Confirmation Timeout
     |--------------------------------------------------------------------------
@@ -137,6 +127,6 @@ return [
     |
     */
 
-	'password_timeout' => 10800,
+  'password_timeout' => 10800,
 
 ];

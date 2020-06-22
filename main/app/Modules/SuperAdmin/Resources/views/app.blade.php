@@ -1,19 +1,25 @@
 <!DOCTYPE html>
 <html>
 
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
-        @routes('superadmin')
-        <link href="{{ mix('/css/superadmin.css') }}" rel="stylesheet" />
-        <script src="{{ mix('/js/manifest.js') }}"></script>
-        <script src="{{ mix('/js/vendor.js') }}"></script>
-        <script src="{{ mix('/js/superadmin.js') }}" defer></script>
-        {{-- @php dump($page) @endphp --}}
-    </head>
+<head>
+  <title>{{ $title }}</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, shrink-to-fit=no">
+  @routes('superadmin')
+  <script src="{{ mix('/js/dashboard-app-vendor.js') }}" async></script>
+  <link href="{{ mix('/css/dashboard-app-22-06-2020.css') }}" rel="stylesheet" />
+  <script src="{{ mix('/js/manifest.js') }}" defer></script>
+  <script src="{{ mix('/js/vendor.js') }}" defer></script>
+  <script src="{{ mix('/js/dashboard-app.js') }}" defer></script>
 
-    <body>
-        @inertia
-    </body>
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+
+</head>
+
+<body>
+  @inertia
+</body>
 
 </html>

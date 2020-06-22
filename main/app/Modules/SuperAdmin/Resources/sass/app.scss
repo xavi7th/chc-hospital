@@ -1,5 +1,7 @@
 @import '@p-assets/sass/vendor/nprogress';
-
-body {
-    background-color: #fee;
-}
+@import './vendor/bootstrap.min';
+@import './vendor/font-awesome.min';
+@import './vendor/simplebar.min';
+@import './vendor/jquery.dataTables.min';
+@import './vendor/summernote-bs4';
+@import './vendor/main';

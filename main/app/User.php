@@ -16,53 +16,18 @@ use App\Modules\AppUser\Models\AppUser;
 /**
  * App\User
  *
- * @property int $id
- * @property string $name
- * @property string $email
- * @property \Illuminate\Support\Carbon|null $email_verified_at
- * @property string $password
- * @property string|null $remember_token
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Modules\SuperAdmin\Models\ActivityLog[] $activities
  * @property-read int|null $activities_count
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
  * @property-read int|null $notifications_count
+ * @property-write mixed $password
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User newQuery()
  * @method static \Illuminate\Database\Query\Builder|\App\User onlyTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User query()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereEmail($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereEmailVerifiedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\User wherePassword($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereRememberToken($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereUpdatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\App\User withTrashed()
  * @method static \Illuminate\Database\Query\Builder|\App\User withoutTrashed()
  * @mixin \Eloquent
- * @property \Illuminate\Support\Carbon|null $deleted_at
- * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereDeletedAt($value)
- * @property int $role_id
- * @property string $unenc_password
- * @property string $phone
- * @property string $country
- * @property string $currency
- * @property string|null $id_card
- * @property string|null $verified_at
- * @property int $can_withdraw
- * @property int $is_active
- * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereCanWithdraw($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereCountry($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereCurrency($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereIdCard($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereIsActive($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\User wherePhone($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereRoleId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereUnencPassword($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereVerifiedAt($value)
  */
 class User extends Authenticatable //implements JWTSubject
 {
@@ -95,7 +60,6 @@ class User extends Authenticatable //implements JWTSubject
     'email_verified_at' => 'datetime',
   ];
 
-
   public function activities()
   {
     return $this->morphMany(ActivityLog::class, 'user')->latest();
@@ -111,17 +75,6 @@ class User extends Authenticatable //implements JWTSubject
    *
    * @return bool
    */
-
-  public function isAppUser(): bool
-  {
-    return $this instanceof AppUser;
-  }
-
-  public function isAdmin(): bool
-  {
-    return $this instanceof Admin;
-  }
-
   public function isSuperAdmin(): bool
   {
     return $this instanceof SuperAdmin;
@@ -134,11 +87,7 @@ class User extends Authenticatable //implements JWTSubject
    */
   public function dashboardRoute(): string
   {
-    if ($this->isAppUser()) {
-      return  'appuser.dashboard';
-    } else if ($this->isAdmin()) {
-      return 'admin.dashboard';
-    } else if ($this->isSuperAdmin()) {
+    if ($this->isSuperAdmin()) {
       return 'superadmin.dashboard';
     } else {
       return 'app.login';
@@ -149,8 +98,6 @@ class User extends Authenticatable //implements JWTSubject
   {
     if ($this->isSuperAdmin()) {
       return get_related_routes('superadmin.', ['GET'], $isHeirarchical = true);
-    } elseif ($this->isAppUser()) {
-      return get_related_routes('appuser.', ['GET'], $isHeirarchical = true);
     } else {
       return null;
     }
@@ -166,25 +113,5 @@ class User extends Authenticatable //implements JWTSubject
     return [
       'id' => $this->id
     ];
-  }
-
-  /**
-   * Get the identifier that will be stored in the subject claim of the JWT.
-   *
-   * @return mixed
-   */
-  public function getJWTIdentifier()
-  {
-    return $this->getKey();
-  }
-
-  /**
-   * Return a key value array, containing any custom claims to be added to the JWT.
-   *
-   * @return array
-   */
-  public function getJWTCustomClaims()
-  {
-    return [];
   }
 }
