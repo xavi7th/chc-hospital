@@ -36,6 +36,7 @@ class SuperAdminController extends Controller
           Route::get('/job-listings', 'SuperAdminController@viewJobListings')->name('superadmin.job_listings')->defaults('ex', self::__e(false, 'briefcase'));
           Route::get('/new-job-listing', 'SuperAdminController@viewCreateJobListingPage')->name('superadmin.new_job_listing')->defaults('ex', self::__e(false, 'briefcase'));
           Route::post('/create-job-listing', 'SuperAdminController@createJobListing')->name('superadmin.create_job_listing')->defaults('ex', self::__e(true, 'briefcase'));
+          Route::delete('/{jobListing}/delete', 'SuperAdminController@deleteJobListing')->name('superadmin.delete_job_listing');
         });
       });
     });
@@ -70,7 +71,9 @@ class SuperAdminController extends Controller
 
   public function viewJobListings(Request $request)
   {
-    return Inertia::render('ManageJobListings');
+    return Inertia::render('ManageJobListings', [
+      'jobListings' => JobListing::latest()->get()
+    ]);
   }
 
   public function viewCreateJobListingPage(Request $request)
@@ -80,7 +83,6 @@ class SuperAdminController extends Controller
 
   public function createJobListing(Request $request)
   {
-    // dd($request->all());
 
     $validator = Validator::make($request->all(), [
       'contract_type' => 'required|max:20',
@@ -95,9 +97,14 @@ class SuperAdminController extends Controller
         ->withError('There are errors in your form!');
     }
 
-
     JobListing::create($validator->validated());
 
     return back()->withSuccess('Job listing created');
+  }
+
+  public function deleteJobListing(JobListing $jobListing)
+  {
+    $jobListing->delete();
+    return back()->withSuccess('Job listing deleted');
   }
 }

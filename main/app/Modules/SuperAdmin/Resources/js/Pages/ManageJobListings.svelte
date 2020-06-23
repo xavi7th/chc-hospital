@@ -4,9 +4,50 @@
   import Layout from "@s-shared/SuperAdminLayout";
   import FlashMessage from "@p-shared/FlashMessage";
   import route from "ziggy";
+  import axios from "axios";
 
-  $: ({ app } = $page);
+  $: ({ app, status, flash } = $page);
+
+  export let jobListings;
+
+  let deleteJobListing = id => {
+    swalPreconfirm
+      .fire({
+        confirmButtonText: "Carry on!",
+        text: "This will permanently delete this job listing from the site",
+        preConfirm: () => {
+          return Inertia.delete(route("superadmin.delete_job_listing", id));
+        }
+      })
+      .then(val => {
+        if (undefined === status) {
+          if (val.isDismissed) {
+            Toast.fire({
+              title: "Canceled",
+              icon: "info",
+              position: "center"
+            });
+          } else if (flash.success) {
+            ToastLarge.fire({
+              title: "Success",
+              html: `Job listing has been deleted`,
+              position: "bottom",
+              icon: "success",
+              timer: 10000
+            });
+          }
+        }
+      });
+  };
 </script>
+
+<style>
+  .btn-xs {
+    margin-left: auto;
+    margin-right: 0;
+    display: block;
+  }
+</style>
 
 <Layout title="Manage Job Listings">
   <div class="document">
@@ -17,94 +58,52 @@
           <div class="card-body">
             <div class="timeline">
               <!-- left -->
-              <div class="timeline-item">
-                <div class="timeline-point">
-                  <div class="badge badge-primary badge-xxl badge-dot" />
-                </div>
-                <div class="timeline-detail">
-                  <span>21/09/2018 - 02:30</span>
-                </div>
-                <div class="timeline-content">
-                  <div>
-                    <h5 class="timeline-title">Timeline Event #1</h5>
-                    <p class="timeline-text">
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                      Illum corporis corrupti, quia numquam, reprehenderit
-                      accusamus perferendis veniam facere nemo debitis
-                      blanditiis similique.
-                    </p>
+
+              {#each jobListings as listing, idx}
+                <div class="timeline-item" class:timeline-item-right={idx % 2}>
+                  <div class="timeline-point">
+                    <div class="badge badge-primary badge-xxl badge-dot" />
+                  </div>
+                  <div class="timeline-detail">
+                    <span>
+                      {new Date(listing.created_at).toDateString()} - {new Date(listing.created_at).toLocaleTimeString()}
+                    </span>
+                  </div>
+                  <div class="timeline-content">
+                    <div>
+                      <h5 class="timeline-title">
+                        {listing.contract_type} {listing.job_title} at {listing.job_location}
+                      </h5>
+                      <p class="timeline-text">
+                        {@html listing.job_description}
+                      </p>
+                    </div>
+                    <button
+                      type="button"
+                      class="btn btn-danger btn-outline btn-bold btn-w-sm btn-xs"
+                      on:click={deleteJobListing(listing.id)}>
+                      Delete
+                    </button>
                   </div>
                 </div>
-              </div>
-              <!-- right -->
-              <div class="timeline-item timeline-item-right">
-                <div class="timeline-point">
-                  <div class="badge badge-primary badge-xxl badge-dot" />
-                </div>
-                <div class="timeline-detail">
-                  <span>22/09/2018 - 04:00</span>
-                </div>
-                <div class="timeline-content">
-                  <div>
-                    <h5 class="timeline-title">Joined User</h5>
-                    <div class="img-list">
-                      <a href="">
-                        <img src="/img/user-1.png" alt="user" />
-                      </a>
-                      <a href="">
-                        <img src="/img/user-2.png" alt="user" />
-                      </a>
-                      <a href="">
-                        <img src="/img/user-3.png" alt="user" />
-                      </a>
+              {:else}
+                <div class="timeline-item">
+                  <div class="timeline-point">
+                    <div class="badge badge-primary badge-xxl badge-dot" />
+                  </div>
+                  <div class="timeline-detail">
+                    <span>{new Date().toDateString()}</span>
+                  </div>
+                  <div class="timeline-content">
+                    <div>
+                      <h4 class="timeline-title">
+                        THERE ARE NO JOB LISTINGS AT THE MOMENT
+                      </h4>
                     </div>
                   </div>
                 </div>
-              </div>
-              <!-- left -->
-              <div class="timeline-item">
-                <div class="timeline-point">
-                  <div class="badge badge-primary badge-xxl badge-dot" />
-                </div>
-                <div class="timeline-detail">
-                  <span>20/09/2018 - 12:00</span>
-                </div>
-                <div class="timeline-content">
-                  <div>
-                    <h5 class="timeline-title">Timeline Event #3</h5>
-                    <p class="timeline-text">
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                      Magni culpa dolores a necessitatibus, architecto enim!
-                      Nobis illum dolor quam soluta eos, natus, aspernatur cum
-                      quisquam earum veritatis architecto harum, excepturi?
-                      <br />
-                      <a
-                        href=""
-                        class="btn btn-secondary btn-round btn-bold mt-20">
-                        DETAIL
-                      </a>
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <!-- right -->
-              <div class="timeline-item timeline-item-right">
-                <div class="timeline-point">
-                  <div class="badge badge-primary badge-xxl badge-dot" />
-                </div>
-                <div class="timeline-detail">
-                  <span>22/09/2018 - 04:00</span>
-                </div>
-                <div class="timeline-content">
-                  <div>
-                    <h5 class="timeline-title">Timeline Event #4</h5>
-                    <p class="timeline-text">
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                      Illum corporis corrupti...
-                    </p>
-                  </div>
-                </div>
-              </div>
+              {/each}
+
             </div>
           </div>
         </div>

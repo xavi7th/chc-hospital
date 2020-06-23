@@ -41,8 +41,6 @@
     }
   };
 
-  let deleteJobListing = () => {};
-
   onMount(() => {
     setTimeout(() => {
       jQuery(".summernote").summernote({
