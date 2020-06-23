@@ -32,6 +32,10 @@ mix.webpackConfig({
     ]
 });
 
+mix.babelConfig({
+	plugins: ['@babel/plugin-syntax-dynamic-import'],
+});
+
 mix.options({
 		fileLoaderDirs: {
 			images: 'img'

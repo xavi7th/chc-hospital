@@ -10,10 +10,13 @@ window.Toast = swal.mixin({
 });
 
 window.BlockToast = swal.mixin({
-	showConfirmButton: false,
+	showConfirmButton: true,
 	showCloseButton: false,
 	allowOutsideClick: false,
-	allowEscapeKey: false
+	allowEscapeKey: false,
+	onBeforeOpen: () => {
+		swal.showLoading()
+	}
 });
 
 window.ToastLarge = swal.mixin({

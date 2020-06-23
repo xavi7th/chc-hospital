@@ -7,7 +7,7 @@
 </script>
 
 {#if msg}
-  <span class="form-validation">{msg}</span>
+  <span class="form-validation form-control-feedback">{msg}</span>
 {:else if flash.error && isGeneralError}
   <div class="alert alert-danger">{flash.error}</div>
 {:else if flash.success && isGeneralError}

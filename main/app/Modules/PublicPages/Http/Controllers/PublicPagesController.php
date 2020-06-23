@@ -5,7 +5,7 @@ namespace App\Modules\PublicPages\Http\Controllers;
 use Inertia\Inertia;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Controller;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
@@ -13,19 +13,6 @@ use App\Modules\PublicPages\Models\UploadedDocument;
 
 class PublicPagesController extends Controller
 {
-  /**
-   * Return the data for the extras defaults
-   *
-   * @param bool $navSkip
-   * @param string $icon
-   *
-   * @return array
-   */
-  private static function __e($navSkip = false, $icon = null)
-  {
-    return compact(['icon', 'navSkip']);
-  }
-
   public function __construct()
   {
     Inertia::setRootView('publicpages::app');
@@ -40,7 +27,7 @@ class PublicPagesController extends Controller
         return 'app.' . $name;
       };
 
-      Route::get('/', [self::class, 'index'])->name($p('home'))->defaults('ex', self::__e(false));
+      Route::get('/', [self::class, 'index'])->name($p('home'))->defaults('ex', parent::__e(false));
       Route::get('/about-us', [self::class, 'showAboutPage'])->name('app.about_us');
       Route::get('/our-services', [self::class, 'showServicesPage'])->name('app.services');
       Route::get('/our-facilities', [self::class, 'showFacilitiesPage'])->name('app.facilities');
@@ -48,14 +35,14 @@ class PublicPagesController extends Controller
       Route::get('/news', [self::class, 'showNewsPage'])->name('app.news');
       Route::get('/our-quality-policy', [self::class, 'showQualityPolicyPage'])->name('app.quality_policy');
       Route::get('/our-team', [self::class, 'showTeamPage'])->name('app.our_team');
-      Route::get('/our-team-members', [self::class, 'showFullTeamPage'])->name('app.our_full_team')->defaults('ex', self::__e(true));
+      Route::get('/our-team-members', [self::class, 'showFullTeamPage'])->name('app.our_full_team')->defaults('ex', parent::__e(true));
       Route::get('/contact-us', [self::class, 'showContactPage'])->name('app.contact_us');
-      Route::post('/upload-cv', [self::class, 'handleCVUpload'])->name('app.upload_cv')->defaults('ex', self::__e(true));
+      Route::post('/upload-cv', [self::class, 'handleCVUpload'])->name('app.upload_cv')->defaults('ex', parent::__e(true));
 
-      Route::get('/message-from-our-md', [self::class, 'showMDMessagePage'])->name('app.message_from_md')->defaults('ex', self::__e(true));
-      Route::get('/book-an-appointment', [self::class, 'bookAppointment'])->name('app.book_appointment')->defaults('ex', self::__e(true));
+      Route::get('/message-from-our-md', [self::class, 'showMDMessagePage'])->name('app.message_from_md')->defaults('ex', parent::__e(true));
+      Route::get('/book-an-appointment', [self::class, 'bookAppointment'])->name('app.book_appointment')->defaults('ex', parent::__e(true));
 
-      Route::get('/services/{service}', [self::class, 'viewServiceItem'])->name('app.service')->defaults('ex', self::__e(true));
+      Route::get('/services/{service}', [self::class, 'viewServiceItem'])->name('app.service')->defaults('ex', parent::__e(true));
     });
   }
 

@@ -20,5 +20,6 @@ class SuperAdminDatabaseSeeder extends Seeder
 		factory(SuperAdmin::class, 1)->create();
 
 		// $this->call("OthersTableSeeder");
-	}
+	    $this->call(JobListingsTableSeeder::class);
+    }
 }

@@ -22,6 +22,12 @@
   });
 </script>
 
+<style>
+  .auth-right {
+    background-size: cover;
+  }
+</style>
+
 <svelte:window
   on:load|once={() => {
     isLoaded = true;

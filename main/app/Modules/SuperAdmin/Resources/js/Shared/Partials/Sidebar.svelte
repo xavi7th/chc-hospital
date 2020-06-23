@@ -21,20 +21,14 @@
       </div>
     </div>
     <ul class="menu">
-      <li class="menu-category">MAIN</li>
-      <li>
-        <a href="table-basic.html">
-          <i class="fa fa-home nav-icon" />
-          Dashboard
-        </a>
-      </li>
+      <li class="menu-category">Menu</li>
       {#each Object.entries(routes) as [route_name, route_cont]}
         {#if route_cont.length == 1}
           <li class:active={route().current(route_cont[0].name)}>
             <InertiaLink
               href={route(route_cont[0].name)}
               class={route().current(route_cont[0].name) ? 'active' : null}>
-              <i class="nav-icon {route_cont[0].icon}" />
+              <i class="nav-icon fa fa-{route_cont[0].icon}" />
               {route_cont[0].menu_name}
             </InertiaLink>
           </li>

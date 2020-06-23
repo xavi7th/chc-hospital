@@ -5,49 +5,61 @@
   import FlashMessage from "@p-shared/FlashMessage";
   import route from "ziggy";
 
-  $: ({ app } = $page);
+  $: ({ app, flash, errors } = $page);
+
+  let details = {};
+
+  let loginAdmin = () => {
+    BlockToast.fire({
+      text: "Accessing your dashboard..."
+    });
+    Inertia.post(route("superadmin.login.post"), { ...details }).then(() => {
+      if (_.size(errors) !== 0) {
+        swal.close();
+      }
+    });
+  };
 </script>
 
 <Layout title="{app.name} Admin Login" isAuth={true}>
   <div class="fs-18 fw-600 text-center mb-30 text-title">Welcome, Log In</div>
-  <form action="">
-    <div class="form-group mb-20">
-      <label for="form-mail">
+  <form on:submit|preventDefault={loginAdmin}>
+    <FlashMessage isGeneralError={true} />
+    <div class="form-group mb-20" class:has-danger={errors.email}>
+      <label for="login-email" class=" form-control-label">
         <strong>E-Mail</strong>
       </label>
       <input
-        type="text"
+        type="email"
         class="form-control form-control-pill"
-        id="form-mail" />
+        class:form-control-danger={errors.email}
+        bind:value={details.email}
+        id="login-email" />
+      <FlashMessage msg={errors.email} />
     </div>
-    <div class="form-group mb-20">
-      <label for="form-pass">
+    <div class="form-group mb-20" class:has-danger={errors.password}>
+      <label for="login-pass" class=" form-control-label">
         <strong>Password</strong>
       </label>
       <input
         type="password"
+        bind:value={details.password}
         class="form-control form-control-pill"
-        id="form-pass" />
+        class:form-control-danger={errors.password}
+        id="login-pass" />
+      <FlashMessage msg={errors.password} />
     </div>
     <div class="form-group">
       <label class="control control-checkbox">
         <div class="flex a-i-center j-c-between">
           <span class="text-light fs-12 ">Remember</span>
-          <a href="" class="fs-12 text-light mt-2">Forgot Password?</a>
         </div>
-        <input type="checkbox" />
+        <input type="checkbox" bind:value={details.remember} />
         <span class="control-icon" />
       </label>
     </div>
     <div class="form-group flex j-c-center mt-30">
       <button class="btn btn-primary btn-shadow btn-round">Log In</button>
-    </div>
-    <div>
-      <hr />
-      <p class="fs-12 text-center text-light">
-        Do not have an account?
-        <a href="page-register-2.html" class="text-primary">Register</a>
-      </p>
     </div>
   </form>
 </Layout>

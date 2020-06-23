@@ -42,7 +42,7 @@ class LoginController extends Controller
   static function routes()
   {
     Route::group(['middleware' => 'web'], function () {
-      Route::get('/login', [self::class, 'showLoginForm'])->middleware('guest')->name('superadmin.login');
+      Route::get('/login', [self::class, 'showLoginForm'])->middleware('guest')->name('superadmin.login')->defaults('ex', self::__e(true));
       Route::post('login', [self::class, 'login'])->name('superadmin.login.post');
       Route::post('logout', [self::class, 'logout'])->name('superadmin.logout')->middleware('auth');
     });
@@ -65,6 +65,7 @@ class LoginController extends Controller
    */
   public function login(Request $request)
   {
+
     $this->validateLogin($request);
 
     // If the class is using the ThrottlesLogins trait, we can automatically throttle

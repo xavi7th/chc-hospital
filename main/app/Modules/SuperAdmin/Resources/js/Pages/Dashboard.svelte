@@ -3,9 +3,14 @@
   import { Inertia } from "@inertiajs/inertia";
   import Layout from "@s-shared/SuperAdminLayout";
   import FlashMessage from "@p-shared/FlashMessage";
+  import { onMount } from "svelte";
   import route from "ziggy";
 
   $: ({ app } = $page);
+
+  onMount(() => {
+    swal.close();
+  });
 </script>
 
 <Layout title="Super Admin Dashboard">

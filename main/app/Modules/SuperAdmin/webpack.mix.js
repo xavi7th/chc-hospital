@@ -23,6 +23,9 @@ if (['buildcss'].includes(process.env.npm_config_section)) {
     __dirname + '/Resources/js/vendor/popper.min.js',
     __dirname + '/Resources/js/vendor/bootstrap.min.js',
     __dirname + '/Resources/js/vendor/simplebar.min.js',
+    __dirname + '/Resources/js/vendor/jquery.dataTables.min.js',
+    __dirname + '/Resources/js/vendor/dataTables.responsive.min.js',
+    __dirname + '/Resources/js/vendor/summernote-bs4.min.js',
   ], 'public_html/js/dashboard-app-vendor.js');
 
 	mix.scripts([
