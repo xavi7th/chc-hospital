@@ -7,7 +7,7 @@
   import FlashMessage from "@p-shared/FlashMessage";
   import route from "ziggy";
 
-  $: ({ app, errors, flash } = $page);
+  $: ({ app, errors, flash, jobListings } = $page);
 
   let uploadCV = () => {
     BlockToast.fire({
@@ -15,11 +15,9 @@
     });
 
     let formData = new FormData();
-
     _.forEach(details, (val, key) => {
       formData.append(key, val);
     });
-
     Inertia.post(
       route("app.upload_cv"),
       formData,
@@ -34,21 +32,18 @@
       }
     ).then(() => {
       if (flash.success) {
-        // files = null;
         details.cv = null;
-        details = {}
-
+        details = {};
         ToastLarge.fire({
           title: "Successful!",
           html: flash.success,
-          timer: 10000,
+          timer: 10000
         });
       } else {
         swal.close();
       }
     });
   };
-
   let attachFile = e => {
     details.cv = e.target.files[0];
   };
@@ -57,7 +52,6 @@
 </script>
 
 <style lang="scss">
-  /*! CSS Used from: http://localhost:8001/css/bootstrap.css */
   *,
   ::after,
   ::before {
@@ -223,7 +217,7 @@
   }
   .text-center {
     text-align: center !important;
-  } /*! CSS Used from: http://localhost:8001/css/style.css */
+  }
   a:focus {
     outline: 0 !important;
   }
@@ -411,7 +405,7 @@
     .section-lg {
       padding: 120px 0;
     }
-  } /*! CSS Used from: http://localhost:8001/css/style.css */
+  }
   a:focus {
     outline: 0 !important;
   }
@@ -718,7 +712,7 @@
     margin-right: 0;
     display: block;
     width: 35%;
-  } /*! CSS Used from: http://localhost:8001/css/bootstrap.css */
+  }
   *,
   ::after,
   ::before {
@@ -734,10 +728,6 @@
   p {
     margin-top: 0;
     margin-bottom: 1rem;
-  }
-  label {
-    display: inline-block;
-    margin-bottom: 0.5rem;
   }
   button {
     border-radius: 0;
@@ -861,17 +851,6 @@
     -webkit-box-align: center;
     align-items: center;
   }
-  @media (min-width: 576px) {
-    .form-inline label {
-      display: -webkit-box;
-      display: flex;
-      -webkit-box-align: center;
-      align-items: center;
-      -webkit-box-pack: center;
-      justify-content: center;
-      margin-bottom: 0;
-    }
-  }
   .justify-content-center {
     -webkit-box-pack: center !important;
     justify-content: center !important;
@@ -897,7 +876,7 @@
     .container {
       min-width: 992px !important;
     }
-  } /*! CSS Used from: http://localhost:8001/css/style.css */
+  }
   button:focus {
     outline: 0 !important;
   }
@@ -910,9 +889,6 @@
   button,
   input {
     outline: 0;
-  }
-  label {
-    margin-bottom: 0;
   }
   p {
     margin: 0;
@@ -1049,28 +1025,6 @@
   .form-input:focus {
     outline: 0;
   }
-  .form-label {
-    margin-bottom: 0;
-    font-weight: 400;
-  }
-  .form-label {
-    position: absolute;
-    top: 24px;
-    left: 0;
-    right: 0;
-    padding-left: 19px;
-    padding-right: 19px;
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 1.5;
-    color: #252227;
-    pointer-events: none;
-    text-align: left;
-    z-index: 9;
-    transition: 0.25s;
-    will-change: transform;
-    transform: translateY(-50%);
-  }
   :global(.form-validation) {
     position: absolute;
     right: 15px;
@@ -1106,9 +1060,6 @@
   .form-inline .form-wrap {
     flex: 20 0;
     min-width: 220px;
-  }
-  .form-inline .form-label {
-    display: block;
   }
   .form-inline .form-input {
     border-color: #fff;
@@ -1174,14 +1125,8 @@
     background-size: cover;
     background-position: center center;
   }
-  .fadeIn {
-    animation-name: fadeIn;
-  }
   .slideInUp {
     animation-name: slideInUp;
-  }
-  .slideInLeft {
-    animation-name: slideInLeft;
   }
   .wow-outer {
     position: relative;
@@ -1214,12 +1159,6 @@
     }
     100% {
       transform: translate3d(0, 0, 0);
-    }
-  }
-
-  .upload-cv {
-    @media (max-width: 576px) {
-      margin-top: 50px;
     }
   }
 </style>
@@ -1282,151 +1221,28 @@
     <div class="container">
       <h3>Available Vacancies</h3>
       <div class="row row-45">
-        <div class="col-md-6 col-lg-4">
-          <!-- Career Classic-->
-          <article class="career-classic">
-            <h4 class="career-classic-title">
-              <a href="single-job.html">Customer Assistant</a>
-            </h4>
-            <div class="career-classic-divider" />
-            <ul class="career-classic-list">
-              <li>
-                <span class="icon mdi mdi-calendar-clock" />
-                <span>Full Time</span>
-              </li>
-              <li>
-                <span class="icon mdi mdi-map-marker" />
-                <span>San Diego</span>
-              </li>
-            </ul>
-            <p>
-              Tabes velums, tanquam camerarius tata. A falsis, urbs superbus
-              xiphias. Nunquam examinare abnoba. Humani generiss observare,
-              tanquam tus.
-            </p>
-          </article>
-        </div>
-        <div class="col-md-6 col-lg-4">
-          <!-- Career Classic-->
-          <article class="career-classic">
-            <h4 class="career-classic-title">
-              <a href="single-job.html">Web Designer</a>
-            </h4>
-            <div class="career-classic-divider" />
-            <ul class="career-classic-list">
-              <li>
-                <span class="icon mdi mdi-calendar-clock" />
-                <span>Full Time</span>
-              </li>
-              <li>
-                <span class="icon mdi mdi-map-marker" />
-                <span>San Diego</span>
-              </li>
-            </ul>
-            <p>
-              Superbus uria recte attrahendams bursa est. Sunt cottaes quaestio
-              camerarius, dexter assimilatioes. Lotus, noster classiss recte
-              locus de pius, flavum bubo. Diatrias sunt particulas de flavum
-              ignigena.
-            </p>
-          </article>
-        </div>
-        <div class="col-md-6 col-lg-4">
-          <!-- Career Classic-->
-          <article class="career-classic">
-            <h4 class="career-classic-title">
-              <a href="single-job.html">Technical Support Agent</a>
-            </h4>
-            <div class="career-classic-divider" />
-            <ul class="career-classic-list">
-              <li>
-                <span class="icon mdi mdi-calendar-clock" />
-                <span>Full Time</span>
-              </li>
-              <li>
-                <span class="icon mdi mdi-map-marker" />
-                <span>San Diego</span>
-              </li>
-            </ul>
-            <p>
-              Era de salvus fluctus, promissio lumen! Magister de castus
-              aonides, magicae adelphis! Cum calcaria credere, omnes lunaes
-              reperire grandis, mirabilis accolaes.
-            </p>
-          </article>
-        </div>
-        <div class="col-md-6 col-lg-4">
-          <!-- Career Classic-->
-          <article class="career-classic">
-            <h4 class="career-classic-title">
-              <a href="single-job.html">Accountant</a>
-            </h4>
-            <div class="career-classic-divider" />
-            <ul class="career-classic-list">
-              <li>
-                <span class="icon mdi mdi-calendar-clock" />
-                <span>Full Time</span>
-              </li>
-              <li>
-                <span class="icon mdi mdi-map-marker" />
-                <span>San Diego</span>
-              </li>
-            </ul>
-            <p>
-              Byssuss potus! Finiss peregrinatione in antenna! Cum zirbus ire,
-              omnes rectores demitto rusticus, orgiaes. Cum fluctus velum,
-              elogiumes imperium castus.
-            </p>
-          </article>
-        </div>
-        <div class="col-md-6 col-lg-4">
-          <!-- Career Classic-->
-          <article class="career-classic">
-            <h4 class="career-classic-title">
-              <a href="single-job.html">Customer Care Manager</a>
-            </h4>
-            <div class="career-classic-divider" />
-            <ul class="career-classic-list">
-              <li>
-                <span class="icon mdi mdi-calendar-clock" />
-                <span>Full Time</span>
-              </li>
-              <li>
-                <span class="icon mdi mdi-map-marker" />
-                <span>San Diego</span>
-              </li>
-            </ul>
-            <p>
-              Heu, luna! Sunt racanaes imitari bassus, lotus aususes. Orexiss
-              mori, tanquam velox extum. Raptus, nobilis bullas etiam aperto de
-              placidus, albus ventus.
-            </p>
-          </article>
-        </div>
-        <div class="col-md-6 col-lg-4">
-          <!-- Career Classic-->
-          <article class="career-classic">
-            <h4 class="career-classic-title">
-              <a href="single-job.html">Junior PR Manager</a>
-            </h4>
-            <div class="career-classic-divider" />
-            <ul class="career-classic-list">
-              <li>
-                <span class="icon mdi mdi-calendar-clock" />
-                <span>Full Time</span>
-              </li>
-              <li>
-                <span class="icon mdi mdi-map-marker" />
-                <span>San Diego</span>
-              </li>
-            </ul>
-            <p>
-              Ecce, secundus devirginato! Cum ignigena nocere, omnes
-              tumultumquees acquirere superbus, clemens victrixes. Compater,
-              domina, et extum.
-            </p>
-          </article>
-        </div>
+        {#each jobListings as listing}
+          <div class="col-md-6 col-lg-4">
+            <article class="career-classic">
+              <h4 class="career-classic-title">
+                <a href="#home">{listing.job_title}</a>
+              </h4>
+              <div class="career-classic-divider" />
+              <ul class="career-classic-list">
+                <li>
+                  <span class="icon mdi mdi-calendar-clock" />
+                  <span>{listing.contract_type}</span>
+                </li>
+                <li>
+                  <span class="icon mdi mdi-map-marker" />
+                  <span>{listing.job_location}</span>
+                </li>
+              </ul>
+              <p>{@html listing.job_description}</p>
+            </article>
+          </div>
+        {/each}
+
       </div>
     </div>
   </section>

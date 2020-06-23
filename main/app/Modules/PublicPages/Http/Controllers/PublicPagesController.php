@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
 use App\Modules\PublicPages\Models\UploadedDocument;
+use App\Modules\SuperAdmin\Models\JobListing;
 
 class PublicPagesController extends Controller
 {
@@ -87,7 +88,9 @@ class PublicPagesController extends Controller
 
   public function showCareerPage(Request $request)
   {
-    return Inertia::render('Career')->withViewData([
+    return Inertia::render('Career', [
+      'jobListings' => JobListing::latest()->get()
+    ])->withViewData([
       'title' => 'About Capitol Hill Hospital/Clinic Warri',
     ]);
   }
