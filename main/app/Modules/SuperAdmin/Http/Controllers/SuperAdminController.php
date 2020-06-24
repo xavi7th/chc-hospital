@@ -35,6 +35,7 @@ class SuperAdminController extends Controller
           Route::get('/view-team-members', 'SuperAdminController@viewTeamMembers')->name('superadmin.team_members')->defaults('ex', self::__e(false, 'users'));
           Route::get('/new-team-member', 'SuperAdminController@viewCreateTeamMemberPage')->name('superadmin.new_team_member')->defaults('ex', self::__e(false, 'user'));
           Route::post('/create-team-member', 'SuperAdminController@createTeamMember')->name('superadmin.create_team_member')->defaults('ex', self::__e(false, 'users'));
+          Route::delete('/{teamMember}', 'SuperAdminController@deleteTeamMember')->name('superadmin.delete_team_member');
           Route::get('/job-listings', 'SuperAdminController@viewJobListings')->name('superadmin.job_listings')->defaults('ex', self::__e(false, 'briefcase'));
           Route::get('/new-job-listing', 'SuperAdminController@viewCreateJobListingPage')->name('superadmin.new_job_listing')->defaults('ex', self::__e(false, 'briefcase'));
           Route::post('/create-job-listing', 'SuperAdminController@createJobListing')->name('superadmin.create_job_listing')->defaults('ex', self::__e(true, 'briefcase'));
@@ -63,7 +64,9 @@ class SuperAdminController extends Controller
 
   public function viewTeamMembers(Request $request)
   {
-    return Inertia::render('ManageTeamMembers');
+    return Inertia::render('ManageTeamMembers', [
+      'teamMembers' => TeamMember::all()
+    ]);
   }
 
   public function viewCreateTeamMemberPage(Request $request)
@@ -93,6 +96,12 @@ class SuperAdminController extends Controller
     TeamMember::create(collect($validator->validated())->merge($img_url)->toArray());
 
     return back()->withSuccess('Team member profile created');
+  }
+
+  public function deleteTeamMember(TeamMember $teamMember)
+  {
+    $teamMember->delete();
+    return back()->withSuccess('Profile deleted');
   }
 
   public function viewJobListings(Request $request)
