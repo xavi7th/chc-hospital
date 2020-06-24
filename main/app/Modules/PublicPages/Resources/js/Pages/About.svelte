@@ -288,7 +288,7 @@
             <br />
             set us apart.
           </h2>
-          <InertiaLink href="{route('app.career')}" class="thm-btn inverse">
+          <InertiaLink href={route('app.career')} class="thm-btn inverse">
             Be a part of us
           </InertiaLink>
         </div>
@@ -327,11 +327,11 @@
             </div>
             <span
               class="timer"
-              data-from="10"
-              data-to="200"
-              data-speed="2000"
-              data-refresh-interval="50">
-              200
+              data-from="5"
+              data-to="70"
+              data-speed="200"
+              data-refresh-interval="25">
+              70
             </span>
             <p>Total Beds</p>
           </div>
