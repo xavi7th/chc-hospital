@@ -31,26 +31,25 @@ export let toTitleCase = ( str ) => {
 
 export let range = ( start, stop, step ) => {
     /**
+     import {range} from './range.js';
+     </script>
+     {#each range(10) as v,i}
+       [{i}]:{v}<br/>
+     {/each}
+     <hr>
+     {#each range(10,0,-1) as v,i}
+       [{i}]:{v}<br/>
+     {/each}
+     <hr>
+     {#each range(3,20,2) as v,i}
+       [{i}]:{v}<br/>
+     {/each}
+     <hr>
+     {#each range(20,3,-2) as v,i}
+       [{i}]:{v}<br/>
+     {/each}
+     **/
 
-import {range} from './range.js';
-</script>
-{#each range(10) as v,i}
-	[{i}]:{v}<br/>
-{/each}
-<hr>
-{#each range(10,0,-1) as v,i}
-	[{i}]:{v}<br/>
-{/each}
-<hr>
-{#each range(3,20,2) as v,i}
-	[{i}]:{v}<br/>
-{/each}
-<hr>
-{#each range(20,3,-2) as v,i}
-	[{i}]:{v}<br/>
-{/each}
-
-**/
     if ( stop == null ) {
         stop = start;
         start = 0;

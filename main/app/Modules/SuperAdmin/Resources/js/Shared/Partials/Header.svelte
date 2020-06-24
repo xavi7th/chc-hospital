@@ -1,19 +1,21 @@
+<script>
+  import { InertiaLink } from "@inertiajs/inertia-svelte";
+  import route from "ziggy";
+</script>
+
 <header>
   <div class="header-left">
-    <!-- navigation-toggle  -->
-    <a href="" class="header-btn side-nav-toggle">
+    <a href="#home" class="header-btn side-nav-toggle">
       <span />
       <span />
       <span />
     </a>
 
-    <!-- window full screen -->
-    <a href="" id="fullScreen" class="header-btn hide-md">
+    <a href="#home" id="fullScreen" class="header-btn hide-md">
       <i class="fa fa-expand" />
     </a>
 
-    <!-- search -->
-    <div class="form-group search-field flex a-i-center hide-xs">
+    <!-- <div class="form-group search-field flex a-i-center hide-xs">
       <div class="header-divider" />
       <label for="header-search">
         <i class="fa fa-search" />
@@ -23,25 +25,24 @@
         class="form-control"
         id="header-search"
         placeholder="Search here..." />
-    </div>
+    </div> -->
   </div>
 
   <div class="header-right">
     <!-- dropdown language -->
     <div class="dropdown hide-md dropdown-xs">
-      <a href="" class="header-btn alert-active" data-toggle="dropdown">
+      <a href="#home" class="header-btn alert-active" data-toggle="dropdown">
         <i class="far fa-flag" />
       </a>
       <div class="dropdown-menu dropdown-menu-right text-center">
-        <a href="" class="dropdown-item">TR</a>
-        <a href="" class="dropdown-item active">EN</a>
-        <a href="" class="dropdown-item">RU</a>
+        <a href="#home" class="dropdown-item">TR</a>
+        <a href="#home" class="dropdown-item active">EN</a>
+        <a href="#home" class="dropdown-item">RU</a>
       </div>
     </div>
     <!-- dropdown language //. -->
 
-    <!-- dropdown notification -->
-    <div class="dropdown media-dropdown">
+    <!-- <div class="dropdown media-dropdown">
       <a href="" class="header-btn alert-active" data-toggle="dropdown">
         <i class="far fa-bell">
           <span class="alert-dot">
@@ -87,11 +88,9 @@
           <a href="" class="media-all-view">All View</a>
         </div>
       </div>
-    </div>
-    <!-- dropdown notification //. -->
+    </div> -->
 
-    <!-- dropdown message -->
-    <div class="dropdown media-dropdown hide-md">
+    <!-- <div class="dropdown media-dropdown hide-md">
       <a href="" class="header-btn" data-toggle="dropdown">
         <i class="far fa-envelope" />
       </a>
@@ -145,16 +144,14 @@
           <a href="app-inbox.html" class="media-all-view">All View</a>
         </div>
       </div>
-    </div>
-    <!-- dropdown message //. -->
+    </div> -->
 
-    <!-- dropdown user-->
     <div class="dropdown logged-user">
-      <a href="#" class="header-btn" data-toggle="dropdown">
+      <a href="#home" class="header-btn" data-toggle="dropdown">
         <img src="/img/user-4.png" alt="..." />
       </a>
       <div class="dropdown-menu dropdown-menu-right">
-        <a href="page-profile.html" class="dropdown-item">
+        <!-- <a href="page-profile.html" class="dropdown-item">
           <i class="fa fa-user mr-10" />
           Profile
         </a>
@@ -165,13 +162,15 @@
         <a href="user-profile.html" class="dropdown-item">
           <i class="fa fa-cog mr-10" />
           Settings
-        </a>
-        <a href="page-login-2.html" class="dropdown-item">
+        </a> -->
+        <InertiaLink
+          method="post"
+          href={route('superadmin.logout')}
+          class="dropdown-item">
           <i class="fas fa-sign-out-alt mr-10" />
           Log Out
-        </a>
+        </InertiaLink>
       </div>
     </div>
-    <!-- dropdown user //. -->
   </div>
 </header>

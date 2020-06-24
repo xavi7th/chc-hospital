@@ -8,7 +8,7 @@
 
   $: ({ app, status, flash } = $page);
 
-  export let jobListings;
+  export let jobListings = [];
 
   let deleteJobListing = id => {
     swalPreconfirm

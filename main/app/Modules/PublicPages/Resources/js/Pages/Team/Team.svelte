@@ -6,12 +6,12 @@
   import TeamMembers from "@p-pages/Team/TeamMembersHighlight";
 
   import route from "ziggy";
-  $: ({ app } = $page);
+  $: ({ app, teamMembers } = $page);
 </script>
 
 <Layout title="Our Team">
 
-  <TeamMembers />
+  <TeamMembers {teamMembers} />
 
   <ReachUs {app} />
 

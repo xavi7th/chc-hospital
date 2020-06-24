@@ -6,35 +6,62 @@
   import FlashMessage from "@p-shared/FlashMessage";
   import route from "ziggy";
 
-  $: ({ app } = $page);
+  $: ({ app, flash, status } = $page);
+
+  export let uploadedCVs = [];
+
+  let deleteCV = cv => {
+    swalPreconfirm
+      .fire({
+        confirmButtonText: "Yes!",
+        text: `This will permanently delete ${cv.full_name}'s job application from the records`,
+        preConfirm: () => {
+          return Inertia.delete(route("superadmin.delete_cv", cv.id));
+        }
+      })
+      .then(val => {
+        if (undefined === status) {
+          if (val.isDismissed) {
+            Toast.fire({
+              title: "Canceled",
+              icon: "info",
+              position: "center"
+            });
+          } else if (flash.success) {
+            ToastLarge.fire({
+              title: "Success",
+              html: `Job application has been deleted`,
+              position: "bottom",
+              icon: "success",
+              timer: 10000
+            });
+          }
+        }
+      });
+  };
 
   onMount(() => {
     let jq = window.$;
 
     jq(function() {
-      jq("#datatable1").DataTable({
-        responsive: true,
-        language: {
-          searchPlaceholder: "Search...",
-          sSearch: ""
-        }
-      });
-
-      jq("#datatable2").DataTable({
-        responsive: true,
-        searching: false,
-        bLengthChange: false
-      });
+      if (jq.fn.dataTable.isDataTable("#datatable1")) {
+        // table = jq("#datatable1").DataTable();
+      } else if (uploadedCVs.length !== 0) {
+        jq("#datatable1").DataTable({
+          responsive: true,
+          language: {
+            searchPlaceholder: "Search...",
+            sSearch: ""
+          }
+        });
+      }
     });
   });
 </script>
 
 <Layout title="Manage CVs">
   <div class="content">
-    <div class="card">
-      <div class="card-body">Do you have an account?</div>
-    </div>
-    <row>
+    <div class="row">
       <div class="col-md-12">
         <div class="card">
           <div class="card-title">
@@ -45,193 +72,47 @@
               <thead>
                 <tr>
                   <th>ID</th>
-                  <th>Profile</th>
-                  <th>Date</th>
-                  <th>Status</th>
+                  <th>Applicant Name</th>
+                  <th>Phone</th>
+                  <th>Interested Position</th>
+                  <th>Uploaded Date</th>
+                  <th>Actions</th>
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>7250-15</td>
-                  <td>Jack</td>
-                  <td>10/10/2018</td>
-                  <td>
-                    <div class="badge badge-success badge-shadow">
-                      Completed
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>0850-01</td>
-                  <td>John</td>
-                  <td>08/10/2018</td>
-                  <td>
-                    <div class="badge badge-danger badge-shadow">Error</div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>9750-32</td>
-                  <td>Chris</td>
-                  <td>01/09/2018</td>
-                  <td>
-                    <div class="badge badge-warning badge-shadow">Pending</div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>9915-70</td>
-                  <td>Emily</td>
-                  <td>15/09/2017</td>
-                  <td>
-                    <div class="badge badge-success badge-shadow">
-                      Completed
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>8314-61</td>
-                  <td>Peter</td>
-                  <td>06/09/2017</td>
-                  <td>
-                    <div class="badge badge-danger badge-shadow">Error</div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>7250-15</td>
-                  <td>Jack</td>
-                  <td>10/10/2018</td>
-                  <td>
-                    <div class="badge badge-success badge-shadow">
-                      Completed
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>0850-01</td>
-                  <td>John</td>
-                  <td>08/10/2018</td>
-                  <td>
-                    <div class="badge badge-danger badge-shadow">Error</div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>9750-32</td>
-                  <td>Chris</td>
-                  <td>01/09/2018</td>
-                  <td>
-                    <div class="badge badge-warning badge-shadow">Pending</div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>9915-70</td>
-                  <td>Emily</td>
-                  <td>15/09/2017</td>
-                  <td>
-                    <div class="badge badge-success badge-shadow">
-                      Completed
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>8314-61</td>
-                  <td>Peter</td>
-                  <td>06/09/2017</td>
-                  <td>
-                    <div class="badge badge-danger badge-shadow">Error</div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>7250-15</td>
-                  <td>Jack</td>
-                  <td>10/10/2018</td>
-                  <td>
-                    <div class="badge badge-success badge-shadow">
-                      Completed
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>0850-01</td>
-                  <td>John</td>
-                  <td>08/10/2018</td>
-                  <td>
-                    <div class="badge badge-danger badge-shadow">Error</div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>9750-32</td>
-                  <td>Chris</td>
-                  <td>01/09/2018</td>
-                  <td>
-                    <div class="badge badge-warning badge-shadow">Pending</div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>9915-70</td>
-                  <td>Emily</td>
-                  <td>15/09/2017</td>
-                  <td>
-                    <div class="badge badge-success badge-shadow">
-                      Completed
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>8314-61</td>
-                  <td>Peter</td>
-                  <td>06/09/2017</td>
-                  <td>
-                    <div class="badge badge-danger badge-shadow">Error</div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>7250-15</td>
-                  <td>Jack</td>
-                  <td>10/10/2018</td>
-                  <td>
-                    <div class="badge badge-success badge-shadow">
-                      Completed
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>0850-01</td>
-                  <td>John</td>
-                  <td>08/10/2018</td>
-                  <td>
-                    <div class="badge badge-danger badge-shadow">Error</div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>9750-32</td>
-                  <td>Chris</td>
-                  <td>01/09/2018</td>
-                  <td>
-                    <div class="badge badge-warning badge-shadow">Pending</div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>9915-70</td>
-                  <td>Emily</td>
-                  <td>15/09/2017</td>
-                  <td>
-                    <div class="badge badge-success badge-shadow">
-                      Completed
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>8314-61</td>
-                  <td>Peter</td>
-                  <td>06/09/2017</td>
-                  <td>
-                    <div class="badge badge-danger badge-shadow">Error</div>
-                  </td>
-                </tr>
+                {#each uploadedCVs as uploadedCV, idx}
+                  <tr>
+                    <td>{idx + 1}</td>
+                    <td>{uploadedCV.full_name}</td>
+                    <td>{uploadedCV.phone}</td>
+                    <td>{uploadedCV.position}</td>
+                    <td>{new Date(uploadedCV.created_at).toDateString()}</td>
+                    <td class="nowrap">
+                      <a
+                        href={uploadedCV.cv}
+                        target="_blank"
+                        class="badge badge-success badge-shadow">
+                        Details
+                      </a>
+                      <button
+                        class="badge badge-danger badge-shadow"
+                        on:click={deleteCV(uploadedCV)}>
+                        Delete
+                      </button>
+                    </td>
+                  </tr>
+                {:else}
+                  <tr>
+                    <td class="text-center h3" colspan="6">
+                      No Uploaded Applications
+                    </td>
+                  </tr>
+                {/each}
               </tbody>
             </table>
           </div>
         </div>
       </div>
-    </row>
+    </div>
   </div>
 </Layout>

@@ -5,7 +5,9 @@
   import FlashMessage from "@p-shared/FlashMessage";
   import route from "ziggy";
 
-  $: ({ app, teamMembers, flash, status } = $page);
+  $: ({ app, flash, status } = $page);
+
+  export let teamMembers = [];
 
   let deleteTeamMemberProfile = teamMember => {
     swalPreconfirm
@@ -43,15 +45,10 @@
 <Layout title="Manage Team Members">
   <div class="content">
 
-    <div class="card">
-      <div class="card-body">Do you have an account?</div>
-    </div>
-
     <div class="row">
       <!-- activity -->
       <div class="col-lg-12 col-md-12">
         <div class="profile-activity">
-
           {#each teamMembers as teamMember}
             <div class="card">
               <div class="activity-item">

@@ -10,8 +10,9 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Validator;
 use App\Modules\SuperAdmin\Models\JobListing;
 use App\Modules\SuperAdmin\Models\SuperAdmin;
-use App\Modules\SuperAdmin\Http\Controllers\LoginController;
 use App\Modules\SuperAdmin\Models\TeamMember;
+use App\Modules\PublicPages\Models\UploadedDocument;
+use App\Modules\SuperAdmin\Http\Controllers\LoginController;
 
 class SuperAdminController extends Controller
 {
@@ -32,6 +33,7 @@ class SuperAdminController extends Controller
         Route::group(['middleware' => ['auth:super_admin']], function () {
           Route::get('/', 'SuperAdminController@index')->name('superadmin.dashboard')->defaults('ex', self::__e(false, 'desktop'));
           Route::get('/view-cvs', 'SuperAdminController@viewCVs')->name('superadmin.manage_cvs')->defaults('ex', self::__e(false, 'comment'));
+          Route::delete('/{uploadedDocument}', 'SuperAdminController@deleteUploadedDocument')->name('superadmin.delete_cv');
           Route::get('/view-team-members', 'SuperAdminController@viewTeamMembers')->name('superadmin.team_members')->defaults('ex', self::__e(false, 'users'));
           Route::get('/new-team-member', 'SuperAdminController@viewCreateTeamMemberPage')->name('superadmin.new_team_member')->defaults('ex', self::__e(false, 'user'));
           Route::post('/create-team-member', 'SuperAdminController@createTeamMember')->name('superadmin.create_team_member')->defaults('ex', self::__e(false, 'users'));
@@ -50,26 +52,34 @@ class SuperAdminController extends Controller
    * Display a listing of the resource.
    * @return Response
    */
-  public function index(Request $request)
+  public function index()
   {
     return Inertia::render('Dashboard')->withViewData([
       'title' => config('app.name') . ' Admin Dashboard'
     ]);
   }
 
-  public function viewCVs(Request $request)
+  public function viewCVs()
   {
-    return Inertia::render('ManageCVs');
+    return Inertia::render('ManageCVs', [
+      'uploadedCVs' => UploadedDocument::all()
+    ]);
   }
 
-  public function viewTeamMembers(Request $request)
+  public function deleteUploadedDocument(UploadedDocument $uploadedDocument)
+  {
+    $uploadedDocument->delete();
+    return back()->withSuccess('CV deleted');
+  }
+
+  public function viewTeamMembers()
   {
     return Inertia::render('ManageTeamMembers', [
       'teamMembers' => TeamMember::all()
     ]);
   }
 
-  public function viewCreateTeamMemberPage(Request $request)
+  public function viewCreateTeamMemberPage()
   {
     return Inertia::render('CreateTeamMember');
   }

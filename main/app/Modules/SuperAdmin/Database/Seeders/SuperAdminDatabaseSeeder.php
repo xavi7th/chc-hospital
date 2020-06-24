@@ -22,5 +22,6 @@ class SuperAdminDatabaseSeeder extends Seeder
     // $this->call("OthersTableSeeder");
     $this->call(JobListingsTableSeeder::class);
     $this->call(TeamMembersTableSeeder::class);
-  }
+      $this->call(UploadedDocumentsTableSeeder::class);
+    }
 }

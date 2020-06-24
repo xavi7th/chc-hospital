@@ -7,10 +7,11 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
-use App\Modules\PublicPages\Models\UploadedDocument;
+use Illuminate\Support\Facades\Validator;
 use App\Modules\SuperAdmin\Models\JobListing;
+use App\Modules\SuperAdmin\Models\TeamMember;
+use App\Modules\PublicPages\Models\UploadedDocument;
 
 class PublicPagesController extends Controller
 {
@@ -118,14 +119,18 @@ class PublicPagesController extends Controller
 
   public function showTeamPage(Request $request)
   {
-    return Inertia::render('Team/Team')->withViewData([
+    return Inertia::render('Team/Team', [
+      'teamMembers' => TeamMember::inRandomOrder()->take(4)->get()
+    ])->withViewData([
       'title' => 'About Capitol Hill Hospital/Clinic Warri',
     ]);
   }
 
   public function showFullTeamPage()
   {
-    return Inertia::render('Team/AllTeamMembers')->withViewData([
+    return Inertia::render('Team/AllTeamMembers', [
+      'teamMembers' => TeamMember::all()
+    ])->withViewData([
       'title' => 'About Capitol Hill Hospital/Clinic Warri',
     ]);
   }
