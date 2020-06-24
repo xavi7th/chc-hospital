@@ -3,7 +3,7 @@
 
 /**
  * A helper file for Laravel, to provide autocomplete information to your IDE
- * Generated for Laravel 7.14.1 on 2020-06-23 12:47:59.
+ * Generated for Laravel 7.17.1 on 2020-06-24 11:45:47.
  *
  * This file should not be included in your code, only analyzed by your IDE!
  *
@@ -777,6 +777,19 @@ namespace Illuminate\Support\Facades {
         {
                         /** @var \Illuminate\Foundation\Application $instance */
                         return $instance->getLoadedProviders();
+        }
+        
+        /**
+         * Determine if the given service provider is loaded.
+         *
+         * @param string $provider
+         * @return bool 
+         * @static 
+         */ 
+        public static function providerIsLoaded($provider)
+        {
+                        /** @var \Illuminate\Foundation\Application $instance */
+                        return $instance->providerIsLoaded($provider);
         }
         
         /**
@@ -10951,9 +10964,9 @@ namespace Illuminate\Support\Facades {
          *
          * @static 
          */ 
-        public static function isApi()
+        public static function inertia()
         {
-                        return \Illuminate\Http\Request::isApi();
+                        return \Illuminate\Http\Request::inertia();
         }
         
         /**
@@ -10961,9 +10974,9 @@ namespace Illuminate\Support\Facades {
          *
          * @static 
          */ 
-        public static function inertia()
+        public static function isApi()
         {
-                        return \Illuminate\Http\Request::inertia();
+                        return \Illuminate\Http\Request::isApi();
         }
          
     }
@@ -15381,6 +15394,19 @@ namespace Illuminate\Support {
  
 }
 
+namespace danielme85\LaravelLogToDB { 
+
+    /**
+     * Class LogToDb
+     *
+     * @package danielme85\LaravelLogToDB
+     */ 
+    class LogToDB {
+         
+    }
+ 
+}
+
 namespace Nwidart\Modules\Facades { 
 
     /**
@@ -15975,6 +16001,75 @@ namespace Nwidart\Modules\Facades {
  
 }
 
+namespace Intervention\Image\Facades { 
+
+    /**
+     * 
+     *
+     */ 
+    class Image {
+        
+        /**
+         * Overrides configuration settings
+         *
+         * @param array $config
+         * @return self 
+         * @static 
+         */ 
+        public static function configure($config = [])
+        {
+                        /** @var \Intervention\Image\ImageManager $instance */
+                        return $instance->configure($config);
+        }
+        
+        /**
+         * Initiates an Image instance from different input types
+         *
+         * @param mixed $data
+         * @return \Intervention\Image\Image 
+         * @static 
+         */ 
+        public static function make($data)
+        {
+                        /** @var \Intervention\Image\ImageManager $instance */
+                        return $instance->make($data);
+        }
+        
+        /**
+         * Creates an empty image canvas
+         *
+         * @param int $width
+         * @param int $height
+         * @param mixed $background
+         * @return \Intervention\Image\Image 
+         * @static 
+         */ 
+        public static function canvas($width, $height, $background = null)
+        {
+                        /** @var \Intervention\Image\ImageManager $instance */
+                        return $instance->canvas($width, $height, $background);
+        }
+        
+        /**
+         * Create new cached image and run callback
+         * (requires additional package intervention/imagecache)
+         *
+         * @param \Closure $callback
+         * @param int $lifetime
+         * @param boolean $returnObj
+         * @return \Image 
+         * @static 
+         */ 
+        public static function cache($callback, $lifetime = null, $returnObj = false)
+        {
+                        /** @var \Intervention\Image\ImageManager $instance */
+                        return $instance->cache($callback, $lifetime, $returnObj);
+        }
+         
+    }
+ 
+}
+
 namespace Tymon\JWTAuth\Facades { 
 
     /**
@@ -16531,19 +16626,6 @@ namespace Tymon\JWTAuth\Facades {
                         /** @var \Tymon\JWTAuth\Factory $instance */
                         return $instance->setRefreshFlow($refreshFlow);
         }
-         
-    }
- 
-}
-
-namespace danielme85\LaravelLogToDB { 
-
-    /**
-     * Class LogToDb
-     *
-     * @package danielme85\LaravelLogToDB
-     */ 
-    class LogToDB {
          
     }
  
@@ -18341,7 +18423,7 @@ namespace  {
             }
          
             /**
-             * Execute a callback over each item while chunking by id.
+             * Execute a callback over each item while chunking by ID.
              *
              * @param callable $callback
              * @param int $count
@@ -18388,7 +18470,7 @@ namespace  {
              * Pass the query to a given callback.
              *
              * @param callable $callback
-             * @return \Illuminate\Database\Query\Builder 
+             * @return \Illuminate\Database\Eloquent\Builder 
              * @static 
              */ 
             public static function tap($callback)
@@ -18703,7 +18785,7 @@ namespace  {
             /**
              * Add a subselect expression to the query.
              *
-             * @param \Closure|\Illuminate\Database\Query\Builder|string $query
+             * @param \Closure|$this|string $query
              * @param string $as
              * @return \Illuminate\Database\Query\Builder 
              * @throws \InvalidArgumentException
@@ -20548,13 +20630,15 @@ namespace  {
 
     class View extends \Illuminate\Support\Facades\View {}
 
+    class LogToDB extends \danielme85\LaravelLogToDB\LogToDB {}
+
     class Module extends \Nwidart\Modules\Facades\Module {}
+
+    class Image extends \Intervention\Image\Facades\Image {}
 
     class JWTAuth extends \Tymon\JWTAuth\Facades\JWTAuth {}
 
     class JWTFactory extends \Tymon\JWTAuth\Facades\JWTFactory {}
-
-    class LogToDB extends \danielme85\LaravelLogToDB\LogToDB {}
 
     class Debugbar extends \Barryvdh\Debugbar\Facade {}
 

@@ -63,11 +63,6 @@
   });
 </script>
 
-<svelte:window
-  on:load={() => {
-    pageLoaded = true;
-  }} />
-
 <Layout title="Create Job Listings">
   <div class="content">
     <div class="document">
@@ -171,22 +166,3 @@
     </div>
   </div>
 </Layout>
-
-{#if pageLoaded}
-  <script>
-    // $(".summernote").summernote({
-    //   height: 300,
-    //   toolbar: [
-    //     ["style", ["bold", "italic", "underline", "clear"]],
-    //     ["font", ["fontname"]],
-    //     ["fontsize", ["fontsize"]],
-    //     ["color", ["color"]],
-    //     ["para", ["ul", "ol", "paragraph"]],
-    //     ["height", ["height"]],
-    //     ["table", ["table"]],
-    //     ["insert", ["link", "picture"]],
-    //     ["view", ["help"]]
-    //   ]
-    // });
-  </script>
-{/if}

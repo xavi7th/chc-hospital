@@ -8,18 +8,19 @@ use App\Modules\SuperAdmin\Models\SuperAdmin;
 
 class SuperAdminDatabaseSeeder extends Seeder
 {
-	/**
-	 * Run the database seeds.
-	 *
-	 * @return void
-	 */
-	public function run()
-	{
-		Model::unguard();
+  /**
+   * Run the database seeds.
+   *
+   * @return void
+   */
+  public function run()
+  {
+    Model::unguard();
 
-		factory(SuperAdmin::class, 1)->create();
+    factory(SuperAdmin::class, 1)->create();
 
-		// $this->call("OthersTableSeeder");
-	    $this->call(JobListingsTableSeeder::class);
-    }
+    // $this->call("OthersTableSeeder");
+    $this->call(JobListingsTableSeeder::class);
+    $this->call(TeamMembersTableSeeder::class);
+  }
 }

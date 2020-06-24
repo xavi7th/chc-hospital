@@ -29,8 +29,14 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Modules\SuperAdmin\Models\TeamMember wherePhone($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Modules\SuperAdmin\Models\TeamMember whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property string $job_description
+ * @property string $thumb_url
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Modules\SuperAdmin\Models\TeamMember whereJobDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Modules\SuperAdmin\Models\TeamMember whereThumbUrl($value)
  */
 class TeamMember extends Model
 {
-    protected $fillable = [];
+  protected $fillable = [
+    'name', 'job_title', 'phone', 'email', 'job_description', 'img_url', 'thumb_url',
+  ];
 }

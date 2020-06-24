@@ -19,8 +19,9 @@ class CreateTeamMembersTable extends Migration
       $table->string('job_title');
       $table->string('phone');
       $table->string('email');
-      $table->string('description');
+      $table->longText('job_description');
       $table->string('img_url');
+      $table->string('thumb_url');
 
       $table->timestamps();
     });

@@ -10,13 +10,11 @@
     <div class="header">
       <div class="logo">
         <div class="logo-type">
-          <a href="index.html">
-            <span>
-              c
-              <span>o</span>
-              dash
-            </span>
-          </a>
+          <InertiaLink
+            href={route('superadmin.dashboard')}
+            class="text-center d-block">
+            <img src="/img/logo.png" alt="capitol hill logo" width="70%" />
+          </InertiaLink>
         </div>
       </div>
     </div>
