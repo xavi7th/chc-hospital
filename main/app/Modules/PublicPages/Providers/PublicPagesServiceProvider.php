@@ -73,7 +73,7 @@ class PublicPagesServiceProvider extends ServiceProvider
         'address2' => config('app.address2'),
       ],
       'routes' => function (Request $request) {
-        return Str::of(request()->route()->getName())->contains('superadmin') ? optional($request->user())->get_navigation_routes() ?? (object)[] : get_related_routes('app.', ['GET'], true);
+        return request()->route() ? Str::of(request()->route()->getName())->contains('superadmin') ? optional($request->user())->get_navigation_routes() ?? (object)[] : get_related_routes('app.', ['GET'], true) : (object)[];
       },
       'isInertiaRequest' => (bool)request()->header('X-Inertia'),
       'flash' => function () {
