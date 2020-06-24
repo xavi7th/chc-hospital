@@ -2,10 +2,11 @@
   import { page, InertiaLink } from "@inertiajs/inertia-svelte";
   import route from "ziggy";
 
-  export let routes;
+  export let routes = {};
 </script>
 
 <aside class="main-navigation">
+
   <nav data-simplebar>
     <div class="header">
       <div class="logo">

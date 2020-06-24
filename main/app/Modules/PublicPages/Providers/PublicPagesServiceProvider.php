@@ -3,7 +3,9 @@
 namespace App\Modules\PublicPages\Providers;
 
 use Inertia\Inertia;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\ServiceProvider;
@@ -71,7 +73,7 @@ class PublicPagesServiceProvider extends ServiceProvider
         'address2' => config('app.address2'),
       ],
       'routes' => function (Request $request) {
-        return optional($request->user())->get_navigation_routes() ?? get_related_routes('app.', ['GET'], true);
+        return Str::of(request()->route()->getName())->contains('superadmin') ? optional($request->user())->get_navigation_routes() ?? (object)[] : get_related_routes('app.', ['GET'], true);
       },
       'isInertiaRequest' => (bool)request()->header('X-Inertia'),
       'flash' => function () {

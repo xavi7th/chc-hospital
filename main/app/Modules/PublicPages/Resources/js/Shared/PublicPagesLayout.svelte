@@ -15,8 +15,6 @@
 
   $: ({ isInertiaRequest, app, routes } = $page);
 
-  console.log($page);
-
   export let title;
 </script>
 

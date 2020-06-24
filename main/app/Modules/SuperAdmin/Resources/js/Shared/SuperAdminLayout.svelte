@@ -10,8 +10,6 @@
 
   $: ({ app, routes } = $page);
 
-  console.log($page);
-
   let isLoaded = false,
     isMounted = false;
   export let title,
