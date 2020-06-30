@@ -42,13 +42,13 @@
                 </div>
               </div>
               <div class="content">
-                <a href="news-radiology">
+                <a href={newsItem.webUrl} target="_blank">
                   <h3>{newsItem.webTitle}</h3>
                 </a>
                 <p>
                   {truncateString(newsItem.fields.body, 150)}
                   <span>
-                    <a href={newsItem.webUrl}>read more</a>
+                    <a href={newsItem.webUrl} target="_blank">read more</a>
                   </span>
                 </p>
 

@@ -7,15 +7,15 @@
 
   $: ({ app, status, flash } = $page);
 
-  export let jobListings = [];
+  export let blogPosts = [];
 
-  let deleteJobListing = id => {
+  let deleteBlogPost = id => {
     swalPreconfirm
       .fire({
         confirmButtonText: "Carry on!",
-        text: "This will permanently delete this job listing from the site",
+        text: "This will permanently delete this news article from the site",
         preConfirm: () => {
-          return Inertia.delete(route("superadmin.delete_job_listing", id));
+          return Inertia.delete(route("superadmin.delete_blog_post", id));
         }
       })
       .then(val => {
@@ -29,7 +29,7 @@
           } else if (flash.success) {
             ToastLarge.fire({
               title: "Success",
-              html: `Job listing has been deleted`,
+              html: `News article has been deleted`,
               position: "bottom",
               icon: "success",
               timer: 10000
@@ -40,47 +40,48 @@
   };
 </script>
 
-<style>
-  .btn-xs {
+<style lang="scss">
+  :global(.btn-xs) {
     margin-left: auto;
     margin-right: 0;
-    display: block;
+    display: inline-block;
   }
 </style>
 
-<Layout title="Manage Job Listings">
+<Layout title="View Blog Posts">
   <div class="document">
     <div class="row">
-      <!-- basic  -->
       <div class="col-lg-12">
         <div class="card">
           <div class="card-body">
             <div class="timeline">
-              <!-- left -->
-
-              {#each jobListings as listing, idx}
+              {#each blogPosts as post, idx}
                 <div class="timeline-item" class:timeline-item-right={idx % 2}>
                   <div class="timeline-point">
                     <div class="badge badge-primary badge-xxl badge-dot" />
                   </div>
                   <div class="timeline-detail">
                     <span>
-                      {new Date(listing.created_at).toDateString()} - {new Date(listing.created_at).toLocaleTimeString()}
+                      {new Date(post.created_at).toDateString()} - {new Date(post.created_at).toLocaleTimeString()}
                     </span>
                   </div>
                   <div class="timeline-content">
                     <div>
-                      <h5 class="timeline-title">
-                        {listing.contract_type} {listing.job_title} at {listing.job_location}
-                      </h5>
-                      <p class="timeline-text">
-                        {@html listing.job_description}
-                      </p>
+                      <img
+                        src={post.thumb_url}
+                        alt="lead post img"
+                        class="img-responsive" />
+                      <h4 class="timeline-title">{post.title}</h4>
                     </div>
+                    <InertiaLink
+                      href={route('superadmin.blog_post', post.id)}
+                      class="btn btn-success btn-w-sm btn-xs">
+                      View
+                    </InertiaLink>
                     <button
                       type="button"
                       class="btn btn-danger btn-outline btn-bold btn-w-sm btn-xs"
-                      on:click={deleteJobListing(listing.id)}>
+                      on:click={deleteBlogPost(post.id)}>
                       Delete
                     </button>
                   </div>
@@ -95,14 +96,13 @@
                   </div>
                   <div class="timeline-content">
                     <div>
-                      <h4 class="timeline-title">
-                        THERE ARE NO JOB LISTINGS AT THE MOMENT
-                      </h4>
+                      <p class="timeline-title">
+                        THERE ARE NO NEWS ARTICLES AT THE MOMENT
+                      </p>
                     </div>
                   </div>
                 </div>
               {/each}
-
             </div>
           </div>
         </div>

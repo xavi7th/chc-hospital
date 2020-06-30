@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use App\Modules\SuperAdmin\Models\BlogPost;
 use App\Modules\SuperAdmin\Models\JobListing;
 use App\Modules\SuperAdmin\Models\TeamMember;
 use App\Modules\PublicPages\Models\UploadedDocument;
@@ -35,11 +36,13 @@ class PublicPagesController extends Controller
       Route::get('/our-facilities', [self::class, 'showFacilitiesPage'])->name('app.facilities');
       Route::get('/work-with-us', [self::class, 'showCareerPage'])->name('app.career');
       Route::get('/news', [self::class, 'showNewsPage'])->name('app.news');
+      Route::get('/news/category/{category?}', [self::class, 'showNewsPage'])->name('app.news.category')->defaults('ex', parent::__e(true));
+      Route::get('/news/{blogPost:slug}', [self::class, 'showNewsPostPage'])->name('app.news.post')->defaults('ex', parent::__e(true));
       Route::get('/our-quality-policy', [self::class, 'showQualityPolicyPage'])->name('app.quality_policy');
       Route::get('/our-team', [self::class, 'showTeamPage'])->name('app.our_team');
       Route::get('/our-team-members', [self::class, 'showFullTeamPage'])->name('app.our_full_team')->defaults('ex', parent::__e(true));
       Route::get('/contact-us', [self::class, 'showContactPage'])->name('app.contact_us');
-      Route::get('/appointment', [self::class, 'showContactPage'])->name('app.appointment');
+      Route::get('/appointment', [self::class, 'showContactPage'])->name('app.appointment')->defaults('ex', parent::__e(true));
       Route::post('/upload-cv', [self::class, 'handleCVUpload'])->name('app.upload_cv')->defaults('ex', parent::__e(true));
 
       Route::get('/message-from-our-md', [self::class, 'showMDMessagePage'])->name('app.message_from_md')->defaults('ex', parent::__e(true));
@@ -94,6 +97,35 @@ class PublicPagesController extends Controller
       'jobListings' => JobListing::latest()->get()
     ])->withViewData([
       'title' => 'About Capitol Hill Hospital/Clinic Warri',
+    ]);
+  }
+
+  public function showNewsPage(Request $request, $category = null)
+  {
+    // dd($category);
+    if ($category) {
+      $blogPosts = BlogPost::where('category_slug', $category)->inRandomOrder()->take(8)->get(['id', 'title', 'slug', 'author', 'created_at', 'img_url', 'thumb_url', 'content'])->each->append(['summary', 'human_date'])->each->makeHidden('content');
+    } else {
+      $blogPosts = BlogPost::inRandomOrder()->take(8)->get(['id', 'title', 'slug', 'author', 'created_at', 'img_url', 'thumb_url', 'content'])->each->append(['summary', 'human_date'])->each->makeHidden('content');
+    }
+
+    return Inertia::render('BlogPosts', [
+      'blogPosts' => $blogPosts,
+      'categories' => BlogPost::select('category', 'category_slug')->distinct()->get(),
+      'latestArticles' => BlogPost::latest()->take(6)->get(['title', 'author', 'created_at', 'slug'])->each->append('human_date'),
+    ])->withViewData([
+      'title' => 'About Capitol Hill Hospital/Clinic Warri',
+    ]);
+  }
+
+  public function showNewsPostPage(BlogPost $blogPost)
+  {
+    return Inertia::render('ViewBlogPost', [
+      'blogPost' => $blogPost->append('human_date'),
+      'categories' => BlogPost::select('category', 'category_slug')->distinct()->get(),
+      'latestArticles' => BlogPost::latest()->take(6)->get(['title', 'author', 'created_at', 'slug'])->each->append('human_date'),
+    ])->withViewData([
+      'title' => $blogPost->title,
     ]);
   }
 

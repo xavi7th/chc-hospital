@@ -13,6 +13,7 @@ use App\Modules\SuperAdmin\Models\SuperAdmin;
 use App\Modules\SuperAdmin\Models\TeamMember;
 use App\Modules\PublicPages\Models\UploadedDocument;
 use App\Modules\SuperAdmin\Http\Controllers\LoginController;
+use App\Modules\SuperAdmin\Models\BlogPost;
 
 class SuperAdminController extends Controller
 {
@@ -42,6 +43,16 @@ class SuperAdminController extends Controller
           Route::get('/new-job-listing', 'SuperAdminController@viewCreateJobListingPage')->name('superadmin.new_job_listing')->defaults('ex', self::__e(false, 'briefcase'));
           Route::post('/create-job-listing', 'SuperAdminController@createJobListing')->name('superadmin.create_job_listing')->defaults('ex', self::__e(true, 'briefcase'));
           Route::delete('/job-listing/{jobListing}', 'SuperAdminController@deleteJobListing')->name('superadmin.delete_job_listing');
+
+
+
+          Route::get('/blog-posts', 'SuperAdminController@viewBlogPosts')->name('superadmin.blog_posts')->defaults('ex', self::__e(false, 'edit'));
+          Route::get('/blog-post/{blogPost}', 'SuperAdminController@viewBlogPost')->name('superadmin.blog_post')->defaults('ex', self::__e(true, 'edit'));
+          Route::get('/blog-post/{blogPost}/edit', 'SuperAdminController@viewCreateBlogPostPage')->name('superadmin.blog_post.edit')->defaults('ex', self::__e(true, 'edit'));
+          Route::put('/blog-post/{blogPost}/edit', 'SuperAdminController@editBlogPost')->name('superadmin.blog_post.edit')->defaults('ex', self::__e(true, 'edit'));
+          Route::get('/new-blog-post', 'SuperAdminController@viewCreateBlogPostPage')->name('superadmin.new_blog_post')->defaults('ex', self::__e(false, 'edit'));
+          Route::post('/create-blog-post', 'SuperAdminController@createBlogPost')->name('superadmin.create_blog_post');
+          Route::delete('/blog-post/{blogPost}', 'SuperAdminController@deleteBlogPost')->name('superadmin.delete_blog_post');
         });
       });
     });
@@ -151,5 +162,76 @@ class SuperAdminController extends Controller
   {
     $jobListing->delete();
     return back()->withSuccess('Job listing deleted');
+  }
+
+  public function viewBlogPosts(Request $request)
+  {
+    return Inertia::render('ListBlogPosts', [
+      'blogPosts' => BlogPost::latest()->get(['id', 'title', 'thumb_url', 'author', 'created_at'])
+    ]);
+  }
+
+  public function viewBlogPost(BlogPost $blogPost)
+  {
+
+    return Inertia::render('ViewBlogPost', compact('blogPost'));
+  }
+
+  public function viewCreateBlogPostPage(Request $request, BlogPost $blogPost = null)
+  {
+    $blogPost = $blogPost ?? (object)[];
+    $categories = BlogPost::select('category')->distinct()->get();
+    return Inertia::render('CreateBlogPost', compact('blogPost', 'categories'));
+  }
+
+  public function createBlogPost(Request $request)
+  {
+
+    $validator = Validator::make($request->all(), [
+      'title' => 'required|max:100',
+      'author' => 'required|max:30',
+      'category' => 'required|max:20',
+      'content' => 'required|string',
+      'post_img' => 'required|file|mimes:jpeg,bmp,png,jpg,gif',
+    ]);
+
+    if ($validator->fails()) {
+      return back()
+        ->withErrors($validator)
+        ->withError('There are errors in your form!');
+    }
+
+    $img_url = compress_image_upload('post_img', '/img/blog/', '/img/blog/thumbs/',  1400, true);
+    // dd(collect($validator->validated())->except('content')->merge($img_url)->merge(['content' => strip_tags_content($request->content)])->toArray());
+    BlogPost::create(collect($validator->validated())->except('content')->merge($img_url)->merge(['content' => strip_tags_content($request->content)])->toArray());
+
+    return back()->withSuccess('Job listing created');
+  }
+
+  public function editBlogPost(Request $request)
+  {
+
+    $validator = Validator::make($request->all(), [
+      'contract_type' => 'required|max:20',
+      'job_location' => 'required|max:20',
+      'job_title' => 'required|max:150',
+      'job_description' => 'required|string',
+    ]);
+
+    if ($validator->fails()) {
+      return back()
+        ->withErrors($validator)
+        ->withError('There are errors in your form!');
+    }
+
+    BlogPost::update($validator->validated());
+
+    return back()->withSuccess('Job listing created');
+  }
+
+  public function deleteBlogPost(BlogPost $blogPost)
+  {
+    $blogPost->delete();
+    return back()->withSuccess('Blog Post deleted');
   }
 }

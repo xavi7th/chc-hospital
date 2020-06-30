@@ -52,6 +52,56 @@ if (!function_exists('get_related_routes')) {
 
 
 
+if (!function_exists('strip_tags_content')) {
+
+  /**
+   * Strip unwanted tags AND THEIR CONTENTS from a supplied string
+   *
+   * The original strip_tags function can be unsafe sometimes and you have to list ALL tags you want.
+   * Also the original leaves the contents, resulting in garbled messages
+   *  With this you can add the tag you DON'T WANT
+   *
+   * @param string $text The string to strip
+   * @param string $tags The tags you want to allow or disallow.
+   * @param bool $invert Determines whether you are specifying allowable or unallowed tags
+   *
+   *
+   *
+   * @return array
+   **/
+
+  function strip_tags_content($text, $tags = '<script>', $invert = TRUE)
+  {
+
+    preg_match_all('/<(.+?)[\s]*\/?[\s]*>/si', trim($tags), $tags);
+    $tags = array_unique($tags[1]);
+
+    if (is_array($tags) and count($tags) > 0) {
+      if ($invert == FALSE) {
+        return preg_replace('@<(?!(?:' . implode('|', $tags) . ')\b)(\w+)\b.*?>.*?</\1>@si', '', $text);
+      } else {
+        return preg_replace('@<(' . implode('|', $tags) . ')\b.*?>.*?</\1>@si', '', $text);
+      }
+    } elseif ($invert == FALSE) {
+      return preg_replace('@<(\w+)\b.*?>.*?</\1>@si', '', $text);
+    }
+    return $text;
+  }
+}
+
+function truncate($string, $length = 100, $append = "&hellip;")
+{
+  $string = trim($string);
+
+  if (strlen($string) > $length) {
+    $string = wordwrap($string, $length);
+    $string = explode("\n", $string, 2);
+    $string = $string[0] . $append;
+  }
+
+  return $string;
+}
+
 if (!function_exists('compress_image_upload')) {
 
   /**
@@ -95,7 +145,7 @@ if (!function_exists('compress_image_upload')) {
       $url = $save_path . request()->file($key)->hashName();
 
       if ($thumb_path) {
-        $image->resize(200, null, function ($constraint) {
+        $image->resize(300, null, function ($constraint) {
           $constraint->aspectRatio();
         })->save(public_path($thumb_path) . request()->file($key)->hashName(), 70);
 
@@ -109,7 +159,7 @@ if (!function_exists('compress_image_upload')) {
       $url = $save_path . request()->file($key)->hashName();
 
       if ($thumb_path) {
-        $image->resize(200)->save(public_path($thumb_path) . request()->file($key)->hashName(), 70);
+        $image->resize(300)->save(public_path($thumb_path) . request()->file($key)->hashName(), 70);
         $thumb_url = $thumb_path . request()->file($key)->hashName();
 
         return ['img_url' => $url, 'thumb_url' => $thumb_url];
