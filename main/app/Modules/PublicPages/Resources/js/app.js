@@ -5,17 +5,20 @@
  */
 
 import '@p-assets/js/bootstrap'
+/** OR IMPORT IT IN COMPONENT */
+// import "@p-assets/sass/app.scss";
 
 import {
-    InertiaApp
+	InertiaApp
 } from '@inertiajs/inertia-svelte'
 
-const app = document.getElementById( 'app' )
+const app = document.getElementById('app')
 
-new InertiaApp( {
-    target: app,
-    props: {
-        initialPage: JSON.parse( app.dataset.page ),
-        resolveComponent: name => import( /* webpackChunkName: "js/public-" */ `./Pages/${name}.svelte` ).then( module => module.default ),
-    },
-} )
+new InertiaApp({
+	target: app,
+	props: {
+		initialPage: JSON.parse(app.dataset.page),
+		resolveComponent: name => import( /* webpackChunkName: "js/public-" */ `./Pages/${name}.svelte`)
+			.then(module => module.default),
+	},
+})

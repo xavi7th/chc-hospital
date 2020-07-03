@@ -434,6 +434,50 @@
         </div>
       </div>
 
+      <div class="row">
+        <div class="col-md-4">
+          <div class="single-service-home">
+            <div class="content">
+              <h3>Orthopaedic Services</h3>
+              <p>
+                We have many experienced and certified orthopaedics. They are
+                specially trained to treat bone related problems, like disorders
+                of spines and joints
+              </p>
+              <a href="orthopaedic">Read More</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="single-service-home">
+            <div class="content">
+              <h3>Neurosurgery</h3>
+              <p>
+                We have experienced and certified Neurosurgeons. They are
+                specially trained to treat problems with the nervous system,
+                especially disorders of the brain.
+              </p>
+              <a href="specialist-consultation">Read More</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <!-- <div class="single-service-home">
+            <div class="content">
+              <h3>OCCUPATIONAL HEALTH (OH)</h3>
+              <p>
+                Occupational Health is part of preventive medicine. It functions
+                to Protect, Promote, Improve and Maintain the health of the
+                workforce to optimal level, thereby achieving cost effective
+                business goals.
+              </p>
+              <a href="occupational-health">Read More</a>
+            </div>
+          </div> -->
+        </div>
+      </div>
+
     </div>
   </section>
 
@@ -505,7 +549,7 @@
                     <span class="inner" />
                   </span>
                   <span class="text">
-                    Book and appointment with any specialist anytime
+                    Book an appointment with our specialists
                   </span>
                 </h4>
               </div>

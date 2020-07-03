@@ -207,6 +207,6 @@ class PublicPagesController extends Controller
       'cv' => $url
     ]);
 
-    return back()->withSuccess('Your CV has been submitted successfully. A member of our HR team will contact you shortly');
+    return back()->withSuccess('Your CV has been submitted successfully. A member of our HR team will contact you.');
   }
 }

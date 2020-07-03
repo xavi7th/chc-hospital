@@ -24,6 +24,8 @@ return [
   'phone4' => env('APP_PHONE4', null),
   'address1' => env('APP_ADDRESS1', null),
   'address2' => env('APP_ADDRESS2', null),
+  'num_of_beds' => env('APP_NUM_OF_BEDS', 70),
+  'num_of_doctors' => env('APP_NUM_OF_DOCTORS', 50),
 
   /*
     |--------------------------------------------------------------------------

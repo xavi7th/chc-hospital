@@ -48,7 +48,7 @@ class SuperAdminController extends Controller
 
           Route::get('/blog-posts', 'SuperAdminController@viewBlogPosts')->name('superadmin.blog_posts')->defaults('ex', self::__e(false, 'edit'));
           Route::get('/blog-post/{blogPost}', 'SuperAdminController@viewBlogPost')->name('superadmin.blog_post')->defaults('ex', self::__e(true, 'edit'));
-          Route::get('/blog-post/{blogPost}/edit', 'SuperAdminController@viewCreateBlogPostPage')->name('superadmin.blog_post.edit')->defaults('ex', self::__e(true, 'edit'));
+          Route::get('/blog-post/{blogPost}/edit', 'SuperAdminController@viewCreateBlogPostPage')->name('superadmin.blog_post.show_edit')->defaults('ex', self::__e(true, 'edit'));
           Route::put('/blog-post/{blogPost}/edit', 'SuperAdminController@editBlogPost')->name('superadmin.blog_post.edit')->defaults('ex', self::__e(true, 'edit'));
           Route::get('/new-blog-post', 'SuperAdminController@viewCreateBlogPostPage')->name('superadmin.new_blog_post')->defaults('ex', self::__e(false, 'edit'));
           Route::post('/create-blog-post', 'SuperAdminController@createBlogPost')->name('superadmin.create_blog_post');

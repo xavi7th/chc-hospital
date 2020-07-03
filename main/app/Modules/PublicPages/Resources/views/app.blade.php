@@ -25,8 +25,6 @@
 
 
   <link rel="canonical" href="{{$canonicalUrl ?? url()->current()}}" />
-
-  <link href="{{ mix('/css/app.css') }}" rel="stylesheet" />
   <link rel="shortcut icon" href="/img/favicon.png" type="image/png">
 
   <script src="{{ mix('/js/admin-app-vendor.js') }}" defer async></script>

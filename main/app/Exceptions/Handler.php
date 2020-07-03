@@ -58,14 +58,16 @@ class Handler extends ExceptionHandler
   {
     $response = parent::render($request, $exception);
 
-    if ((App::environment('local')) && in_array($response->status(), [500, 503, 404, 403])) {
+    if (in_array($response->status(), [500, 503, 404, 403])) {
       if ($this->is404($exception)) {
         $this->log404($request);
       }
-      Inertia::setRootView('publicpages::app');
-      return Inertia::render('DisplayError', ['status' => $response->status()])
-        ->toResponse($request)
-        ->setStatusCode($response->status());
+      try {
+        Inertia::setRootView('publicpages::app');
+        return Inertia::render('DisplayError', ['status' => $response->status()])
+          ->toResponse($request)
+          ->setStatusCode($response->status());
+      } catch (\Throwable $th) { }
     } elseif (in_array($response->status(), [419])) {
       return back()->withError('Your session has expired. Please try again');
     }

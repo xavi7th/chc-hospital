@@ -18,6 +18,10 @@
   export let title;
 </script>
 
+<style lang="scss" global>
+  @import "../../sass/app";
+</style>
+
 {#if !pageLoaded && !isInertiaRequest}
   <PageLoader />
 {:else if !pageLoaded && isInertiaRequest}

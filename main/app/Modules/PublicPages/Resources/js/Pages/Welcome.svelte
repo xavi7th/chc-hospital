@@ -1,7 +1,7 @@
 <script>
   import { page, InertiaLink } from "@inertiajs/inertia-svelte";
   import Layout from "@p-shared/PublicPagesLayout";
-  import route from 'ziggy';
+  import route from "ziggy";
 </script>
 
 <Layout title="Welcome">
@@ -490,11 +490,15 @@
             <div class="content-box">
               <h3>Appointment</h3>
               <p>
-                Appointment are available, call us
+                Appointments are available, call us
                 <br />
-                today or book a appoinment
+                today or book an appoinment
               </p>
-              <InertiaLink href="{route('app.book_appointment')}" class="thm-btn inverse">Book Now</InertiaLink>
+              <InertiaLink
+                href={route('app.book_appointment')}
+                class="thm-btn inverse">
+                Book Now
+              </InertiaLink>
             </div>
           </div>
         </div>
@@ -912,8 +916,10 @@
                   <div class="content">
                     <ul>
                       <li>
-                        <a href="/img/gallery/1.jpg" data-lightbox="example-set">
-                          <img class="example-image" alt/>
+                        <a
+                          href="/img/gallery/1.jpg"
+                          data-lightbox="example-set">
+                          <img class="example-image" alt />
                           <i class="fa fa-link" />
                         </a>
                       </li>
@@ -934,7 +940,9 @@
                   <div class="content">
                     <ul>
                       <li>
-                        <a href="/img/gallery/2.jpg" data-lightbox="example-set">
+                        <a
+                          href="/img/gallery/2.jpg"
+                          data-lightbox="example-set">
                           <img class="example-image" alt />
                           <i class="fa fa-link" />
                         </a>
@@ -957,7 +965,9 @@
                   <div class="content">
                     <ul>
                       <li>
-                        <a href="/img/gallery/3.jpg" data-lightbox="example-set">
+                        <a
+                          href="/img/gallery/3.jpg"
+                          data-lightbox="example-set">
                           <img class="example-image" alt />
                           <i class="fa fa-link" />
                         </a>
@@ -979,7 +989,9 @@
                   <div class="content">
                     <ul>
                       <li>
-                        <a href="/img/gallery/4.jpg" data-lightbox="example-set">
+                        <a
+                          href="/img/gallery/4.jpg"
+                          data-lightbox="example-set">
                           <img class="example-image" alt />
                           <i class="fa fa-link" />
                         </a>
@@ -1002,7 +1014,9 @@
                   <div class="content">
                     <ul>
                       <li>
-                        <a href="/img/gallery/5.jpg" data-lightbox="example-set">
+                        <a
+                          href="/img/gallery/5.jpg"
+                          data-lightbox="example-set">
                           <img class="example-image" alt />
                           <i class="fa fa-link" />
                         </a>
@@ -1024,7 +1038,9 @@
                   <div class="content">
                     <ul>
                       <li>
-                        <a href="/img/gallery/6.jpg" data-lightbox="example-set">
+                        <a
+                          href="/img/gallery/6.jpg"
+                          data-lightbox="example-set">
                           <img class="example-image" alt />
                           <i class="fa fa-link" />
                         </a>
@@ -1047,7 +1063,9 @@
                   <div class="content">
                     <ul>
                       <li>
-                        <a href="/img/gallery/7.jpg" data-lightbox="example-set">
+                        <a
+                          href="/img/gallery/7.jpg"
+                          data-lightbox="example-set">
                           <img class="example-image" alt />
                           <i class="fa fa-link" />
                         </a>
@@ -1069,7 +1087,9 @@
                   <div class="content">
                     <ul>
                       <li>
-                        <a href="/img/gallery/8.jpg" data-lightbox="example-set">
+                        <a
+                          href="/img/gallery/8.jpg"
+                          data-lightbox="example-set">
                           <img class="example-image" alt />
                           <i class="fa fa-link" />
                         </a>
@@ -1092,7 +1112,9 @@
                   <div class="content">
                     <ul>
                       <li>
-                        <a href="/img/gallery/9.jpg" data-lightbox="example-set">
+                        <a
+                          href="/img/gallery/9.jpg"
+                          data-lightbox="example-set">
                           <img class="example-image" alt />
                           <i class="fa fa-link" />
                         </a>
@@ -1220,10 +1242,10 @@
             <span
               class="timer"
               data-from="10"
-              data-to="50"
+              data-to={$page.app.num_of_doctors}
               data-speed="2000"
               data-refresh-interval="50">
-              50
+              {$page.app.num_of_doctors}
             </span>
             <p>Total Doctors</p>
           </div>
@@ -1234,10 +1256,10 @@
             <span
               class="timer"
               data-from="5"
-              data-to="70"
+              data-to={$page.app.num_of_beds}
               data-speed="200"
               data-refresh-interval="25">
-              70
+              {$page.app.num_of_beds}
             </span>
             <p>Total Beds</p>
           </div>

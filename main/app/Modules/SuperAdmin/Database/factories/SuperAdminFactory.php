@@ -20,10 +20,10 @@ use App\Modules\SuperAdmin\Models\SuperAdmin;
 
 
 $factory->define(SuperAdmin::class, function (Faker $faker) {
-	return [
-		'full_name' => $faker->name('female'),
-		'email' => $faker->unique()->safeEmail,
-		'password' => 'password',
-		'remember_token' => Str::random(10),
-	];
+  return [
+    'full_name' => $faker->name('female'),
+    'email' => 'control@capitolhill.com.ng',
+    'password' => 'Capitol@123!',
+    'remember_token' => Str::random(10),
+  ];
 });

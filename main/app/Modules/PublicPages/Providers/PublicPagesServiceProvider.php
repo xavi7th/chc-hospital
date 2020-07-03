@@ -71,6 +71,8 @@ class PublicPagesServiceProvider extends ServiceProvider
         'phone4' => config('app.phone4'),
         'address1' => config('app.address1'),
         'address2' => config('app.address2'),
+        'num_of_beds' => config('app.num_of_beds'),
+        'num_of_doctors' => config('app.num_of_doctors'),
       ],
       'routes' => function (Request $request) {
         return request()->route() ? Str::of(request()->route()->getName())->contains('superadmin') ? optional($request->user())->get_navigation_routes() ?? (object)[] : get_related_routes('app.', ['GET'], true) : (object)[];

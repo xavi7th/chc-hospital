@@ -1,23 +1,20 @@
-const mix = require( 'laravel-mix' );
+const mix = require('laravel-mix');
 
-mix.webpackConfig( {
-    resolve: {
-        extensions: [ '.js', '.svelte', '.json' ],
-        alias: {
-            '@p-pages': __dirname + '/Resources/js/Pages',
-            '@p-shared': __dirname + '/Resources/js/Shared',
-            '@p-assets': __dirname + '/Resources'
-        },
-    },
-} )
+mix.webpackConfig({
+	resolve: {
+		extensions: ['.js', '.svelte', '.json'],
+		alias: {
+			'@p-pages': __dirname + '/Resources/js/Pages',
+			'@p-shared': __dirname + '/Resources/js/Shared',
+			'@p-assets': __dirname + '/Resources'
+		},
+	},
+})
 
-if ( [ 'buildcss' ].includes( process.env.npm_config_section ) ) {
-    mix.copyDirectory( __dirname + '/Resources/img', 'public_html/img' );
-    mix.copyDirectory( __dirname + '/Resources/fonts', 'public_html/fonts' );
+mix.copyDirectory(__dirname + '/Resources/img', 'public_html/img');
+mix.copyDirectory(__dirname + '/Resources/fonts', 'public_html/fonts');
 
-    mix.sass( __dirname + '/Resources/sass/app.scss', 'css/app.css' )
-} else {
-    mix.scripts( [
+mix.scripts([
         __dirname + '/Resources/js/vendor/lightbox-plus-jquery.min.js',
         __dirname + '/Resources/js/vendor/jquery-1.11.1.min.js',
         __dirname + '/Resources/js/vendor/bootstrap.min.js',
@@ -42,9 +39,8 @@ if ( [ 'buildcss' ].includes( process.env.npm_config_section ) ) {
         __dirname + '/Resources/js/vendor/revolution.extension.parallax.min.js',
         __dirname + '/Resources/js/vendor/revolution.extension.slideanims.min.js',
         __dirname + '/Resources/js/vendor/revolution.extension.video.min.js',
-    ], 'public_html/js/admin-app-vendor.js' );
+    ], 'public_html/js/admin-app-vendor.js');
 
-    mix.scripts( __dirname + '/Resources/js/vendor/custom.js', 'public_html/js/app-init-06-06-20.js' );
+mix.scripts(__dirname + '/Resources/js/vendor/custom.js', 'public_html/js/app-init-06-06-20.js');
 
-    mix.js( __dirname + '/Resources/js/app.js', 'js/app.js' )
-}
+mix.js(__dirname + '/Resources/js/app.js', 'js/app.js')

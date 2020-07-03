@@ -92,7 +92,7 @@
                         href={uploadedCV.cv}
                         target="_blank"
                         class="badge badge-success badge-shadow">
-                        Details
+                        View
                       </a>
                       <button
                         class="badge badge-danger badge-shadow"

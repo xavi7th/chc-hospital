@@ -1,22 +1,130 @@
-if ( [ 'buildcss', 'buildjs' ].includes( process.env.npm_config_section ) ) {
-    require( `${__dirname}/webpack.${process.env.npm_config_section}.mix.js` )
-} else {
-    console.log(
-        '\x1b[41m%s\x1b[0m',
-        'Provide correct --section argument to build command: buildcss, buildjs. For example npm --section=buildjs run dev '
-    )
+const mix = require('laravel-mix');
+const autoPreprocess = require('svelte-preprocess');
+const {
+	CleanWebpackPlugin
+} = require('clean-webpack-plugin');
 
-    function createError( msg, status ) {
-        var err = new Error( msg );
-        err.status = status;
+require('laravel-mix-merge-manifest');
+require('laravel-mix-svelte');
 
-        // uncomment this next line to get a clean stack trace in node.js
-        // Error.captureStackTrace( err, createError );
-        Error.captureStackTrace( err, function () {} );
-        return err;
-    }
+mix.setPublicPath('./public_html');
 
-    var err = createError( 'Provide correct --section argument to build command!', 500 );
-    throw err;
-    // throw new Error(  )
+let fs = require('fs-extra');
+let modules = fs.readdirSync('./main/app/Modules');
+
+if (modules && modules.length > 0) {
+	modules.forEach((module) => {
+		let path = `./main/app/Modules/${module}/webpack.mix.js`;
+		if (fs.existsSync(path)) {
+			require(path);
+		}
+	});
+}
+
+mix.webpackConfig({
+	output: {
+		filename: "[name].[chunkhash].js",
+		chunkFilename: "[name].[chunkhash].js",
+	},
+	resolve: {
+		alias: {
+			ziggy: path.resolve('./main/vendor/tightenco/ziggy/dist/js/route.js')
+		},
+	},
+	plugins: [
+    new CleanWebpackPlugin({
+			dry: false,
+			cleanOnceBeforeBuildPatterns: ['js/*', './*.js', 'robots.txt', 'mix-manifest.json', 'css/*', 'img/*',
+				'fonts/*']
+
+		}),
+    ]
+});
+
+mix.babelConfig({
+	plugins: ['@babel/plugin-syntax-dynamic-import'],
+});
+
+mix.options({
+		fileLoaderDirs: {
+			images: 'img'
+		},
+		postCss: [
+      require('postcss-fixes')(),
+      require('cssnano')({
+				discardComments: {
+					removeAll: true
+				},
+				normalizeWhitespace: mix.inProduction(),
+				calc: false,
+				cssDeclarationSorter: true
+			}),
+  ]
+	})
+	.svelte({
+		dev: !mix.inProduction(),
+		css: true,
+		preprocess: autoPreprocess(),
+		onwarn: (warning, handler) => {
+			const {
+				code,
+				frame
+			} = warning;
+
+			if (code == "anchor-is-valid" || code == "a11y-invalid-attribute") {
+				return
+			}
+			if (code == "css-unused-selector") {
+				return
+			}
+			if (code == 'css-unused-selector' && frame.includes('sweetalert')) {
+				return
+			}
+
+			console.log(
+				'\x1b[41m%s\x1b[0m',
+				code
+			)
+
+			handler(warning);
+		}
+	})
+	.extract()
+	.then(() => {
+		var crypto = require("crypto");
+		const _ = require('lodash')
+		const saltCssId = crypto.randomBytes(7)
+			.toString('hex');
+		let oldManifestData = JSON.parse(fs.readFileSync('./public_html/mix-manifest.json', 'utf-8'))
+		let newManifestData = {};
+
+		console.log(
+			'\x1b[41m%s\x1b[0m',
+			saltCssId
+		)
+
+		_.map(oldManifestData, (actualFilename, mixKeyName) => {
+			if (_.startsWith(mixKeyName, '/css')) {
+				newManifestData[mixKeyName] = actualFilename + '?' + saltCssId;
+			} else {
+				let newMixKeyName = _.split(mixKeyName, '.')
+					.tap(o => {
+						_.pullAt(o, 1);
+					})
+					.join('.')
+
+				/** If the js extension has been stripped we add it back */
+				newMixKeyName = _.endsWith(newMixKeyName, '.js') ? newMixKeyName : newMixKeyName + '.js'
+
+				newManifestData[newMixKeyName] = actualFilename;
+			}
+
+		});
+
+		let data = JSON.stringify(newManifestData, null, 2);
+		fs.writeFileSync('./public_html/mix-manifest.json', data);
+	})
+
+if (!mix.inProduction()) {
+	mix.sourceMaps()
 }

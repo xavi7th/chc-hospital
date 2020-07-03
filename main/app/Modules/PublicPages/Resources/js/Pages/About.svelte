@@ -317,7 +317,7 @@
               data-to="50"
               data-speed="2000"
               data-refresh-interval="50">
-              50
+              {app.num_of_doctors}
             </span>
             <p>Total Doctors</p>
           </div>
@@ -331,7 +331,7 @@
               data-to="70"
               data-speed="200"
               data-refresh-interval="25">
-              70
+              {app.num_of_beds}
             </span>
             <p>Total Beds</p>
           </div>

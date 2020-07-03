@@ -20,7 +20,10 @@
   });
 </script>
 
-<style>
+<style lang="scss">
+:global{
+  @import "../../sass/app";
+}
   .auth-right {
     background-size: cover;
   }
