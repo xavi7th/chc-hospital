@@ -1,4 +1,6 @@
 <script>
+    import { InertiaLink } from "@inertiajs/inertia-svelte";
+    import route from "ziggy";
     export let appName;
 </script>
 
@@ -45,7 +47,11 @@
                         encompassing surgery, obstetrics etc.
                     </p>
                     <br />
-                    <a href="about" class="thm-btn inverse">Read More</a>
+                    <InertiaLink
+                        href={route('app.contact_us')}
+                        class="thm-btn inverse">
+                        Read More
+                    </InertiaLink>
                 </div>
             </div>
             <div class="col-md-2 col-sm-6">

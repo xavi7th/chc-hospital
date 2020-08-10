@@ -69,6 +69,7 @@ class PublicPagesServiceProvider extends ServiceProvider
         'phone2' => config('app.phone2'),
         'phone3' => config('app.phone3'),
         'phone4' => config('app.phone4'),
+        'phone5' => config('app.phone5'),
         'address1' => config('app.address1'),
         'address2' => config('app.address2'),
         'num_of_beds' => config('app.num_of_beds'),
