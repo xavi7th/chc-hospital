@@ -1,6 +1,7 @@
 <script>
   import { page, InertiaLink } from "@inertiajs/inertia-svelte";
   import Layout from "@p-shared/PublicPagesLayout";
+  import LatestNews from "@p-shared/Partials/LatestNews";
   import route from "ziggy";
 </script>
 
@@ -657,7 +658,7 @@
       <hr />
       <div class="row">
 
-        <div class="col-md-6 hidden-md">
+        <div class="col-md-6 hidden-sm">
           <div class="img-masonary">
             <div class="img-w1">
               <img src="/img/faq/7.jpg" height="450" width="280" alt="" />
@@ -1399,8 +1400,10 @@
 				</div>
 			</div>
 		</div>
-	</section> -->
-
+  </section> -->
+  
+  <LatestNews />
+<!-- 
   <section class="blog-home sec-padding">
     <div class="container">
       <div class="sec-title text-center">
@@ -1511,7 +1514,7 @@
         </div>
       </div>
     </div>
-  </section>
+  </section> -->
 
   <section class="sec-padding meet-doctors">
     <div class="container">

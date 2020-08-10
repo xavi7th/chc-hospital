@@ -80,3 +80,28 @@ window.swalPreconfirm = swal.mixin({
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     encrypted: true
 // });
+
+import {
+	InertiaApp
+} from '@inertiajs/inertia-svelte'
+
+const app = document.getElementById('app')
+
+new InertiaApp({
+	target: app,
+	props: {
+		initialPage: JSON.parse(app.dataset.page),
+		resolveComponent: name => import( 
+			/* webpackChunkName: "js/[request]" */
+				/* webpackPrefetch: true */
+				`./Pages/${name}.svelte`)
+			.then(module => module.default)
+			.catch(err => {
+				if (err.code == "MODULE_NOT_FOUND") {
+					location.href = '/'
+				} else {
+					console.error(err);
+				}
+			}),
+	},
+})

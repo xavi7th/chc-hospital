@@ -1,9 +1,6 @@
 {
 	"private": true,
 	"scripts": {
-		"dev-all": "concurrently \"npm --section=buildcss run dev\" \"npm --section=buildjs run dev\"  --kill-others-on-fail",
-		"prod-all": "concurrently \"npm --section=buildcss run prod\" \"npm --section=buildjs run prod\"  --kill-others-on-fail",
-		"watch-all": "concurrently \"npm --section=buildcss run watch\" \"npm --section=buildjs run watch\"  --kill-others-on-fail",
 		"dev": "npm run development",
 		"development": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
 		"watch": "npm run development -- --watch",
@@ -22,7 +19,7 @@
 		"laravel-mix": "^5.0.1",
 		"laravel-mix-merge-manifest": "^0.1.2",
 		"laravel-mix-svelte": "^0.1.6",
-		"lodash": "^4.17.13",
+		"lodash": "^4.17.19",
 		"moment-locales-webpack-plugin": "^1.2.0",
 		"resolve-url-loader": "^3.1.0",
 		"sass": "^1.26.8",

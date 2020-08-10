@@ -28,7 +28,7 @@ mix.webpackConfig({
 	},
 	resolve: {
 		alias: {
-			ziggy: path.resolve('./main/vendor/tightenco/ziggy/dist/js/route.js')
+			ziggy: path.resolve('./main/vendor/tightenco/ziggy/dist/js/route.min.js')
 		},
 	},
 	plugins: [

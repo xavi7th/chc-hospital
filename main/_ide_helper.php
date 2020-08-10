@@ -3,7 +3,7 @@
 
 /**
  * A helper file for Laravel, to provide autocomplete information to your IDE
- * Generated for Laravel 7.17.1 on 2020-07-03 13:29:01.
+ * Generated for Laravel 7.24.0 on 2020-08-09 19:14:49.
  *
  * This file should not be included in your code, only analyzed by your IDE!
  *
@@ -869,6 +869,18 @@ namespace Illuminate\Support\Facades {
         }
         
         /**
+         * Get the current application fallback locale.
+         *
+         * @return string 
+         * @static 
+         */ 
+        public static function getFallbackLocale()
+        {
+                        /** @var \Illuminate\Foundation\Application $instance */
+                        return $instance->getFallbackLocale();
+        }
+        
+        /**
          * Set the current application locale.
          *
          * @param string $locale
@@ -879,6 +891,19 @@ namespace Illuminate\Support\Facades {
         {
                         /** @var \Illuminate\Foundation\Application $instance */
                         $instance->setLocale($locale);
+        }
+        
+        /**
+         * Set the current application fallback locale.
+         *
+         * @param string $fallbackLocale
+         * @return void 
+         * @static 
+         */ 
+        public static function setFallbackLocale($fallbackLocale)
+        {
+                        /** @var \Illuminate\Foundation\Application $instance */
+                        $instance->setFallbackLocale($fallbackLocale);
         }
         
         /**
@@ -5478,7 +5503,7 @@ namespace Illuminate\Support\Facades {
         }
         
         /**
-         * Assert if a event was dispatched a number of times.
+         * Assert if an event was dispatched a number of times.
          *
          * @param string $event
          * @param int $times
@@ -6577,6 +6602,7 @@ namespace Illuminate\Support\Facades {
      * @method static \Illuminate\Http\Client\PendingRequest asJson()
      * @method static \Illuminate\Http\Client\PendingRequest asMultipart()
      * @method static \Illuminate\Http\Client\PendingRequest attach(string $name, string $contents, string|null $filename = null, array $headers = [])
+     * @method static \Illuminate\Http\Client\PendingRequest baseUrl(string $url)
      * @method static \Illuminate\Http\Client\PendingRequest beforeSending(callable $callback)
      * @method static \Illuminate\Http\Client\PendingRequest bodyFormat(string $format)
      * @method static \Illuminate\Http\Client\PendingRequest contentType(string $contentType)
@@ -7222,7 +7248,7 @@ namespace Illuminate\Support\Facades {
         /**
          * Unset the given channel instance.
          *
-         * @param string|null $name
+         * @param string|null $driver
          * @return \Illuminate\Log\LogManager 
          * @static 
          */ 
@@ -7980,6 +8006,11 @@ namespace Illuminate\Support\Facades {
      *
      * @method static mixed reset(array $credentials, \Closure $callback)
      * @method static string sendResetLink(array $credentials)
+     * @method static \Illuminate\Contracts\Auth\CanResetPassword getUser(array $credentials)
+     * @method static string createToken(\Illuminate\Contracts\Auth\CanResetPassword $user)
+     * @method static void deleteToken(\Illuminate\Contracts\Auth\CanResetPassword $user)
+     * @method static bool tokenExists(\Illuminate\Contracts\Auth\CanResetPassword $user, string $token)
+     * @method static \Illuminate\Auth\Passwords\TokenRepositoryInterface getRepository()
      * @see \Illuminate\Auth\Passwords\PasswordBroker
      */ 
     class Password {
@@ -10687,6 +10718,19 @@ namespace Illuminate\Support\Facades {
         {
                         /** @var \Illuminate\Http\Request $instance */
                         return $instance->filled($key);
+        }
+        
+        /**
+         * Determine if the request contains an empty value for an input item.
+         *
+         * @param string|array $key
+         * @return bool 
+         * @static 
+         */ 
+        public static function isNotFilled($key)
+        {
+                        /** @var \Illuminate\Http\Request $instance */
+                        return $instance->isNotFilled($key);
         }
         
         /**
@@ -13484,7 +13528,7 @@ namespace Illuminate\Support\Facades {
          *
          * @param string $path
          * @param \Illuminate\Http\File|\Illuminate\Http\UploadedFile|string $file
-         * @param array $options
+         * @param mixed $options
          * @return string|false 
          * @static 
          */ 
@@ -13500,7 +13544,7 @@ namespace Illuminate\Support\Facades {
          * @param string $path
          * @param \Illuminate\Http\File|\Illuminate\Http\UploadedFile|string $file
          * @param string $name
-         * @param array $options
+         * @param mixed $options
          * @return string|false 
          * @static 
          */ 
@@ -15167,6 +15211,19 @@ namespace Illuminate\Support\Facades {
         }
         
         /**
+         * Check if section does not exist.
+         *
+         * @param string $name
+         * @return bool 
+         * @static 
+         */ 
+        public static function sectionMissing($name)
+        {
+                        /** @var \Illuminate\View\Factory $instance */
+                        return $instance->sectionMissing($name);
+        }
+        
+        /**
          * Get the contents of a section.
          *
          * @param string $name
@@ -15389,1243 +15446,6 @@ namespace Illuminate\Support {
      *
      */ 
     class Str {
-         
-    }
- 
-}
-
-namespace danielme85\LaravelLogToDB { 
-
-    /**
-     * Class LogToDb
-     *
-     * @package danielme85\LaravelLogToDB
-     */ 
-    class LogToDB {
-         
-    }
- 
-}
-
-namespace Nwidart\Modules\Facades { 
-
-    /**
-     * 
-     *
-     */ 
-    class Module {
-        
-        /**
-         * Add other module location.
-         *
-         * @param string $path
-         * @return \Nwidart\Modules\Laravel\LaravelFileRepository 
-         * @static 
-         */ 
-        public static function addLocation($path)
-        {
-            //Method inherited from \Nwidart\Modules\FileRepository            
-                        /** @var \Nwidart\Modules\Laravel\LaravelFileRepository $instance */
-                        return $instance->addLocation($path);
-        }
-        
-        /**
-         * Get all additional paths.
-         *
-         * @return array 
-         * @static 
-         */ 
-        public static function getPaths()
-        {
-            //Method inherited from \Nwidart\Modules\FileRepository            
-                        /** @var \Nwidart\Modules\Laravel\LaravelFileRepository $instance */
-                        return $instance->getPaths();
-        }
-        
-        /**
-         * Get scanned modules paths.
-         *
-         * @return array 
-         * @static 
-         */ 
-        public static function getScanPaths()
-        {
-            //Method inherited from \Nwidart\Modules\FileRepository            
-                        /** @var \Nwidart\Modules\Laravel\LaravelFileRepository $instance */
-                        return $instance->getScanPaths();
-        }
-        
-        /**
-         * Get & scan all modules.
-         *
-         * @return array 
-         * @static 
-         */ 
-        public static function scan()
-        {
-            //Method inherited from \Nwidart\Modules\FileRepository            
-                        /** @var \Nwidart\Modules\Laravel\LaravelFileRepository $instance */
-                        return $instance->scan();
-        }
-        
-        /**
-         * Get all modules.
-         *
-         * @return array 
-         * @static 
-         */ 
-        public static function all()
-        {
-            //Method inherited from \Nwidart\Modules\FileRepository            
-                        /** @var \Nwidart\Modules\Laravel\LaravelFileRepository $instance */
-                        return $instance->all();
-        }
-        
-        /**
-         * Get cached modules.
-         *
-         * @return array 
-         * @static 
-         */ 
-        public static function getCached()
-        {
-            //Method inherited from \Nwidart\Modules\FileRepository            
-                        /** @var \Nwidart\Modules\Laravel\LaravelFileRepository $instance */
-                        return $instance->getCached();
-        }
-        
-        /**
-         * Get all modules as collection instance.
-         *
-         * @return \Nwidart\Modules\Collection 
-         * @static 
-         */ 
-        public static function toCollection()
-        {
-            //Method inherited from \Nwidart\Modules\FileRepository            
-                        /** @var \Nwidart\Modules\Laravel\LaravelFileRepository $instance */
-                        return $instance->toCollection();
-        }
-        
-        /**
-         * Get modules by status.
-         *
-         * @param $status
-         * @return array 
-         * @static 
-         */ 
-        public static function getByStatus($status)
-        {
-            //Method inherited from \Nwidart\Modules\FileRepository            
-                        /** @var \Nwidart\Modules\Laravel\LaravelFileRepository $instance */
-                        return $instance->getByStatus($status);
-        }
-        
-        /**
-         * Determine whether the given module exist.
-         *
-         * @param $name
-         * @return bool 
-         * @static 
-         */ 
-        public static function has($name)
-        {
-            //Method inherited from \Nwidart\Modules\FileRepository            
-                        /** @var \Nwidart\Modules\Laravel\LaravelFileRepository $instance */
-                        return $instance->has($name);
-        }
-        
-        /**
-         * Get list of enabled modules.
-         *
-         * @return array 
-         * @static 
-         */ 
-        public static function allEnabled()
-        {
-            //Method inherited from \Nwidart\Modules\FileRepository            
-                        /** @var \Nwidart\Modules\Laravel\LaravelFileRepository $instance */
-                        return $instance->allEnabled();
-        }
-        
-        /**
-         * Get list of disabled modules.
-         *
-         * @return array 
-         * @static 
-         */ 
-        public static function allDisabled()
-        {
-            //Method inherited from \Nwidart\Modules\FileRepository            
-                        /** @var \Nwidart\Modules\Laravel\LaravelFileRepository $instance */
-                        return $instance->allDisabled();
-        }
-        
-        /**
-         * Get count from all modules.
-         *
-         * @return int 
-         * @static 
-         */ 
-        public static function count()
-        {
-            //Method inherited from \Nwidart\Modules\FileRepository            
-                        /** @var \Nwidart\Modules\Laravel\LaravelFileRepository $instance */
-                        return $instance->count();
-        }
-        
-        /**
-         * Get all ordered modules.
-         *
-         * @param string $direction
-         * @return array 
-         * @static 
-         */ 
-        public static function getOrdered($direction = 'asc')
-        {
-            //Method inherited from \Nwidart\Modules\FileRepository            
-                        /** @var \Nwidart\Modules\Laravel\LaravelFileRepository $instance */
-                        return $instance->getOrdered($direction);
-        }
-        
-        /**
-         * 
-         *
-         * @inheritDoc 
-         * @static 
-         */ 
-        public static function getPath()
-        {
-            //Method inherited from \Nwidart\Modules\FileRepository            
-                        /** @var \Nwidart\Modules\Laravel\LaravelFileRepository $instance */
-                        return $instance->getPath();
-        }
-        
-        /**
-         * 
-         *
-         * @inheritDoc 
-         * @static 
-         */ 
-        public static function register()
-        {
-            //Method inherited from \Nwidart\Modules\FileRepository            
-                        /** @var \Nwidart\Modules\Laravel\LaravelFileRepository $instance */
-                        return $instance->register();
-        }
-        
-        /**
-         * 
-         *
-         * @inheritDoc 
-         * @static 
-         */ 
-        public static function boot()
-        {
-            //Method inherited from \Nwidart\Modules\FileRepository            
-                        /** @var \Nwidart\Modules\Laravel\LaravelFileRepository $instance */
-                        return $instance->boot();
-        }
-        
-        /**
-         * 
-         *
-         * @inheritDoc 
-         * @static 
-         */ 
-        public static function find($name)
-        {
-            //Method inherited from \Nwidart\Modules\FileRepository            
-                        /** @var \Nwidart\Modules\Laravel\LaravelFileRepository $instance */
-                        return $instance->find($name);
-        }
-        
-        /**
-         * 
-         *
-         * @inheritDoc 
-         * @static 
-         */ 
-        public static function findByAlias($alias)
-        {
-            //Method inherited from \Nwidart\Modules\FileRepository            
-                        /** @var \Nwidart\Modules\Laravel\LaravelFileRepository $instance */
-                        return $instance->findByAlias($alias);
-        }
-        
-        /**
-         * 
-         *
-         * @inheritDoc 
-         * @static 
-         */ 
-        public static function findRequirements($name)
-        {
-            //Method inherited from \Nwidart\Modules\FileRepository            
-                        /** @var \Nwidart\Modules\Laravel\LaravelFileRepository $instance */
-                        return $instance->findRequirements($name);
-        }
-        
-        /**
-         * Find a specific module, if there return that, otherwise throw exception.
-         *
-         * @param $name
-         * @return \Module 
-         * @throws ModuleNotFoundException
-         * @static 
-         */ 
-        public static function findOrFail($name)
-        {
-            //Method inherited from \Nwidart\Modules\FileRepository            
-                        /** @var \Nwidart\Modules\Laravel\LaravelFileRepository $instance */
-                        return $instance->findOrFail($name);
-        }
-        
-        /**
-         * Get all modules as laravel collection instance.
-         *
-         * @param $status
-         * @return \Nwidart\Modules\Collection 
-         * @static 
-         */ 
-        public static function collections($status = 1)
-        {
-            //Method inherited from \Nwidart\Modules\FileRepository            
-                        /** @var \Nwidart\Modules\Laravel\LaravelFileRepository $instance */
-                        return $instance->collections($status);
-        }
-        
-        /**
-         * Get module path for a specific module.
-         *
-         * @param $module
-         * @return string 
-         * @static 
-         */ 
-        public static function getModulePath($module)
-        {
-            //Method inherited from \Nwidart\Modules\FileRepository            
-                        /** @var \Nwidart\Modules\Laravel\LaravelFileRepository $instance */
-                        return $instance->getModulePath($module);
-        }
-        
-        /**
-         * 
-         *
-         * @inheritDoc 
-         * @static 
-         */ 
-        public static function assetPath($module)
-        {
-            //Method inherited from \Nwidart\Modules\FileRepository            
-                        /** @var \Nwidart\Modules\Laravel\LaravelFileRepository $instance */
-                        return $instance->assetPath($module);
-        }
-        
-        /**
-         * 
-         *
-         * @inheritDoc 
-         * @static 
-         */ 
-        public static function config($key, $default = null)
-        {
-            //Method inherited from \Nwidart\Modules\FileRepository            
-                        /** @var \Nwidart\Modules\Laravel\LaravelFileRepository $instance */
-                        return $instance->config($key, $default);
-        }
-        
-        /**
-         * Get storage path for module used.
-         *
-         * @return string 
-         * @static 
-         */ 
-        public static function getUsedStoragePath()
-        {
-            //Method inherited from \Nwidart\Modules\FileRepository            
-                        /** @var \Nwidart\Modules\Laravel\LaravelFileRepository $instance */
-                        return $instance->getUsedStoragePath();
-        }
-        
-        /**
-         * Set module used for cli session.
-         *
-         * @param $name
-         * @throws ModuleNotFoundException
-         * @static 
-         */ 
-        public static function setUsed($name)
-        {
-            //Method inherited from \Nwidart\Modules\FileRepository            
-                        /** @var \Nwidart\Modules\Laravel\LaravelFileRepository $instance */
-                        return $instance->setUsed($name);
-        }
-        
-        /**
-         * Forget the module used for cli session.
-         *
-         * @static 
-         */ 
-        public static function forgetUsed()
-        {
-            //Method inherited from \Nwidart\Modules\FileRepository            
-                        /** @var \Nwidart\Modules\Laravel\LaravelFileRepository $instance */
-                        return $instance->forgetUsed();
-        }
-        
-        /**
-         * Get module used for cli session.
-         *
-         * @return string 
-         * @throws \Nwidart\Modules\Exceptions\ModuleNotFoundException
-         * @static 
-         */ 
-        public static function getUsedNow()
-        {
-            //Method inherited from \Nwidart\Modules\FileRepository            
-                        /** @var \Nwidart\Modules\Laravel\LaravelFileRepository $instance */
-                        return $instance->getUsedNow();
-        }
-        
-        /**
-         * Get laravel filesystem instance.
-         *
-         * @return \Nwidart\Modules\Filesystem 
-         * @static 
-         */ 
-        public static function getFiles()
-        {
-            //Method inherited from \Nwidart\Modules\FileRepository            
-                        /** @var \Nwidart\Modules\Laravel\LaravelFileRepository $instance */
-                        return $instance->getFiles();
-        }
-        
-        /**
-         * Get module assets path.
-         *
-         * @return string 
-         * @static 
-         */ 
-        public static function getAssetsPath()
-        {
-            //Method inherited from \Nwidart\Modules\FileRepository            
-                        /** @var \Nwidart\Modules\Laravel\LaravelFileRepository $instance */
-                        return $instance->getAssetsPath();
-        }
-        
-        /**
-         * Get asset url from a specific module.
-         *
-         * @param string $asset
-         * @return string 
-         * @throws InvalidAssetPath
-         * @static 
-         */ 
-        public static function asset($asset)
-        {
-            //Method inherited from \Nwidart\Modules\FileRepository            
-                        /** @var \Nwidart\Modules\Laravel\LaravelFileRepository $instance */
-                        return $instance->asset($asset);
-        }
-        
-        /**
-         * 
-         *
-         * @inheritDoc 
-         * @static 
-         */ 
-        public static function isEnabled($name)
-        {
-            //Method inherited from \Nwidart\Modules\FileRepository            
-                        /** @var \Nwidart\Modules\Laravel\LaravelFileRepository $instance */
-                        return $instance->isEnabled($name);
-        }
-        
-        /**
-         * 
-         *
-         * @inheritDoc 
-         * @static 
-         */ 
-        public static function isDisabled($name)
-        {
-            //Method inherited from \Nwidart\Modules\FileRepository            
-                        /** @var \Nwidart\Modules\Laravel\LaravelFileRepository $instance */
-                        return $instance->isDisabled($name);
-        }
-        
-        /**
-         * Enabling a specific module.
-         *
-         * @param string $name
-         * @return void 
-         * @throws \Nwidart\Modules\Exceptions\ModuleNotFoundException
-         * @static 
-         */ 
-        public static function enable($name)
-        {
-            //Method inherited from \Nwidart\Modules\FileRepository            
-                        /** @var \Nwidart\Modules\Laravel\LaravelFileRepository $instance */
-                        $instance->enable($name);
-        }
-        
-        /**
-         * Disabling a specific module.
-         *
-         * @param string $name
-         * @return void 
-         * @throws \Nwidart\Modules\Exceptions\ModuleNotFoundException
-         * @static 
-         */ 
-        public static function disable($name)
-        {
-            //Method inherited from \Nwidart\Modules\FileRepository            
-                        /** @var \Nwidart\Modules\Laravel\LaravelFileRepository $instance */
-                        $instance->disable($name);
-        }
-        
-        /**
-         * 
-         *
-         * @inheritDoc 
-         * @static 
-         */ 
-        public static function delete($name)
-        {
-            //Method inherited from \Nwidart\Modules\FileRepository            
-                        /** @var \Nwidart\Modules\Laravel\LaravelFileRepository $instance */
-                        return $instance->delete($name);
-        }
-        
-        /**
-         * Update dependencies for the specified module.
-         *
-         * @param string $module
-         * @static 
-         */ 
-        public static function update($module)
-        {
-            //Method inherited from \Nwidart\Modules\FileRepository            
-                        /** @var \Nwidart\Modules\Laravel\LaravelFileRepository $instance */
-                        return $instance->update($module);
-        }
-        
-        /**
-         * Install the specified module.
-         *
-         * @param string $name
-         * @param string $version
-         * @param string $type
-         * @param bool $subtree
-         * @return \Symfony\Component\Process\Process 
-         * @static 
-         */ 
-        public static function install($name, $version = 'dev-master', $type = 'composer', $subtree = false)
-        {
-            //Method inherited from \Nwidart\Modules\FileRepository            
-                        /** @var \Nwidart\Modules\Laravel\LaravelFileRepository $instance */
-                        return $instance->install($name, $version, $type, $subtree);
-        }
-        
-        /**
-         * Get stub path.
-         *
-         * @return string|null 
-         * @static 
-         */ 
-        public static function getStubPath()
-        {
-            //Method inherited from \Nwidart\Modules\FileRepository            
-                        /** @var \Nwidart\Modules\Laravel\LaravelFileRepository $instance */
-                        return $instance->getStubPath();
-        }
-        
-        /**
-         * Set stub path.
-         *
-         * @param string $stubPath
-         * @return \Nwidart\Modules\Laravel\LaravelFileRepository 
-         * @static 
-         */ 
-        public static function setStubPath($stubPath)
-        {
-            //Method inherited from \Nwidart\Modules\FileRepository            
-                        /** @var \Nwidart\Modules\Laravel\LaravelFileRepository $instance */
-                        return $instance->setStubPath($stubPath);
-        }
-        
-        /**
-         * Register a custom macro.
-         *
-         * @param string $name
-         * @param object|callable $macro
-         * @return void 
-         * @static 
-         */ 
-        public static function macro($name, $macro)
-        {
-            //Method inherited from \Nwidart\Modules\FileRepository            
-                        \Nwidart\Modules\Laravel\LaravelFileRepository::macro($name, $macro);
-        }
-        
-        /**
-         * Mix another object into the class.
-         *
-         * @param object $mixin
-         * @param bool $replace
-         * @return void 
-         * @throws \ReflectionException
-         * @static 
-         */ 
-        public static function mixin($mixin, $replace = true)
-        {
-            //Method inherited from \Nwidart\Modules\FileRepository            
-                        \Nwidart\Modules\Laravel\LaravelFileRepository::mixin($mixin, $replace);
-        }
-        
-        /**
-         * Checks if macro is registered.
-         *
-         * @param string $name
-         * @return bool 
-         * @static 
-         */ 
-        public static function hasMacro($name)
-        {
-            //Method inherited from \Nwidart\Modules\FileRepository            
-                        return \Nwidart\Modules\Laravel\LaravelFileRepository::hasMacro($name);
-        }
-         
-    }
- 
-}
-
-namespace Intervention\Image\Facades { 
-
-    /**
-     * 
-     *
-     */ 
-    class Image {
-        
-        /**
-         * Overrides configuration settings
-         *
-         * @param array $config
-         * @return self 
-         * @static 
-         */ 
-        public static function configure($config = [])
-        {
-                        /** @var \Intervention\Image\ImageManager $instance */
-                        return $instance->configure($config);
-        }
-        
-        /**
-         * Initiates an Image instance from different input types
-         *
-         * @param mixed $data
-         * @return \Intervention\Image\Image 
-         * @static 
-         */ 
-        public static function make($data)
-        {
-                        /** @var \Intervention\Image\ImageManager $instance */
-                        return $instance->make($data);
-        }
-        
-        /**
-         * Creates an empty image canvas
-         *
-         * @param int $width
-         * @param int $height
-         * @param mixed $background
-         * @return \Intervention\Image\Image 
-         * @static 
-         */ 
-        public static function canvas($width, $height, $background = null)
-        {
-                        /** @var \Intervention\Image\ImageManager $instance */
-                        return $instance->canvas($width, $height, $background);
-        }
-        
-        /**
-         * Create new cached image and run callback
-         * (requires additional package intervention/imagecache)
-         *
-         * @param \Closure $callback
-         * @param int $lifetime
-         * @param boolean $returnObj
-         * @return \Image 
-         * @static 
-         */ 
-        public static function cache($callback, $lifetime = null, $returnObj = false)
-        {
-                        /** @var \Intervention\Image\ImageManager $instance */
-                        return $instance->cache($callback, $lifetime, $returnObj);
-        }
-         
-    }
- 
-}
-
-namespace Tymon\JWTAuth\Facades { 
-
-    /**
-     * 
-     *
-     */ 
-    class JWTAuth {
-        
-        /**
-         * Attempt to authenticate the user and return the token.
-         *
-         * @param array $credentials
-         * @return false|string 
-         * @static 
-         */ 
-        public static function attempt($credentials)
-        {
-                        /** @var \Tymon\JWTAuth\JWTAuth $instance */
-                        return $instance->attempt($credentials);
-        }
-        
-        /**
-         * Authenticate a user via a token.
-         *
-         * @return \Tymon\JWTAuth\Contracts\JWTSubject|false 
-         * @static 
-         */ 
-        public static function authenticate()
-        {
-                        /** @var \Tymon\JWTAuth\JWTAuth $instance */
-                        return $instance->authenticate();
-        }
-        
-        /**
-         * Alias for authenticate().
-         *
-         * @return \Tymon\JWTAuth\Contracts\JWTSubject|false 
-         * @static 
-         */ 
-        public static function toUser()
-        {
-                        /** @var \Tymon\JWTAuth\JWTAuth $instance */
-                        return $instance->toUser();
-        }
-        
-        /**
-         * Get the authenticated user.
-         *
-         * @return \Tymon\JWTAuth\Contracts\JWTSubject 
-         * @static 
-         */ 
-        public static function user()
-        {
-                        /** @var \Tymon\JWTAuth\JWTAuth $instance */
-                        return $instance->user();
-        }
-        
-        /**
-         * Generate a token for a given subject.
-         *
-         * @param \Tymon\JWTAuth\Contracts\JWTSubject $subject
-         * @return string 
-         * @static 
-         */ 
-        public static function fromSubject($subject)
-        {
-            //Method inherited from \Tymon\JWTAuth\JWT            
-                        /** @var \Tymon\JWTAuth\JWTAuth $instance */
-                        return $instance->fromSubject($subject);
-        }
-        
-        /**
-         * Alias to generate a token for a given user.
-         *
-         * @param \Tymon\JWTAuth\Contracts\JWTSubject $user
-         * @return string 
-         * @static 
-         */ 
-        public static function fromUser($user)
-        {
-            //Method inherited from \Tymon\JWTAuth\JWT            
-                        /** @var \Tymon\JWTAuth\JWTAuth $instance */
-                        return $instance->fromUser($user);
-        }
-        
-        /**
-         * Refresh an expired token.
-         *
-         * @param bool $forceForever
-         * @param bool $resetClaims
-         * @return string 
-         * @static 
-         */ 
-        public static function refresh($forceForever = false, $resetClaims = false)
-        {
-            //Method inherited from \Tymon\JWTAuth\JWT            
-                        /** @var \Tymon\JWTAuth\JWTAuth $instance */
-                        return $instance->refresh($forceForever, $resetClaims);
-        }
-        
-        /**
-         * Invalidate a token (add it to the blacklist).
-         *
-         * @param bool $forceForever
-         * @return \Tymon\JWTAuth\JWTAuth 
-         * @static 
-         */ 
-        public static function invalidate($forceForever = false)
-        {
-            //Method inherited from \Tymon\JWTAuth\JWT            
-                        /** @var \Tymon\JWTAuth\JWTAuth $instance */
-                        return $instance->invalidate($forceForever);
-        }
-        
-        /**
-         * Alias to get the payload, and as a result checks that
-         * the token is valid i.e. not expired or blacklisted.
-         *
-         * @throws \Tymon\JWTAuth\Exceptions\JWTException
-         * @return \Tymon\JWTAuth\Payload 
-         * @static 
-         */ 
-        public static function checkOrFail()
-        {
-            //Method inherited from \Tymon\JWTAuth\JWT            
-                        /** @var \Tymon\JWTAuth\JWTAuth $instance */
-                        return $instance->checkOrFail();
-        }
-        
-        /**
-         * Check that the token is valid.
-         *
-         * @param bool $getPayload
-         * @return \Tymon\JWTAuth\Payload|bool 
-         * @static 
-         */ 
-        public static function check($getPayload = false)
-        {
-            //Method inherited from \Tymon\JWTAuth\JWT            
-                        /** @var \Tymon\JWTAuth\JWTAuth $instance */
-                        return $instance->check($getPayload);
-        }
-        
-        /**
-         * Get the token.
-         *
-         * @return \Tymon\JWTAuth\Token|null 
-         * @static 
-         */ 
-        public static function getToken()
-        {
-            //Method inherited from \Tymon\JWTAuth\JWT            
-                        /** @var \Tymon\JWTAuth\JWTAuth $instance */
-                        return $instance->getToken();
-        }
-        
-        /**
-         * Parse the token from the request.
-         *
-         * @throws \Tymon\JWTAuth\Exceptions\JWTException
-         * @return \Tymon\JWTAuth\JWTAuth 
-         * @static 
-         */ 
-        public static function parseToken()
-        {
-            //Method inherited from \Tymon\JWTAuth\JWT            
-                        /** @var \Tymon\JWTAuth\JWTAuth $instance */
-                        return $instance->parseToken();
-        }
-        
-        /**
-         * Get the raw Payload instance.
-         *
-         * @return \Tymon\JWTAuth\Payload 
-         * @static 
-         */ 
-        public static function getPayload()
-        {
-            //Method inherited from \Tymon\JWTAuth\JWT            
-                        /** @var \Tymon\JWTAuth\JWTAuth $instance */
-                        return $instance->getPayload();
-        }
-        
-        /**
-         * Alias for getPayload().
-         *
-         * @return \Tymon\JWTAuth\Payload 
-         * @static 
-         */ 
-        public static function payload()
-        {
-            //Method inherited from \Tymon\JWTAuth\JWT            
-                        /** @var \Tymon\JWTAuth\JWTAuth $instance */
-                        return $instance->payload();
-        }
-        
-        /**
-         * Convenience method to get a claim value.
-         *
-         * @param string $claim
-         * @return mixed 
-         * @static 
-         */ 
-        public static function getClaim($claim)
-        {
-            //Method inherited from \Tymon\JWTAuth\JWT            
-                        /** @var \Tymon\JWTAuth\JWTAuth $instance */
-                        return $instance->getClaim($claim);
-        }
-        
-        /**
-         * Create a Payload instance.
-         *
-         * @param \Tymon\JWTAuth\Contracts\JWTSubject $subject
-         * @return \Tymon\JWTAuth\Payload 
-         * @static 
-         */ 
-        public static function makePayload($subject)
-        {
-            //Method inherited from \Tymon\JWTAuth\JWT            
-                        /** @var \Tymon\JWTAuth\JWTAuth $instance */
-                        return $instance->makePayload($subject);
-        }
-        
-        /**
-         * Check if the subject model matches the one saved in the token.
-         *
-         * @param string|object $model
-         * @return bool 
-         * @static 
-         */ 
-        public static function checkSubjectModel($model)
-        {
-            //Method inherited from \Tymon\JWTAuth\JWT            
-                        /** @var \Tymon\JWTAuth\JWTAuth $instance */
-                        return $instance->checkSubjectModel($model);
-        }
-        
-        /**
-         * Set the token.
-         *
-         * @param \Tymon\JWTAuth\Token|string $token
-         * @return \Tymon\JWTAuth\JWTAuth 
-         * @static 
-         */ 
-        public static function setToken($token)
-        {
-            //Method inherited from \Tymon\JWTAuth\JWT            
-                        /** @var \Tymon\JWTAuth\JWTAuth $instance */
-                        return $instance->setToken($token);
-        }
-        
-        /**
-         * Unset the current token.
-         *
-         * @return \Tymon\JWTAuth\JWTAuth 
-         * @static 
-         */ 
-        public static function unsetToken()
-        {
-            //Method inherited from \Tymon\JWTAuth\JWT            
-                        /** @var \Tymon\JWTAuth\JWTAuth $instance */
-                        return $instance->unsetToken();
-        }
-        
-        /**
-         * Set the request instance.
-         *
-         * @param \Illuminate\Http\Request $request
-         * @return \Tymon\JWTAuth\JWTAuth 
-         * @static 
-         */ 
-        public static function setRequest($request)
-        {
-            //Method inherited from \Tymon\JWTAuth\JWT            
-                        /** @var \Tymon\JWTAuth\JWTAuth $instance */
-                        return $instance->setRequest($request);
-        }
-        
-        /**
-         * Set whether the subject should be "locked".
-         *
-         * @param bool $lock
-         * @return \Tymon\JWTAuth\JWTAuth 
-         * @static 
-         */ 
-        public static function lockSubject($lock)
-        {
-            //Method inherited from \Tymon\JWTAuth\JWT            
-                        /** @var \Tymon\JWTAuth\JWTAuth $instance */
-                        return $instance->lockSubject($lock);
-        }
-        
-        /**
-         * Get the Manager instance.
-         *
-         * @return \Tymon\JWTAuth\Manager 
-         * @static 
-         */ 
-        public static function manager()
-        {
-            //Method inherited from \Tymon\JWTAuth\JWT            
-                        /** @var \Tymon\JWTAuth\JWTAuth $instance */
-                        return $instance->manager();
-        }
-        
-        /**
-         * Get the Parser instance.
-         *
-         * @return \Tymon\JWTAuth\Http\Parser\Parser 
-         * @static 
-         */ 
-        public static function parser()
-        {
-            //Method inherited from \Tymon\JWTAuth\JWT            
-                        /** @var \Tymon\JWTAuth\JWTAuth $instance */
-                        return $instance->parser();
-        }
-        
-        /**
-         * Get the Payload Factory.
-         *
-         * @return \Tymon\JWTAuth\Factory 
-         * @static 
-         */ 
-        public static function factory()
-        {
-            //Method inherited from \Tymon\JWTAuth\JWT            
-                        /** @var \Tymon\JWTAuth\JWTAuth $instance */
-                        return $instance->factory();
-        }
-        
-        /**
-         * Get the Blacklist.
-         *
-         * @return \Tymon\JWTAuth\Blacklist 
-         * @static 
-         */ 
-        public static function blacklist()
-        {
-            //Method inherited from \Tymon\JWTAuth\JWT            
-                        /** @var \Tymon\JWTAuth\JWTAuth $instance */
-                        return $instance->blacklist();
-        }
-        
-        /**
-         * Set the custom claims.
-         *
-         * @param array $customClaims
-         * @return \Tymon\JWTAuth\JWTAuth 
-         * @static 
-         */ 
-        public static function customClaims($customClaims)
-        {
-            //Method inherited from \Tymon\JWTAuth\JWT            
-                        /** @var \Tymon\JWTAuth\JWTAuth $instance */
-                        return $instance->customClaims($customClaims);
-        }
-        
-        /**
-         * Alias to set the custom claims.
-         *
-         * @param array $customClaims
-         * @return \Tymon\JWTAuth\JWTAuth 
-         * @static 
-         */ 
-        public static function claims($customClaims)
-        {
-            //Method inherited from \Tymon\JWTAuth\JWT            
-                        /** @var \Tymon\JWTAuth\JWTAuth $instance */
-                        return $instance->claims($customClaims);
-        }
-        
-        /**
-         * Get the custom claims.
-         *
-         * @return array 
-         * @static 
-         */ 
-        public static function getCustomClaims()
-        {
-            //Method inherited from \Tymon\JWTAuth\JWT            
-                        /** @var \Tymon\JWTAuth\JWTAuth $instance */
-                        return $instance->getCustomClaims();
-        }
-         
-    }
-
-    /**
-     * 
-     *
-     */ 
-    class JWTFactory {
-        
-        /**
-         * Create the Payload instance.
-         *
-         * @param bool $resetClaims
-         * @return \Tymon\JWTAuth\Payload 
-         * @static 
-         */ 
-        public static function make($resetClaims = false)
-        {
-                        /** @var \Tymon\JWTAuth\Factory $instance */
-                        return $instance->make($resetClaims);
-        }
-        
-        /**
-         * Empty the claims collection.
-         *
-         * @return \Tymon\JWTAuth\Factory 
-         * @static 
-         */ 
-        public static function emptyClaims()
-        {
-                        /** @var \Tymon\JWTAuth\Factory $instance */
-                        return $instance->emptyClaims();
-        }
-        
-        /**
-         * Build and get the Claims Collection.
-         *
-         * @return \Tymon\JWTAuth\Claims\Collection 
-         * @static 
-         */ 
-        public static function buildClaimsCollection()
-        {
-                        /** @var \Tymon\JWTAuth\Factory $instance */
-                        return $instance->buildClaimsCollection();
-        }
-        
-        /**
-         * Get a Payload instance with a claims collection.
-         *
-         * @param \Tymon\JWTAuth\Claims\Collection $claims
-         * @return \Tymon\JWTAuth\Payload 
-         * @static 
-         */ 
-        public static function withClaims($claims)
-        {
-                        /** @var \Tymon\JWTAuth\Factory $instance */
-                        return $instance->withClaims($claims);
-        }
-        
-        /**
-         * Set the default claims to be added to the Payload.
-         *
-         * @param array $claims
-         * @return \Tymon\JWTAuth\Factory 
-         * @static 
-         */ 
-        public static function setDefaultClaims($claims)
-        {
-                        /** @var \Tymon\JWTAuth\Factory $instance */
-                        return $instance->setDefaultClaims($claims);
-        }
-        
-        /**
-         * Helper to set the ttl.
-         *
-         * @param int $ttl
-         * @return \Tymon\JWTAuth\Factory 
-         * @static 
-         */ 
-        public static function setTTL($ttl)
-        {
-                        /** @var \Tymon\JWTAuth\Factory $instance */
-                        return $instance->setTTL($ttl);
-        }
-        
-        /**
-         * Helper to get the ttl.
-         *
-         * @return int 
-         * @static 
-         */ 
-        public static function getTTL()
-        {
-                        /** @var \Tymon\JWTAuth\Factory $instance */
-                        return $instance->getTTL();
-        }
-        
-        /**
-         * Get the default claims.
-         *
-         * @return array 
-         * @static 
-         */ 
-        public static function getDefaultClaims()
-        {
-                        /** @var \Tymon\JWTAuth\Factory $instance */
-                        return $instance->getDefaultClaims();
-        }
-        
-        /**
-         * Get the PayloadValidator instance.
-         *
-         * @return \Tymon\JWTAuth\Validators\PayloadValidator 
-         * @static 
-         */ 
-        public static function validator()
-        {
-                        /** @var \Tymon\JWTAuth\Factory $instance */
-                        return $instance->validator();
-        }
-        
-        /**
-         * Set the custom claims.
-         *
-         * @param array $customClaims
-         * @return \Tymon\JWTAuth\Factory 
-         * @static 
-         */ 
-        public static function customClaims($customClaims)
-        {
-                        /** @var \Tymon\JWTAuth\Factory $instance */
-                        return $instance->customClaims($customClaims);
-        }
-        
-        /**
-         * Alias to set the custom claims.
-         *
-         * @param array $customClaims
-         * @return \Tymon\JWTAuth\Factory 
-         * @static 
-         */ 
-        public static function claims($customClaims)
-        {
-                        /** @var \Tymon\JWTAuth\Factory $instance */
-                        return $instance->claims($customClaims);
-        }
-        
-        /**
-         * Get the custom claims.
-         *
-         * @return array 
-         * @static 
-         */ 
-        public static function getCustomClaims()
-        {
-                        /** @var \Tymon\JWTAuth\Factory $instance */
-                        return $instance->getCustomClaims();
-        }
-        
-        /**
-         * Set the refresh flow flag.
-         *
-         * @param bool $refreshFlow
-         * @return \Tymon\JWTAuth\Factory 
-         * @static 
-         */ 
-        public static function setRefreshFlow($refreshFlow = true)
-        {
-                        /** @var \Tymon\JWTAuth\Factory $instance */
-                        return $instance->setRefreshFlow($refreshFlow);
-        }
          
     }
  
@@ -17237,6 +16057,19 @@ namespace Barryvdh\Debugbar {
  
 }
 
+namespace danielme85\LaravelLogToDB { 
+
+    /**
+     * Class LogToDb
+     *
+     * @package danielme85\LaravelLogToDB
+     */ 
+    class LogToDB {
+         
+    }
+ 
+}
+
 namespace Facade\Ignition\Facades { 
 
     /**
@@ -17496,6 +16329,1230 @@ namespace Facade\Ignition\Facades {
         {
                         /** @var \Facade\FlareClient\Flare $instance */
                         return $instance->group($groupName, $properties);
+        }
+         
+    }
+ 
+}
+
+namespace Intervention\Image\Facades { 
+
+    /**
+     * 
+     *
+     */ 
+    class Image {
+        
+        /**
+         * Overrides configuration settings
+         *
+         * @param array $config
+         * @return self 
+         * @static 
+         */ 
+        public static function configure($config = [])
+        {
+                        /** @var \Intervention\Image\ImageManager $instance */
+                        return $instance->configure($config);
+        }
+        
+        /**
+         * Initiates an Image instance from different input types
+         *
+         * @param mixed $data
+         * @return \Intervention\Image\Image 
+         * @static 
+         */ 
+        public static function make($data)
+        {
+                        /** @var \Intervention\Image\ImageManager $instance */
+                        return $instance->make($data);
+        }
+        
+        /**
+         * Creates an empty image canvas
+         *
+         * @param int $width
+         * @param int $height
+         * @param mixed $background
+         * @return \Intervention\Image\Image 
+         * @static 
+         */ 
+        public static function canvas($width, $height, $background = null)
+        {
+                        /** @var \Intervention\Image\ImageManager $instance */
+                        return $instance->canvas($width, $height, $background);
+        }
+        
+        /**
+         * Create new cached image and run callback
+         * (requires additional package intervention/imagecache)
+         *
+         * @param \Closure $callback
+         * @param int $lifetime
+         * @param boolean $returnObj
+         * @return \Image 
+         * @static 
+         */ 
+        public static function cache($callback, $lifetime = null, $returnObj = false)
+        {
+                        /** @var \Intervention\Image\ImageManager $instance */
+                        return $instance->cache($callback, $lifetime, $returnObj);
+        }
+         
+    }
+ 
+}
+
+namespace Nwidart\Modules\Facades { 
+
+    /**
+     * 
+     *
+     */ 
+    class Module {
+        
+        /**
+         * Add other module location.
+         *
+         * @param string $path
+         * @return \Nwidart\Modules\Laravel\LaravelFileRepository 
+         * @static 
+         */ 
+        public static function addLocation($path)
+        {
+            //Method inherited from \Nwidart\Modules\FileRepository            
+                        /** @var \Nwidart\Modules\Laravel\LaravelFileRepository $instance */
+                        return $instance->addLocation($path);
+        }
+        
+        /**
+         * Get all additional paths.
+         *
+         * @return array 
+         * @static 
+         */ 
+        public static function getPaths()
+        {
+            //Method inherited from \Nwidart\Modules\FileRepository            
+                        /** @var \Nwidart\Modules\Laravel\LaravelFileRepository $instance */
+                        return $instance->getPaths();
+        }
+        
+        /**
+         * Get scanned modules paths.
+         *
+         * @return array 
+         * @static 
+         */ 
+        public static function getScanPaths()
+        {
+            //Method inherited from \Nwidart\Modules\FileRepository            
+                        /** @var \Nwidart\Modules\Laravel\LaravelFileRepository $instance */
+                        return $instance->getScanPaths();
+        }
+        
+        /**
+         * Get & scan all modules.
+         *
+         * @return array 
+         * @static 
+         */ 
+        public static function scan()
+        {
+            //Method inherited from \Nwidart\Modules\FileRepository            
+                        /** @var \Nwidart\Modules\Laravel\LaravelFileRepository $instance */
+                        return $instance->scan();
+        }
+        
+        /**
+         * Get all modules.
+         *
+         * @return array 
+         * @static 
+         */ 
+        public static function all()
+        {
+            //Method inherited from \Nwidart\Modules\FileRepository            
+                        /** @var \Nwidart\Modules\Laravel\LaravelFileRepository $instance */
+                        return $instance->all();
+        }
+        
+        /**
+         * Get cached modules.
+         *
+         * @return array 
+         * @static 
+         */ 
+        public static function getCached()
+        {
+            //Method inherited from \Nwidart\Modules\FileRepository            
+                        /** @var \Nwidart\Modules\Laravel\LaravelFileRepository $instance */
+                        return $instance->getCached();
+        }
+        
+        /**
+         * Get all modules as collection instance.
+         *
+         * @return \Nwidart\Modules\Collection 
+         * @static 
+         */ 
+        public static function toCollection()
+        {
+            //Method inherited from \Nwidart\Modules\FileRepository            
+                        /** @var \Nwidart\Modules\Laravel\LaravelFileRepository $instance */
+                        return $instance->toCollection();
+        }
+        
+        /**
+         * Get modules by status.
+         *
+         * @param $status
+         * @return array 
+         * @static 
+         */ 
+        public static function getByStatus($status)
+        {
+            //Method inherited from \Nwidart\Modules\FileRepository            
+                        /** @var \Nwidart\Modules\Laravel\LaravelFileRepository $instance */
+                        return $instance->getByStatus($status);
+        }
+        
+        /**
+         * Determine whether the given module exist.
+         *
+         * @param $name
+         * @return bool 
+         * @static 
+         */ 
+        public static function has($name)
+        {
+            //Method inherited from \Nwidart\Modules\FileRepository            
+                        /** @var \Nwidart\Modules\Laravel\LaravelFileRepository $instance */
+                        return $instance->has($name);
+        }
+        
+        /**
+         * Get list of enabled modules.
+         *
+         * @return array 
+         * @static 
+         */ 
+        public static function allEnabled()
+        {
+            //Method inherited from \Nwidart\Modules\FileRepository            
+                        /** @var \Nwidart\Modules\Laravel\LaravelFileRepository $instance */
+                        return $instance->allEnabled();
+        }
+        
+        /**
+         * Get list of disabled modules.
+         *
+         * @return array 
+         * @static 
+         */ 
+        public static function allDisabled()
+        {
+            //Method inherited from \Nwidart\Modules\FileRepository            
+                        /** @var \Nwidart\Modules\Laravel\LaravelFileRepository $instance */
+                        return $instance->allDisabled();
+        }
+        
+        /**
+         * Get count from all modules.
+         *
+         * @return int 
+         * @static 
+         */ 
+        public static function count()
+        {
+            //Method inherited from \Nwidart\Modules\FileRepository            
+                        /** @var \Nwidart\Modules\Laravel\LaravelFileRepository $instance */
+                        return $instance->count();
+        }
+        
+        /**
+         * Get all ordered modules.
+         *
+         * @param string $direction
+         * @return array 
+         * @static 
+         */ 
+        public static function getOrdered($direction = 'asc')
+        {
+            //Method inherited from \Nwidart\Modules\FileRepository            
+                        /** @var \Nwidart\Modules\Laravel\LaravelFileRepository $instance */
+                        return $instance->getOrdered($direction);
+        }
+        
+        /**
+         * 
+         *
+         * @inheritDoc 
+         * @static 
+         */ 
+        public static function getPath()
+        {
+            //Method inherited from \Nwidart\Modules\FileRepository            
+                        /** @var \Nwidart\Modules\Laravel\LaravelFileRepository $instance */
+                        return $instance->getPath();
+        }
+        
+        /**
+         * 
+         *
+         * @inheritDoc 
+         * @static 
+         */ 
+        public static function register()
+        {
+            //Method inherited from \Nwidart\Modules\FileRepository            
+                        /** @var \Nwidart\Modules\Laravel\LaravelFileRepository $instance */
+                        return $instance->register();
+        }
+        
+        /**
+         * 
+         *
+         * @inheritDoc 
+         * @static 
+         */ 
+        public static function boot()
+        {
+            //Method inherited from \Nwidart\Modules\FileRepository            
+                        /** @var \Nwidart\Modules\Laravel\LaravelFileRepository $instance */
+                        return $instance->boot();
+        }
+        
+        /**
+         * 
+         *
+         * @inheritDoc 
+         * @static 
+         */ 
+        public static function find($name)
+        {
+            //Method inherited from \Nwidart\Modules\FileRepository            
+                        /** @var \Nwidart\Modules\Laravel\LaravelFileRepository $instance */
+                        return $instance->find($name);
+        }
+        
+        /**
+         * 
+         *
+         * @inheritDoc 
+         * @static 
+         */ 
+        public static function findByAlias($alias)
+        {
+            //Method inherited from \Nwidart\Modules\FileRepository            
+                        /** @var \Nwidart\Modules\Laravel\LaravelFileRepository $instance */
+                        return $instance->findByAlias($alias);
+        }
+        
+        /**
+         * 
+         *
+         * @inheritDoc 
+         * @static 
+         */ 
+        public static function findRequirements($name)
+        {
+            //Method inherited from \Nwidart\Modules\FileRepository            
+                        /** @var \Nwidart\Modules\Laravel\LaravelFileRepository $instance */
+                        return $instance->findRequirements($name);
+        }
+        
+        /**
+         * Find a specific module, if there return that, otherwise throw exception.
+         *
+         * @param $name
+         * @return \Module 
+         * @throws ModuleNotFoundException
+         * @static 
+         */ 
+        public static function findOrFail($name)
+        {
+            //Method inherited from \Nwidart\Modules\FileRepository            
+                        /** @var \Nwidart\Modules\Laravel\LaravelFileRepository $instance */
+                        return $instance->findOrFail($name);
+        }
+        
+        /**
+         * Get all modules as laravel collection instance.
+         *
+         * @param $status
+         * @return \Nwidart\Modules\Collection 
+         * @static 
+         */ 
+        public static function collections($status = 1)
+        {
+            //Method inherited from \Nwidart\Modules\FileRepository            
+                        /** @var \Nwidart\Modules\Laravel\LaravelFileRepository $instance */
+                        return $instance->collections($status);
+        }
+        
+        /**
+         * Get module path for a specific module.
+         *
+         * @param $module
+         * @return string 
+         * @static 
+         */ 
+        public static function getModulePath($module)
+        {
+            //Method inherited from \Nwidart\Modules\FileRepository            
+                        /** @var \Nwidart\Modules\Laravel\LaravelFileRepository $instance */
+                        return $instance->getModulePath($module);
+        }
+        
+        /**
+         * 
+         *
+         * @inheritDoc 
+         * @static 
+         */ 
+        public static function assetPath($module)
+        {
+            //Method inherited from \Nwidart\Modules\FileRepository            
+                        /** @var \Nwidart\Modules\Laravel\LaravelFileRepository $instance */
+                        return $instance->assetPath($module);
+        }
+        
+        /**
+         * 
+         *
+         * @inheritDoc 
+         * @static 
+         */ 
+        public static function config($key, $default = null)
+        {
+            //Method inherited from \Nwidart\Modules\FileRepository            
+                        /** @var \Nwidart\Modules\Laravel\LaravelFileRepository $instance */
+                        return $instance->config($key, $default);
+        }
+        
+        /**
+         * Get storage path for module used.
+         *
+         * @return string 
+         * @static 
+         */ 
+        public static function getUsedStoragePath()
+        {
+            //Method inherited from \Nwidart\Modules\FileRepository            
+                        /** @var \Nwidart\Modules\Laravel\LaravelFileRepository $instance */
+                        return $instance->getUsedStoragePath();
+        }
+        
+        /**
+         * Set module used for cli session.
+         *
+         * @param $name
+         * @throws ModuleNotFoundException
+         * @static 
+         */ 
+        public static function setUsed($name)
+        {
+            //Method inherited from \Nwidart\Modules\FileRepository            
+                        /** @var \Nwidart\Modules\Laravel\LaravelFileRepository $instance */
+                        return $instance->setUsed($name);
+        }
+        
+        /**
+         * Forget the module used for cli session.
+         *
+         * @static 
+         */ 
+        public static function forgetUsed()
+        {
+            //Method inherited from \Nwidart\Modules\FileRepository            
+                        /** @var \Nwidart\Modules\Laravel\LaravelFileRepository $instance */
+                        return $instance->forgetUsed();
+        }
+        
+        /**
+         * Get module used for cli session.
+         *
+         * @return string 
+         * @throws \Nwidart\Modules\Exceptions\ModuleNotFoundException
+         * @static 
+         */ 
+        public static function getUsedNow()
+        {
+            //Method inherited from \Nwidart\Modules\FileRepository            
+                        /** @var \Nwidart\Modules\Laravel\LaravelFileRepository $instance */
+                        return $instance->getUsedNow();
+        }
+        
+        /**
+         * Get laravel filesystem instance.
+         *
+         * @return \Nwidart\Modules\Filesystem 
+         * @static 
+         */ 
+        public static function getFiles()
+        {
+            //Method inherited from \Nwidart\Modules\FileRepository            
+                        /** @var \Nwidart\Modules\Laravel\LaravelFileRepository $instance */
+                        return $instance->getFiles();
+        }
+        
+        /**
+         * Get module assets path.
+         *
+         * @return string 
+         * @static 
+         */ 
+        public static function getAssetsPath()
+        {
+            //Method inherited from \Nwidart\Modules\FileRepository            
+                        /** @var \Nwidart\Modules\Laravel\LaravelFileRepository $instance */
+                        return $instance->getAssetsPath();
+        }
+        
+        /**
+         * Get asset url from a specific module.
+         *
+         * @param string $asset
+         * @return string 
+         * @throws InvalidAssetPath
+         * @static 
+         */ 
+        public static function asset($asset)
+        {
+            //Method inherited from \Nwidart\Modules\FileRepository            
+                        /** @var \Nwidart\Modules\Laravel\LaravelFileRepository $instance */
+                        return $instance->asset($asset);
+        }
+        
+        /**
+         * 
+         *
+         * @inheritDoc 
+         * @static 
+         */ 
+        public static function isEnabled($name)
+        {
+            //Method inherited from \Nwidart\Modules\FileRepository            
+                        /** @var \Nwidart\Modules\Laravel\LaravelFileRepository $instance */
+                        return $instance->isEnabled($name);
+        }
+        
+        /**
+         * 
+         *
+         * @inheritDoc 
+         * @static 
+         */ 
+        public static function isDisabled($name)
+        {
+            //Method inherited from \Nwidart\Modules\FileRepository            
+                        /** @var \Nwidart\Modules\Laravel\LaravelFileRepository $instance */
+                        return $instance->isDisabled($name);
+        }
+        
+        /**
+         * Enabling a specific module.
+         *
+         * @param string $name
+         * @return void 
+         * @throws \Nwidart\Modules\Exceptions\ModuleNotFoundException
+         * @static 
+         */ 
+        public static function enable($name)
+        {
+            //Method inherited from \Nwidart\Modules\FileRepository            
+                        /** @var \Nwidart\Modules\Laravel\LaravelFileRepository $instance */
+                        $instance->enable($name);
+        }
+        
+        /**
+         * Disabling a specific module.
+         *
+         * @param string $name
+         * @return void 
+         * @throws \Nwidart\Modules\Exceptions\ModuleNotFoundException
+         * @static 
+         */ 
+        public static function disable($name)
+        {
+            //Method inherited from \Nwidart\Modules\FileRepository            
+                        /** @var \Nwidart\Modules\Laravel\LaravelFileRepository $instance */
+                        $instance->disable($name);
+        }
+        
+        /**
+         * 
+         *
+         * @inheritDoc 
+         * @static 
+         */ 
+        public static function delete($name)
+        {
+            //Method inherited from \Nwidart\Modules\FileRepository            
+                        /** @var \Nwidart\Modules\Laravel\LaravelFileRepository $instance */
+                        return $instance->delete($name);
+        }
+        
+        /**
+         * Update dependencies for the specified module.
+         *
+         * @param string $module
+         * @static 
+         */ 
+        public static function update($module)
+        {
+            //Method inherited from \Nwidart\Modules\FileRepository            
+                        /** @var \Nwidart\Modules\Laravel\LaravelFileRepository $instance */
+                        return $instance->update($module);
+        }
+        
+        /**
+         * Install the specified module.
+         *
+         * @param string $name
+         * @param string $version
+         * @param string $type
+         * @param bool $subtree
+         * @return \Symfony\Component\Process\Process 
+         * @static 
+         */ 
+        public static function install($name, $version = 'dev-master', $type = 'composer', $subtree = false)
+        {
+            //Method inherited from \Nwidart\Modules\FileRepository            
+                        /** @var \Nwidart\Modules\Laravel\LaravelFileRepository $instance */
+                        return $instance->install($name, $version, $type, $subtree);
+        }
+        
+        /**
+         * Get stub path.
+         *
+         * @return string|null 
+         * @static 
+         */ 
+        public static function getStubPath()
+        {
+            //Method inherited from \Nwidart\Modules\FileRepository            
+                        /** @var \Nwidart\Modules\Laravel\LaravelFileRepository $instance */
+                        return $instance->getStubPath();
+        }
+        
+        /**
+         * Set stub path.
+         *
+         * @param string $stubPath
+         * @return \Nwidart\Modules\Laravel\LaravelFileRepository 
+         * @static 
+         */ 
+        public static function setStubPath($stubPath)
+        {
+            //Method inherited from \Nwidart\Modules\FileRepository            
+                        /** @var \Nwidart\Modules\Laravel\LaravelFileRepository $instance */
+                        return $instance->setStubPath($stubPath);
+        }
+        
+        /**
+         * Register a custom macro.
+         *
+         * @param string $name
+         * @param object|callable $macro
+         * @return void 
+         * @static 
+         */ 
+        public static function macro($name, $macro)
+        {
+            //Method inherited from \Nwidart\Modules\FileRepository            
+                        \Nwidart\Modules\Laravel\LaravelFileRepository::macro($name, $macro);
+        }
+        
+        /**
+         * Mix another object into the class.
+         *
+         * @param object $mixin
+         * @param bool $replace
+         * @return void 
+         * @throws \ReflectionException
+         * @static 
+         */ 
+        public static function mixin($mixin, $replace = true)
+        {
+            //Method inherited from \Nwidart\Modules\FileRepository            
+                        \Nwidart\Modules\Laravel\LaravelFileRepository::mixin($mixin, $replace);
+        }
+        
+        /**
+         * Checks if macro is registered.
+         *
+         * @param string $name
+         * @return bool 
+         * @static 
+         */ 
+        public static function hasMacro($name)
+        {
+            //Method inherited from \Nwidart\Modules\FileRepository            
+                        return \Nwidart\Modules\Laravel\LaravelFileRepository::hasMacro($name);
+        }
+         
+    }
+ 
+}
+
+namespace Tymon\JWTAuth\Facades { 
+
+    /**
+     * 
+     *
+     */ 
+    class JWTAuth {
+        
+        /**
+         * Attempt to authenticate the user and return the token.
+         *
+         * @param array $credentials
+         * @return false|string 
+         * @static 
+         */ 
+        public static function attempt($credentials)
+        {
+                        /** @var \Tymon\JWTAuth\JWTAuth $instance */
+                        return $instance->attempt($credentials);
+        }
+        
+        /**
+         * Authenticate a user via a token.
+         *
+         * @return \Tymon\JWTAuth\Contracts\JWTSubject|false 
+         * @static 
+         */ 
+        public static function authenticate()
+        {
+                        /** @var \Tymon\JWTAuth\JWTAuth $instance */
+                        return $instance->authenticate();
+        }
+        
+        /**
+         * Alias for authenticate().
+         *
+         * @return \Tymon\JWTAuth\Contracts\JWTSubject|false 
+         * @static 
+         */ 
+        public static function toUser()
+        {
+                        /** @var \Tymon\JWTAuth\JWTAuth $instance */
+                        return $instance->toUser();
+        }
+        
+        /**
+         * Get the authenticated user.
+         *
+         * @return \Tymon\JWTAuth\Contracts\JWTSubject 
+         * @static 
+         */ 
+        public static function user()
+        {
+                        /** @var \Tymon\JWTAuth\JWTAuth $instance */
+                        return $instance->user();
+        }
+        
+        /**
+         * Generate a token for a given subject.
+         *
+         * @param \Tymon\JWTAuth\Contracts\JWTSubject $subject
+         * @return string 
+         * @static 
+         */ 
+        public static function fromSubject($subject)
+        {
+            //Method inherited from \Tymon\JWTAuth\JWT            
+                        /** @var \Tymon\JWTAuth\JWTAuth $instance */
+                        return $instance->fromSubject($subject);
+        }
+        
+        /**
+         * Alias to generate a token for a given user.
+         *
+         * @param \Tymon\JWTAuth\Contracts\JWTSubject $user
+         * @return string 
+         * @static 
+         */ 
+        public static function fromUser($user)
+        {
+            //Method inherited from \Tymon\JWTAuth\JWT            
+                        /** @var \Tymon\JWTAuth\JWTAuth $instance */
+                        return $instance->fromUser($user);
+        }
+        
+        /**
+         * Refresh an expired token.
+         *
+         * @param bool $forceForever
+         * @param bool $resetClaims
+         * @return string 
+         * @static 
+         */ 
+        public static function refresh($forceForever = false, $resetClaims = false)
+        {
+            //Method inherited from \Tymon\JWTAuth\JWT            
+                        /** @var \Tymon\JWTAuth\JWTAuth $instance */
+                        return $instance->refresh($forceForever, $resetClaims);
+        }
+        
+        /**
+         * Invalidate a token (add it to the blacklist).
+         *
+         * @param bool $forceForever
+         * @return \Tymon\JWTAuth\JWTAuth 
+         * @static 
+         */ 
+        public static function invalidate($forceForever = false)
+        {
+            //Method inherited from \Tymon\JWTAuth\JWT            
+                        /** @var \Tymon\JWTAuth\JWTAuth $instance */
+                        return $instance->invalidate($forceForever);
+        }
+        
+        /**
+         * Alias to get the payload, and as a result checks that
+         * the token is valid i.e. not expired or blacklisted.
+         *
+         * @throws \Tymon\JWTAuth\Exceptions\JWTException
+         * @return \Tymon\JWTAuth\Payload 
+         * @static 
+         */ 
+        public static function checkOrFail()
+        {
+            //Method inherited from \Tymon\JWTAuth\JWT            
+                        /** @var \Tymon\JWTAuth\JWTAuth $instance */
+                        return $instance->checkOrFail();
+        }
+        
+        /**
+         * Check that the token is valid.
+         *
+         * @param bool $getPayload
+         * @return \Tymon\JWTAuth\Payload|bool 
+         * @static 
+         */ 
+        public static function check($getPayload = false)
+        {
+            //Method inherited from \Tymon\JWTAuth\JWT            
+                        /** @var \Tymon\JWTAuth\JWTAuth $instance */
+                        return $instance->check($getPayload);
+        }
+        
+        /**
+         * Get the token.
+         *
+         * @return \Tymon\JWTAuth\Token|null 
+         * @static 
+         */ 
+        public static function getToken()
+        {
+            //Method inherited from \Tymon\JWTAuth\JWT            
+                        /** @var \Tymon\JWTAuth\JWTAuth $instance */
+                        return $instance->getToken();
+        }
+        
+        /**
+         * Parse the token from the request.
+         *
+         * @throws \Tymon\JWTAuth\Exceptions\JWTException
+         * @return \Tymon\JWTAuth\JWTAuth 
+         * @static 
+         */ 
+        public static function parseToken()
+        {
+            //Method inherited from \Tymon\JWTAuth\JWT            
+                        /** @var \Tymon\JWTAuth\JWTAuth $instance */
+                        return $instance->parseToken();
+        }
+        
+        /**
+         * Get the raw Payload instance.
+         *
+         * @return \Tymon\JWTAuth\Payload 
+         * @static 
+         */ 
+        public static function getPayload()
+        {
+            //Method inherited from \Tymon\JWTAuth\JWT            
+                        /** @var \Tymon\JWTAuth\JWTAuth $instance */
+                        return $instance->getPayload();
+        }
+        
+        /**
+         * Alias for getPayload().
+         *
+         * @return \Tymon\JWTAuth\Payload 
+         * @static 
+         */ 
+        public static function payload()
+        {
+            //Method inherited from \Tymon\JWTAuth\JWT            
+                        /** @var \Tymon\JWTAuth\JWTAuth $instance */
+                        return $instance->payload();
+        }
+        
+        /**
+         * Convenience method to get a claim value.
+         *
+         * @param string $claim
+         * @return mixed 
+         * @static 
+         */ 
+        public static function getClaim($claim)
+        {
+            //Method inherited from \Tymon\JWTAuth\JWT            
+                        /** @var \Tymon\JWTAuth\JWTAuth $instance */
+                        return $instance->getClaim($claim);
+        }
+        
+        /**
+         * Create a Payload instance.
+         *
+         * @param \Tymon\JWTAuth\Contracts\JWTSubject $subject
+         * @return \Tymon\JWTAuth\Payload 
+         * @static 
+         */ 
+        public static function makePayload($subject)
+        {
+            //Method inherited from \Tymon\JWTAuth\JWT            
+                        /** @var \Tymon\JWTAuth\JWTAuth $instance */
+                        return $instance->makePayload($subject);
+        }
+        
+        /**
+         * Check if the subject model matches the one saved in the token.
+         *
+         * @param string|object $model
+         * @return bool 
+         * @static 
+         */ 
+        public static function checkSubjectModel($model)
+        {
+            //Method inherited from \Tymon\JWTAuth\JWT            
+                        /** @var \Tymon\JWTAuth\JWTAuth $instance */
+                        return $instance->checkSubjectModel($model);
+        }
+        
+        /**
+         * Set the token.
+         *
+         * @param \Tymon\JWTAuth\Token|string $token
+         * @return \Tymon\JWTAuth\JWTAuth 
+         * @static 
+         */ 
+        public static function setToken($token)
+        {
+            //Method inherited from \Tymon\JWTAuth\JWT            
+                        /** @var \Tymon\JWTAuth\JWTAuth $instance */
+                        return $instance->setToken($token);
+        }
+        
+        /**
+         * Unset the current token.
+         *
+         * @return \Tymon\JWTAuth\JWTAuth 
+         * @static 
+         */ 
+        public static function unsetToken()
+        {
+            //Method inherited from \Tymon\JWTAuth\JWT            
+                        /** @var \Tymon\JWTAuth\JWTAuth $instance */
+                        return $instance->unsetToken();
+        }
+        
+        /**
+         * Set the request instance.
+         *
+         * @param \Illuminate\Http\Request $request
+         * @return \Tymon\JWTAuth\JWTAuth 
+         * @static 
+         */ 
+        public static function setRequest($request)
+        {
+            //Method inherited from \Tymon\JWTAuth\JWT            
+                        /** @var \Tymon\JWTAuth\JWTAuth $instance */
+                        return $instance->setRequest($request);
+        }
+        
+        /**
+         * Set whether the subject should be "locked".
+         *
+         * @param bool $lock
+         * @return \Tymon\JWTAuth\JWTAuth 
+         * @static 
+         */ 
+        public static function lockSubject($lock)
+        {
+            //Method inherited from \Tymon\JWTAuth\JWT            
+                        /** @var \Tymon\JWTAuth\JWTAuth $instance */
+                        return $instance->lockSubject($lock);
+        }
+        
+        /**
+         * Get the Manager instance.
+         *
+         * @return \Tymon\JWTAuth\Manager 
+         * @static 
+         */ 
+        public static function manager()
+        {
+            //Method inherited from \Tymon\JWTAuth\JWT            
+                        /** @var \Tymon\JWTAuth\JWTAuth $instance */
+                        return $instance->manager();
+        }
+        
+        /**
+         * Get the Parser instance.
+         *
+         * @return \Tymon\JWTAuth\Http\Parser\Parser 
+         * @static 
+         */ 
+        public static function parser()
+        {
+            //Method inherited from \Tymon\JWTAuth\JWT            
+                        /** @var \Tymon\JWTAuth\JWTAuth $instance */
+                        return $instance->parser();
+        }
+        
+        /**
+         * Get the Payload Factory.
+         *
+         * @return \Tymon\JWTAuth\Factory 
+         * @static 
+         */ 
+        public static function factory()
+        {
+            //Method inherited from \Tymon\JWTAuth\JWT            
+                        /** @var \Tymon\JWTAuth\JWTAuth $instance */
+                        return $instance->factory();
+        }
+        
+        /**
+         * Get the Blacklist.
+         *
+         * @return \Tymon\JWTAuth\Blacklist 
+         * @static 
+         */ 
+        public static function blacklist()
+        {
+            //Method inherited from \Tymon\JWTAuth\JWT            
+                        /** @var \Tymon\JWTAuth\JWTAuth $instance */
+                        return $instance->blacklist();
+        }
+        
+        /**
+         * Set the custom claims.
+         *
+         * @param array $customClaims
+         * @return \Tymon\JWTAuth\JWTAuth 
+         * @static 
+         */ 
+        public static function customClaims($customClaims)
+        {
+            //Method inherited from \Tymon\JWTAuth\JWT            
+                        /** @var \Tymon\JWTAuth\JWTAuth $instance */
+                        return $instance->customClaims($customClaims);
+        }
+        
+        /**
+         * Alias to set the custom claims.
+         *
+         * @param array $customClaims
+         * @return \Tymon\JWTAuth\JWTAuth 
+         * @static 
+         */ 
+        public static function claims($customClaims)
+        {
+            //Method inherited from \Tymon\JWTAuth\JWT            
+                        /** @var \Tymon\JWTAuth\JWTAuth $instance */
+                        return $instance->claims($customClaims);
+        }
+        
+        /**
+         * Get the custom claims.
+         *
+         * @return array 
+         * @static 
+         */ 
+        public static function getCustomClaims()
+        {
+            //Method inherited from \Tymon\JWTAuth\JWT            
+                        /** @var \Tymon\JWTAuth\JWTAuth $instance */
+                        return $instance->getCustomClaims();
+        }
+         
+    }
+
+    /**
+     * 
+     *
+     */ 
+    class JWTFactory {
+        
+        /**
+         * Create the Payload instance.
+         *
+         * @param bool $resetClaims
+         * @return \Tymon\JWTAuth\Payload 
+         * @static 
+         */ 
+        public static function make($resetClaims = false)
+        {
+                        /** @var \Tymon\JWTAuth\Factory $instance */
+                        return $instance->make($resetClaims);
+        }
+        
+        /**
+         * Empty the claims collection.
+         *
+         * @return \Tymon\JWTAuth\Factory 
+         * @static 
+         */ 
+        public static function emptyClaims()
+        {
+                        /** @var \Tymon\JWTAuth\Factory $instance */
+                        return $instance->emptyClaims();
+        }
+        
+        /**
+         * Build and get the Claims Collection.
+         *
+         * @return \Tymon\JWTAuth\Claims\Collection 
+         * @static 
+         */ 
+        public static function buildClaimsCollection()
+        {
+                        /** @var \Tymon\JWTAuth\Factory $instance */
+                        return $instance->buildClaimsCollection();
+        }
+        
+        /**
+         * Get a Payload instance with a claims collection.
+         *
+         * @param \Tymon\JWTAuth\Claims\Collection $claims
+         * @return \Tymon\JWTAuth\Payload 
+         * @static 
+         */ 
+        public static function withClaims($claims)
+        {
+                        /** @var \Tymon\JWTAuth\Factory $instance */
+                        return $instance->withClaims($claims);
+        }
+        
+        /**
+         * Set the default claims to be added to the Payload.
+         *
+         * @param array $claims
+         * @return \Tymon\JWTAuth\Factory 
+         * @static 
+         */ 
+        public static function setDefaultClaims($claims)
+        {
+                        /** @var \Tymon\JWTAuth\Factory $instance */
+                        return $instance->setDefaultClaims($claims);
+        }
+        
+        /**
+         * Helper to set the ttl.
+         *
+         * @param int $ttl
+         * @return \Tymon\JWTAuth\Factory 
+         * @static 
+         */ 
+        public static function setTTL($ttl)
+        {
+                        /** @var \Tymon\JWTAuth\Factory $instance */
+                        return $instance->setTTL($ttl);
+        }
+        
+        /**
+         * Helper to get the ttl.
+         *
+         * @return int 
+         * @static 
+         */ 
+        public static function getTTL()
+        {
+                        /** @var \Tymon\JWTAuth\Factory $instance */
+                        return $instance->getTTL();
+        }
+        
+        /**
+         * Get the default claims.
+         *
+         * @return array 
+         * @static 
+         */ 
+        public static function getDefaultClaims()
+        {
+                        /** @var \Tymon\JWTAuth\Factory $instance */
+                        return $instance->getDefaultClaims();
+        }
+        
+        /**
+         * Get the PayloadValidator instance.
+         *
+         * @return \Tymon\JWTAuth\Validators\PayloadValidator 
+         * @static 
+         */ 
+        public static function validator()
+        {
+                        /** @var \Tymon\JWTAuth\Factory $instance */
+                        return $instance->validator();
+        }
+        
+        /**
+         * Set the custom claims.
+         *
+         * @param array $customClaims
+         * @return \Tymon\JWTAuth\Factory 
+         * @static 
+         */ 
+        public static function customClaims($customClaims)
+        {
+                        /** @var \Tymon\JWTAuth\Factory $instance */
+                        return $instance->customClaims($customClaims);
+        }
+        
+        /**
+         * Alias to set the custom claims.
+         *
+         * @param array $customClaims
+         * @return \Tymon\JWTAuth\Factory 
+         * @static 
+         */ 
+        public static function claims($customClaims)
+        {
+                        /** @var \Tymon\JWTAuth\Factory $instance */
+                        return $instance->claims($customClaims);
+        }
+        
+        /**
+         * Get the custom claims.
+         *
+         * @return array 
+         * @static 
+         */ 
+        public static function getCustomClaims()
+        {
+                        /** @var \Tymon\JWTAuth\Factory $instance */
+                        return $instance->getCustomClaims();
+        }
+        
+        /**
+         * Set the refresh flow flag.
+         *
+         * @param bool $refreshFlow
+         * @return \Tymon\JWTAuth\Factory 
+         * @static 
+         */ 
+        public static function setRefreshFlow($refreshFlow = true)
+        {
+                        /** @var \Tymon\JWTAuth\Factory $instance */
+                        return $instance->setRefreshFlow($refreshFlow);
         }
          
     }
@@ -19315,6 +19372,22 @@ namespace  {
             }
          
             /**
+             * Add a where between statement using columns to the query.
+             *
+             * @param string $column
+             * @param array $values
+             * @param string $boolean
+             * @param bool $not
+             * @return \Illuminate\Database\Query\Builder 
+             * @static 
+             */ 
+            public static function whereBetweenColumns($column, $values, $boolean = 'and', $not = false)
+            {
+                                /** @var \Illuminate\Database\Query\Builder $instance */
+                                return $instance->whereBetweenColumns($column, $values, $boolean, $not);
+            }
+         
+            /**
              * Add an or where between statement to the query.
              *
              * @param string $column
@@ -19326,6 +19399,20 @@ namespace  {
             {
                                 /** @var \Illuminate\Database\Query\Builder $instance */
                                 return $instance->orWhereBetween($column, $values);
+            }
+         
+            /**
+             * Add an or where between statement using columns to the query.
+             *
+             * @param string $column
+             * @param array $values
+             * @return \Illuminate\Database\Query\Builder 
+             * @static 
+             */ 
+            public static function orWhereBetweenColumns($column, $values)
+            {
+                                /** @var \Illuminate\Database\Query\Builder $instance */
+                                return $instance->orWhereBetweenColumns($column, $values);
             }
          
             /**
@@ -19344,6 +19431,21 @@ namespace  {
             }
          
             /**
+             * Add a where not between statement using columns to the query.
+             *
+             * @param string $column
+             * @param array $values
+             * @param string $boolean
+             * @return \Illuminate\Database\Query\Builder 
+             * @static 
+             */ 
+            public static function whereNotBetweenColumns($column, $values, $boolean = 'and')
+            {
+                                /** @var \Illuminate\Database\Query\Builder $instance */
+                                return $instance->whereNotBetweenColumns($column, $values, $boolean);
+            }
+         
+            /**
              * Add an or where not between statement to the query.
              *
              * @param string $column
@@ -19355,6 +19457,20 @@ namespace  {
             {
                                 /** @var \Illuminate\Database\Query\Builder $instance */
                                 return $instance->orWhereNotBetween($column, $values);
+            }
+         
+            /**
+             * Add an or where not between statement using columns to the query.
+             *
+             * @param string $column
+             * @param array $values
+             * @return \Illuminate\Database\Query\Builder 
+             * @static 
+             */ 
+            public static function orWhereNotBetweenColumns($column, $values)
+            {
+                                /** @var \Illuminate\Database\Query\Builder $instance */
+                                return $instance->orWhereNotBetweenColumns($column, $values);
             }
          
             /**
@@ -20029,6 +20145,8 @@ namespace  {
             /**
              * Remove all existing orders and optionally add a new order.
              *
+             * @param string|null $column
+             * @param string $direction
              * @return \Illuminate\Database\Query\Builder 
              * @static 
              */ 
@@ -20630,19 +20748,19 @@ namespace  {
 
     class View extends \Illuminate\Support\Facades\View {}
 
+    class Debugbar extends \Barryvdh\Debugbar\Facade {}
+
     class LogToDB extends \danielme85\LaravelLogToDB\LogToDB {}
 
-    class Module extends \Nwidart\Modules\Facades\Module {}
+    class Flare extends \Facade\Ignition\Facades\Flare {}
 
     class Image extends \Intervention\Image\Facades\Image {}
+
+    class Module extends \Nwidart\Modules\Facades\Module {}
 
     class JWTAuth extends \Tymon\JWTAuth\Facades\JWTAuth {}
 
     class JWTFactory extends \Tymon\JWTAuth\Facades\JWTFactory {}
-
-    class Debugbar extends \Barryvdh\Debugbar\Facade {}
-
-    class Flare extends \Facade\Ignition\Facades\Flare {}
 
     class Iseed extends \Orangehill\Iseed\Facades\Iseed {}
  
