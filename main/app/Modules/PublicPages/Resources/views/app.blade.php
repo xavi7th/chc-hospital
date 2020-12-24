@@ -72,9 +72,6 @@
 
   ?>
 
-
-	{{-- @php dump($page) @endphp --}}
-
 </head>
 
 <body>

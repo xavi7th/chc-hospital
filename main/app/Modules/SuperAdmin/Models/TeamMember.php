@@ -33,6 +33,10 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $thumb_url
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Modules\SuperAdmin\Models\TeamMember whereJobDescription($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Modules\SuperAdmin\Models\TeamMember whereThumbUrl($value)
+ * @property string $position
+ * @property string $img
+ * @method static \Illuminate\Database\Eloquent\Builder|TeamMember whereImg($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|TeamMember wherePosition($value)
  */
 class TeamMember extends Model
 {

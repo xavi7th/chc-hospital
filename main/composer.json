@@ -22,13 +22,13 @@
 		"laravel/ui": "^2.0",
 		"nwidart/laravel-modules": "^7.1",
 		"orangehill/iseed": "^2.6",
-		"renatomarinho/laravel-page-speed": "^1.8",
+		"renatomarinho/laravel-page-speed": "^2.0",
 		"tightenco/ziggy": "^0.9.1",
 		"tymon/jwt-auth": "^1.0",
 		"wewowweb/laravel-svelte-preset": "^0.1.7"
 	},
 	"require-dev": {
-		"barryvdh/laravel-debugbar": "^3.3",
+		"barryvdh/laravel-debugbar": "^3.5",
 		"barryvdh/laravel-ide-helper": "^2.7",
 		"facade/ignition": "^2.0",
 		"fzaninotto/faker": "^1.9.1",
