@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "18c1ec685d1bbc969501adee0e043748",
+    "content-hash": "e7f1b6bfe9ad18810da8e4d40a356233",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -2861,67 +2861,6 @@
                 }
             ],
             "time": "2020-08-18T17:17:46+00:00"
-        },
-        {
-            "name": "renatomarinho/laravel-page-speed",
-            "version": "2.x-dev",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/renatomarinho/laravel-page-speed.git",
-                "reference": "750e891428181477d4946f4609795a2f14127bee"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/renatomarinho/laravel-page-speed/zipball/750e891428181477d4946f4609795a2f14127bee",
-                "reference": "750e891428181477d4946f4609795a2f14127bee",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/support": "^5.5 || ^6.0 || ^7.0 || ^8.0",
-                "php": "^7.1.3"
-            },
-            "require-dev": {
-                "mockery/mockery": "^1.3",
-                "orchestra/testbench": "^3.5 || ^4.0 || ^5.0 || ^6.0",
-                "phpunit/phpunit": "^7.5 || ^8.0 || ^9.0",
-                "squizlabs/php_codesniffer": "^3.4"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "RenatoMarinho\\LaravelPageSpeed\\ServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "RenatoMarinho\\LaravelPageSpeed\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Renato Marinho",
-                    "email": "renato.marinho@s2move.com"
-                }
-            ],
-            "description": "Laravel Page Speed",
-            "keywords": [
-                "html",
-                "laravel",
-                "minify",
-                "optimize",
-                "page speed"
-            ],
-            "support": {
-                "issues": "https://github.com/renatomarinho/laravel-page-speed/issues",
-                "source": "https://github.com/renatomarinho/laravel-page-speed/tree/2.x"
-            },
-            "time": "2020-10-31T01:49:34+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
