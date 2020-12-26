@@ -546,7 +546,7 @@
               We have a reasonable number of senior medical officers, who are
               highly trained and have a great deal of experience.
             </p>
-            <a href="general-medicine" class="thm-btn">Read More</a>
+            <InertiaLink href={  route('app.service', 'general-medicine')  } class="thm-btn">Read More</InertiaLink>
           </div>
         </div>
         <div class="col-md-4 col-sm-6 ">
@@ -559,7 +559,7 @@
               At Capitol Hill Clinic / Hospital, we are proud to offer
               comprehensive / quality dental care and customizable dental plans.
             </p>
-            <a href="dental-services" class="thm-btn">Read More</a>
+            <InertiaLink href={  route('app.service', 'dental-care')  } class="thm-btn">Read More</InertiaLink>
           </div>
         </div>
         <div
@@ -574,7 +574,7 @@
               We are able to provide quality neurology transcription service
               that can meet your requirements in a cost-effective manner.
             </p>
-            <a href="neurology" class="thm-btn">Read More</a>
+            <InertiaLink href={  route('app.service', 'neurology')  } class="thm-btn">Read More</InertiaLink>
           </div>
         </div>
       </div>
@@ -614,7 +614,7 @@
               with the most recent -state-of-the-art medical facilities
             </p>
             <br />
-            <a href="about" class="thm-btn">Read More</a>
+            <InertiaLink href={  route('app.about_us')  } class="thm-btn">Read More</InertiaLink>
           </div>
         </div>
       </div>
@@ -1401,9 +1401,9 @@
 			</div>
 		</div>
   </section> -->
-  
+
   <LatestNews />
-<!-- 
+<!--
   <section class="blog-home sec-padding">
     <div class="container">
       <div class="sec-title text-center">

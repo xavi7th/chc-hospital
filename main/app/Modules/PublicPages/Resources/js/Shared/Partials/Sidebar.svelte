@@ -79,7 +79,7 @@
         Dermatology Clinic
       </InertiaLink>
     </li>
-    <li data-tab-name="whiting">
+    <li data-tab-name="whiting" class:active={page == 'dentCare'}>
       <InertiaLink href={route('app.service', 'dental-services')}>
         <i class="fa fa-check" />
         Dental Services
@@ -169,7 +169,7 @@
         Hospital Services
       </InertiaLink>
     </li>
-    <li data-tab-name="crowns">
+    <li data-tab-name="crowns" class:active={page == 'neur'}>
       <InertiaLink href={route('app.service', 'neurology')}>
         <i class="fa fa-check" />
         Neurology
