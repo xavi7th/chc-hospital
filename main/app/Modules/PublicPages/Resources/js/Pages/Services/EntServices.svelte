@@ -1,5 +1,5 @@
 <script>
-  import Layout from "@p-shared/PublicPagesLayout";
+  import Layout from "@p-shared/PublicPagesLayout.svelte";
   import ServiceSidebar from "@p-shared/Partials/Sidebar";
 
   let uploadCV = () => {};
@@ -45,7 +45,7 @@
                 <div class="row">
                   <div class="col-lg-5 col-md-5">
                     <div class="pormo_box_img">
-                      <img src="img/resources/entt.jpg" alt="" />
+                      <img src="/img/resources/entt.jpg" alt="" />
                     </div>
                   </div>
 

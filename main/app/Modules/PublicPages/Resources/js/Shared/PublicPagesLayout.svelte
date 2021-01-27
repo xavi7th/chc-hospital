@@ -24,6 +24,10 @@
     isLoaded = true;
   }} />
 
+  <svelte:head>
+    <title>{title} | Our Services </title>
+  </svelte:head>
+
 <Header {routes} />
 
 {#if !route().current('app.home')}

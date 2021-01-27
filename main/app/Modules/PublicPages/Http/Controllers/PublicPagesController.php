@@ -19,31 +19,27 @@ class PublicPagesController extends Controller
   static function routes()
   {
     // LoginController::routes();
-    Route::group(['middleware' => 'web', 'namespace' => '\App\Modules\PublicPages\Http\Controllers'], function () {
+    Route::name('app.')->middleware('web')->group(function () {
 
-      $p = function ($name) {
-        return 'app.' . $name;
-      };
+      Route::get('/', [self::class, 'index'])->name('home')->defaults('ex', parent::__e(false));
+      Route::get('/about-us', [self::class, 'showAboutPage'])->name('about_us');
+      Route::get('/our-services', [self::class, 'showServicesPage'])->name('services');
+      Route::get('/our-facilities', [self::class, 'showFacilitiesPage'])->name('facilities');
+      Route::get('/work-with-us', [self::class, 'showCareerPage'])->name('career');
+      Route::get('/news', [self::class, 'showNewsPage'])->name('news');
+      Route::get('/news/category/{category?}', [self::class, 'showNewsPage'])->name('news.category')->defaults('ex', parent::__e(true));
+      Route::get('/news/{blogPost:slug}', [self::class, 'showNewsPostPage'])->name('news.post')->defaults('ex', parent::__e(true));
+      Route::get('/our-quality-policy', [self::class, 'showQualityPolicyPage'])->name('quality_policy');
+      Route::get('/our-team', [self::class, 'showTeamPage'])->name('our_team');
+      Route::get('/our-team-members', [self::class, 'showFullTeamPage'])->name('our_full_team')->defaults('ex', parent::__e(true));
+      Route::get('/contact-us', [self::class, 'showContactPage'])->name('contact_us');
+      Route::get('/appointment', [self::class, 'showContactPage'])->name('appointment')->defaults('ex', parent::__e(true));
+      Route::post('/upload-cv', [self::class, 'handleCVUpload'])->name('upload_cv')->defaults('ex', parent::__e(true));
 
-      Route::get('/', [self::class, 'index'])->name($p('home'))->defaults('ex', parent::__e(false));
-      Route::get('/about-us', [self::class, 'showAboutPage'])->name('app.about_us');
-      Route::get('/our-services', [self::class, 'showServicesPage'])->name('app.services');
-      Route::get('/our-facilities', [self::class, 'showFacilitiesPage'])->name('app.facilities');
-      Route::get('/work-with-us', [self::class, 'showCareerPage'])->name('app.career');
-      Route::get('/news', [self::class, 'showNewsPage'])->name('app.news');
-      Route::get('/news/category/{category?}', [self::class, 'showNewsPage'])->name('app.news.category')->defaults('ex', parent::__e(true));
-      Route::get('/news/{blogPost:slug}', [self::class, 'showNewsPostPage'])->name('app.news.post')->defaults('ex', parent::__e(true));
-      Route::get('/our-quality-policy', [self::class, 'showQualityPolicyPage'])->name('app.quality_policy');
-      Route::get('/our-team', [self::class, 'showTeamPage'])->name('app.our_team');
-      Route::get('/our-team-members', [self::class, 'showFullTeamPage'])->name('app.our_full_team')->defaults('ex', parent::__e(true));
-      Route::get('/contact-us', [self::class, 'showContactPage'])->name('app.contact_us');
-      Route::get('/appointment', [self::class, 'showContactPage'])->name('app.appointment')->defaults('ex', parent::__e(true));
-      Route::post('/upload-cv', [self::class, 'handleCVUpload'])->name('app.upload_cv')->defaults('ex', parent::__e(true));
+      Route::get('/message-from-our-md', [self::class, 'showMDMessagePage'])->name('message_from_md')->defaults('ex', parent::__e(true));
+      Route::get('/book-an-appointment', [self::class, 'bookAppointment'])->name('book_appointment')->defaults('ex', parent::__e(true));
 
-      Route::get('/message-from-our-md', [self::class, 'showMDMessagePage'])->name('app.message_from_md')->defaults('ex', parent::__e(true));
-      Route::get('/book-an-appointment', [self::class, 'bookAppointment'])->name('app.book_appointment')->defaults('ex', parent::__e(true));
-
-      Route::get('/services/{service}', [self::class, 'viewServiceItem'])->name('app.service')->defaults('ex', parent::__e(true));
+      Route::get('/services/{service}', [self::class, 'viewServiceItem'])->name('service')->defaults('ex', parent::__e(true));
     });
   }
 
@@ -173,7 +169,7 @@ class PublicPagesController extends Controller
   public function viewServiceItem($service)
   {
     return Inertia::render('PublicPages,Services/' . Str::studly($service))->withViewData([
-      'title' => 'About Capitol Hill Hospital/Clinic Warri',
+      'title' => Str::title(str_replace('-', ' ', $service)) . ' | Our Services',
     ]);
   }
 
