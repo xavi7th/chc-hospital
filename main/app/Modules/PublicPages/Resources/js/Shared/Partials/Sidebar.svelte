@@ -1,7 +1,5 @@
 <script>
   import { InertiaLink } from "@inertiajs/inertia-svelte";
-
-  export let page;
 </script>
 
 <div class="services_lis">
@@ -78,7 +76,7 @@
         Dermatology Clinic
       </InertiaLink>
     </li>
-    <li data-tab-name="whiting" class:active={route().current('app.service', 'general-medicine')}>
+    <li data-tab-name="whiting" class:active={route().current('app.service', 'dental-services')}>
       <InertiaLink href={route('app.service', 'dental-services')}>
         <i class="fa fa-check" />
         Dental Services
@@ -126,7 +124,7 @@
         Dialysis
       </InertiaLink>
     </li>
-    <li data-tab-name="whiting" class:active={route().current('app.service', 'high-dependency')}>
+    <li data-tab-name="whiting" class:active={route().current('app.service', 'high-dependency-care')}>
       <InertiaLink href={route('app.service', 'high-dependency-care')}>
         <i class="fa fa-check" />
         High Dependency Care

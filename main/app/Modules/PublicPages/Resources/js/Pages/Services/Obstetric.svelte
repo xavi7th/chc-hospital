@@ -14,7 +14,7 @@
         <div class="col-lg-3 col-md-3">
           <div class="service_sideber">
 
-            <ServiceSidebar page="entServ" />
+            <ServiceSidebar />
 
           </div>
         </div>
