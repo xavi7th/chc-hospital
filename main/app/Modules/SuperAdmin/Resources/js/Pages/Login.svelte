@@ -1,11 +1,10 @@
 <script>
-  import { page, InertiaLink } from "@inertiajs/inertia-svelte";
+  import { page } from "@inertiajs/inertia-svelte";
   import { Inertia } from "@inertiajs/inertia";
   import Layout from "@s-shared/SuperAdminLayout";
   import FlashMessage from "@p-shared/FlashMessage";
-  import route from "ziggy";
 
-  $: ({ app, flash, errors } = $page);
+  $: ({ app, errors } = $page.props);
 
   let details = {};
 
@@ -13,11 +12,7 @@
     BlockToast.fire({
       text: "Accessing your dashboard..."
     });
-    Inertia.post(route("superadmin.login.post"), { ...details }).then(() => {
-      if (_.size(errors) !== 0) {
-        swal.close();
-      }
-    });
+    Inertia.post(route("superadmin.login.post"), details);
   };
 </script>
 

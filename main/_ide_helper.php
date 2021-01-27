@@ -3,7 +3,7 @@
 
 /**
  * A helper file for Laravel, to provide autocomplete information to your IDE
- * Generated for Laravel 7.30.1.
+ * Generated for Laravel 7.30.4.
  *
  * This file should not be included in your code, only analyzed by your IDE!
  *
@@ -11215,28 +11215,6 @@
         {
                         return \Illuminate\Routing\Router::emailVerification();
         }
-                    /**
-         * 
-         *
-         * @see \Tightenco\Ziggy\ZiggyServiceProvider::boot()
-         * @param mixed $group
-         * @static 
-         */ 
-        public static function blacklist($group = null)
-        {
-                        return \Illuminate\Routing\Router::blacklist($group);
-        }
-                    /**
-         * 
-         *
-         * @see \Tightenco\Ziggy\ZiggyServiceProvider::boot()
-         * @param mixed $group
-         * @static 
-         */ 
-        public static function whitelist($group = null)
-        {
-                        return \Illuminate\Routing\Router::whitelist($group);
-        }
          
     }
             /**
@@ -14185,6 +14163,34 @@
         class Str {
          
     }
+            /**
+     * 
+     *
+     */ 
+        class Collection {
+                    /**
+         * 
+         *
+         * @see \Barryvdh\Debugbar\ServiceProvider::register()
+         * @static 
+         */ 
+        public static function debug()
+        {
+                        return \Illuminate\Support\Collection::debug();
+        }
+                    /**
+         * 
+         *
+         * @see \Spatie\LaravelRay\RayServiceProvider::registerMacros()
+         * @param string $description
+         * @static 
+         */ 
+        public static function ray($description = '')
+        {
+                        return \Illuminate\Support\Collection::ray($description);
+        }
+         
+    }
      
 }
 
@@ -16337,27 +16343,27 @@
         {
                         return \Illuminate\Routing\Router::emailVerification();
         }
+         
+    }
+     
+}
+
+    namespace Illuminate\Testing { 
+            /**
+     * 
+     *
+     * @mixin \Illuminate\Http\Response
+     */ 
+        class TestResponse {
                     /**
          * 
          *
-         * @see \Tightenco\Ziggy\ZiggyServiceProvider::boot()
-         * @param mixed $group
+         * @see \Spatie\LaravelRay\RayServiceProvider::registerMacros()
          * @static 
          */ 
-        public static function blacklist($group = null)
+        public static function ray()
         {
-                        return \Illuminate\Routing\Router::blacklist($group);
-        }
-                    /**
-         * 
-         *
-         * @see \Tightenco\Ziggy\ZiggyServiceProvider::boot()
-         * @param mixed $group
-         * @static 
-         */ 
-        public static function whitelist($group = null)
-        {
-                        return \Illuminate\Routing\Router::whitelist($group);
+                        return \Illuminate\Testing\TestResponse::ray();
         }
          
     }

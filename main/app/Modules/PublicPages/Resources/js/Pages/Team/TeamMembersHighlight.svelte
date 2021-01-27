@@ -1,6 +1,5 @@
 <script>
-  import { page, InertiaLink } from "@inertiajs/inertia-svelte";
-  import route from "ziggy";
+  import { InertiaLink } from "@inertiajs/inertia-svelte";
 
   export let teamMembers;
 </script>

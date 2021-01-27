@@ -1,14 +1,9 @@
 const mix = require('laravel-mix');
 const autoPreprocess = require('svelte-preprocess');
-const {
-	CleanWebpackPlugin
-} = require('clean-webpack-plugin');
-
-require('laravel-mix-merge-manifest');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 require('laravel-mix-svelte');
-
-mix.setPublicPath('./public_html');
-
+require('laravel-mix-bundle-analyzer');
+// require('laravel-mix-purgecss');
 let fs = require('fs-extra');
 let modules = fs.readdirSync('./main/app/Modules');
 
@@ -21,30 +16,24 @@ if (modules && modules.length > 0) {
 	});
 }
 
-mix.webpackConfig({
-	output: {
-		filename: "[name].[chunkhash].js",
-		chunkFilename: "[name].[chunkhash].js",
-	},
-	resolve: {
-		alias: {
-			ziggy: path.resolve('./main/vendor/tightenco/ziggy/dist/js/route.min.js')
-		},
-	},
-	plugins: [
-    new CleanWebpackPlugin({
-			dry: false,
-			cleanOnceBeforeBuildPatterns: ['js/*', './*.js', 'robots.txt', 'mix-manifest.json', 'css/*', 'img/*',
-				'fonts/*']
-
-		}),
-    ]
-});
+mix.setPublicPath('./public_html');
 
 mix.babelConfig({
 	plugins: ['@babel/plugin-syntax-dynamic-import'],
 });
 
+mix.webpackConfig({
+	output: {
+		filename: mix.inProduction() ? "[name].[contenthash].js" : "[name].[hash].js",
+			chunkFilename: mix.inProduction() ? "[name].[contenthash].js" : "[name].[hash].js",
+	},
+	plugins: [
+    new CleanWebpackPlugin({
+			dry: false,
+			cleanOnceBeforeBuildPatterns: ['js/*', './*.js', 'robots.txt', 'mix-manifest.json', 'css/*', 'img/*', 'fonts/*']
+		}),
+    ]
+});
 mix.options({
 		fileLoaderDirs: {
 			images: 'img'
@@ -79,7 +68,10 @@ mix.options({
 			}
 			if (code == 'css-unused-selector' && frame.includes('sweetalert')) {
 				return
-			}
+      }
+      if (code == 'missing-declaration' && frame.includes('route')) {
+      	return
+      }
 
 			console.log(
 				'\x1b[41m%s\x1b[0m',
@@ -128,3 +120,31 @@ mix.options({
 if (!mix.inProduction()) {
 	mix.sourceMaps()
 }
+
+if (mix.inProduction()) {
+	mix.bundleAnalyzer();
+}
+
+// mix.browserSync({
+//   proxy:'romzynew.test/login',
+//   // Disable UI completely
+//   // ui: false,
+//   // files: [
+//   //   "wp-content/themes/**/*.css",
+//   //   {
+//   //       match: ["wp-content/themes/**/*.php"],
+//   //       fn:    function (event, file) {
+//   //           /** Custom event handler **/
+//   //       }
+//   //   }
+//   // ],
+//   // ghostMode: {
+//   //   clicks: true,
+//   //   forms: true,
+//   //   scroll: false
+//   // },
+//   // notify: false,
+//   // reloadDelay: 2000,
+//   // // Don't append timestamps to injected files
+//   // timestamps: false
+// })

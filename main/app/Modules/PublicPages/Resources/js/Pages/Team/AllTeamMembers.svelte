@@ -1,9 +1,5 @@
 <script>
-  import { page, InertiaLink } from "@inertiajs/inertia-svelte";
   import Layout from "@p-shared/PublicPagesLayout";
-
-  import route from "ziggy";
-  $: ({ app } = $page);
 
   export let teamMembers;
 </script>

@@ -1,9 +1,6 @@
 <script>
-    import { page, InertiaLink } from "@inertiajs/inertia-svelte";
     import Layout from "@p-shared/PublicPagesLayout";
     import ServiceSidebar from "@p-shared/Partials/Sidebar";
-    import route from "ziggy";
-    $: ({ app } = $page);
 </script>
 
 <Layout title="Neurology">

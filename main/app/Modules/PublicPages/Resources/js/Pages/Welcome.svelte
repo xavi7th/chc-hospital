@@ -2,7 +2,6 @@
   import { page, InertiaLink } from "@inertiajs/inertia-svelte";
   import Layout from "@p-shared/PublicPagesLayout";
   import LatestNews from "@p-shared/Partials/LatestNews";
-  import route from "ziggy";
 </script>
 
 <Layout title="Welcome">
@@ -1243,10 +1242,10 @@
             <span
               class="timer"
               data-from="10"
-              data-to={$page.app.num_of_doctors}
+              data-to={$page.props.app.num_of_doctors}
               data-speed="2000"
               data-refresh-interval="50">
-              {$page.app.num_of_doctors}
+              {$page.props.app.num_of_doctors}
             </span>
             <p>Total Doctors</p>
           </div>
@@ -1257,10 +1256,10 @@
             <span
               class="timer"
               data-from="5"
-              data-to={$page.app.num_of_beds}
+              data-to={$page.props.app.num_of_beds}
               data-speed="200"
               data-refresh-interval="25">
-              {$page.app.num_of_beds}
+              {$page.props.app.num_of_beds}
             </span>
             <p>Total Beds</p>
           </div>

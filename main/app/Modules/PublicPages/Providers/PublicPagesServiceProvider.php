@@ -2,12 +2,6 @@
 
 namespace App\Modules\PublicPages\Providers;
 
-use Inertia\Inertia;
-use Illuminate\Support\Str;
-use Illuminate\Http\Request;
-use Illuminate\Routing\Route;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Session;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
 use App\Modules\PublicPages\Providers\RouteServiceProvider;
@@ -46,51 +40,6 @@ class PublicPagesServiceProvider extends ServiceProvider
   public function register()
   {
     $this->app->register(RouteServiceProvider::class);
-    $this->registerInertia();
-  }
-
-
-  public function registerInertia()
-  {
-    Inertia::version(function () {
-      return md5_file(public_path('mix-manifest.json'));
-    });
-
-    Inertia::share([
-      'app' => [
-        'name' => config('app.name'),
-        'whatsapp' => config('app.whatsapp'),
-        'phone' => config('app.phone'),
-        'email' => config('app.email'),
-        'email2' => config('app.email2'),
-        'email3' => config('app.email3'),
-        'email4' => config('app.email4'),
-        'phone1' => config('app.phone1'),
-        'phone2' => config('app.phone2'),
-        'phone3' => config('app.phone3'),
-        'phone4' => config('app.phone4'),
-        'phone5' => config('app.phone5'),
-        'address1' => config('app.address1'),
-        'address2' => config('app.address2'),
-        'num_of_beds' => config('app.num_of_beds'),
-        'num_of_doctors' => config('app.num_of_doctors'),
-      ],
-      'routes' => function (Request $request) {
-        return request()->route() ? Str::of(request()->route()->getName())->contains('superadmin') ? optional($request->user())->get_navigation_routes() ?? (object)[] : get_related_routes('app.', ['GET'], true) : (object)[];
-      },
-      'isInertiaRequest' => (bool)request()->header('X-Inertia'),
-      'flash' => function () {
-        return [
-          'success' => Session::get('success'),
-          'error' => Session::get('error'),
-        ];
-      },
-      'errors' => function () {
-        return Session::get('errors')
-          ? Session::get('errors')->getBag('default')->getMessages()
-          : (object)[];
-      },
-    ]);
   }
 
   /**

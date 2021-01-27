@@ -16,11 +16,6 @@ use App\Modules\PublicPages\Models\UploadedDocument;
 
 class PublicPagesController extends Controller
 {
-  public function __construct()
-  {
-    Inertia::setRootView('publicpages::app');
-  }
-
   static function routes()
   {
     // LoginController::routes();
@@ -54,7 +49,7 @@ class PublicPagesController extends Controller
 
   public function index(Request $request)
   {
-    return Inertia::render('Welcome')->withViewData([
+    return Inertia::render('PublicPages,Welcome')->withViewData([
       'title' => 'Welcome to Capitol Hill Hospital/Clinic Warri, Delta State',
       'description' => 'Capitol Hill Clinic/Hospital is a multi-functional hospital, Situated at Ranyo’s Place, Warri, Nigeria. Our Medical Center is an all purpose general specialist practice enclave with non partnership group practice encompassing surgery, obstetrics etc.',
       'keywords' => 'hospital, clinic, laboratory, surgery, capitol hill hospital, warri, delta state, nigeria, specialist, medical',
@@ -64,21 +59,21 @@ class PublicPagesController extends Controller
 
   public function showAboutPage(Request $request)
   {
-    return Inertia::render('About')->withViewData([
+    return Inertia::render('PublicPages,About')->withViewData([
       'title' => 'About Capitol Hill Hospital/Clinic Warri',
     ]);
   }
 
   public function showMDMessagePage(Request $request)
   {
-    return Inertia::render('MDMessage')->withViewData([
+    return Inertia::render('PublicPages,MDMessage')->withViewData([
       'title' => 'Message from our MD/CEO',
     ]);
   }
 
   public function showServicesPage(Request $request)
   {
-    return Inertia::render('Services')->withViewData([
+    return Inertia::render('PublicPages,Services')->withViewData([
       'title' => 'Our Services',
       'description' => 'Qualitative health care is all about the services available to your customers. At Capitol Hill we have top of the line services'
     ]);
@@ -86,14 +81,14 @@ class PublicPagesController extends Controller
 
   public function showFacilitiesPage(Request $request)
   {
-    return Inertia::render('Facilities')->withViewData([
+    return Inertia::render('PublicPages,Facilities')->withViewData([
       'title' => 'Facilities available at ' . config('app.name'),
     ]);
   }
 
   public function showCareerPage(Request $request)
   {
-    return Inertia::render('Career', [
+    return Inertia::render('PublicPages,Career', [
       'jobListings' => JobListing::latest()->get()
     ])->withViewData([
       'title' => 'About Capitol Hill Hospital/Clinic Warri',
@@ -109,7 +104,7 @@ class PublicPagesController extends Controller
       $blogPosts = BlogPost::inRandomOrder()->take(8)->get(['id', 'title', 'slug', 'author', 'created_at', 'img_url', 'thumb_url', 'content'])->each->append(['summary', 'human_date'])->each->makeHidden('content');
     }
 
-    return Inertia::render('BlogPosts', [
+    return Inertia::render('PublicPages,BlogPosts', [
       'blogPosts' => $blogPosts,
       'categories' => BlogPost::select('category', 'category_slug')->distinct()->get(),
       'latestArticles' => BlogPost::latest()->take(6)->get(['title', 'author', 'created_at', 'slug'])->each->append('human_date'),
@@ -120,7 +115,7 @@ class PublicPagesController extends Controller
 
   public function showNewsPostPage(BlogPost $blogPost)
   {
-    return Inertia::render('ViewBlogPost', [
+    return Inertia::render('PublicPages,ViewBlogPost', [
       'blogPost' => $blogPost->append('human_date'),
       'categories' => BlogPost::select('category', 'category_slug')->distinct()->get(),
       'latestArticles' => BlogPost::latest()->take(6)->get(['title', 'author', 'created_at', 'slug'])->each->append('human_date'),
@@ -131,28 +126,28 @@ class PublicPagesController extends Controller
 
   public function showBlogPage(Request $request)
   {
-    return Inertia::render('Blog')->withViewData([
+    return Inertia::render('PublicPages,Blog')->withViewData([
       'title' => 'About Capitol Hill Hospital/Clinic Warri',
     ]);
   }
 
   public function showQualityPolicyPage(Request $request)
   {
-    return Inertia::render('QualityPolicy')->withViewData([
+    return Inertia::render('PublicPages,QualityPolicy')->withViewData([
       'title' => 'About Capitol Hill Hospital/Clinic Warri',
     ]);
   }
 
   public function showContactPage(Request $request)
   {
-    return Inertia::render('Contact')->withViewData([
+    return Inertia::render('PublicPages,Contact')->withViewData([
       'title' => 'About Capitol Hill Hospital/Clinic Warri',
     ]);
   }
 
   public function showTeamPage(Request $request)
   {
-    return Inertia::render('Team/Team', [
+    return Inertia::render('PublicPages,Team/Team', [
       'teamMembers' => TeamMember::inRandomOrder()->take(4)->get()
     ])->withViewData([
       'title' => 'About Capitol Hill Hospital/Clinic Warri',
@@ -161,7 +156,7 @@ class PublicPagesController extends Controller
 
   public function showFullTeamPage()
   {
-    return Inertia::render('Team/AllTeamMembers', [
+    return Inertia::render('PublicPages,Team/AllTeamMembers', [
       'teamMembers' => TeamMember::all()
     ])->withViewData([
       'title' => 'About Capitol Hill Hospital/Clinic Warri',
@@ -170,14 +165,14 @@ class PublicPagesController extends Controller
 
   public function bookAppointment(Request $request)
   {
-    return Inertia::render('Appointment')->withViewData([
+    return Inertia::render('PublicPages,Appointment')->withViewData([
       'title' => 'About Capitol Hill Hospital/Clinic Warri',
     ]);
   }
 
   public function viewServiceItem($service)
   {
-    return Inertia::render('Services/' . Str::studly($service))->withViewData([
+    return Inertia::render('PublicPages,Services/' . Str::studly($service))->withViewData([
       'title' => 'About Capitol Hill Hospital/Clinic Warri',
     ]);
   }
@@ -195,7 +190,7 @@ class PublicPagesController extends Controller
 
     if ($validator->fails()) {
       return back()->withErrors($validator)
-        ->withError('There are errors in your submission');
+        ->withFlash(['error' => 'There are errors in your submission']);
     }
 
     $url = Storage::url($request->file('cv')->store('public/uploaded_cvs'));
@@ -207,6 +202,6 @@ class PublicPagesController extends Controller
       'cv' => $url
     ]);
 
-    return back()->withSuccess('Your CV has been submitted successfully. A member of our HR team will contact you.');
+    return back()->withFlash(['success' => 'Your CV has been submitted successfully. A member of our HR team will contact you.']);
   }
 }

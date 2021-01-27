@@ -17,11 +17,6 @@ use App\Modules\SuperAdmin\Models\BlogPost;
 
 class SuperAdminController extends Controller
 {
-  public function __construct()
-  {
-    Inertia::setRootView('superadmin::app');
-  }
-
 
   static function routes()
   {
@@ -65,14 +60,14 @@ class SuperAdminController extends Controller
    */
   public function index()
   {
-    return Inertia::render('Dashboard')->withViewData([
+    return Inertia::render('SuperAdmin,Dashboard')->withViewData([
       'title' => config('app.name') . ' Admin Dashboard'
     ]);
   }
 
   public function viewCVs()
   {
-    return Inertia::render('ManageCVs', [
+    return Inertia::render('SuperAdmin,ManageCVs', [
       'uploadedCVs' => UploadedDocument::all()
     ]);
   }
@@ -80,19 +75,19 @@ class SuperAdminController extends Controller
   public function deleteUploadedDocument(UploadedDocument $uploadedDocument)
   {
     $uploadedDocument->delete();
-    return back()->withSuccess('CV deleted');
+    return back()->withFlash(['success' => 'CV deleted']);
   }
 
   public function viewTeamMembers()
   {
-    return Inertia::render('ManageTeamMembers', [
+    return Inertia::render('SuperAdmin,ManageTeamMembers', [
       'teamMembers' => TeamMember::all()
     ]);
   }
 
   public function viewCreateTeamMemberPage()
   {
-    return Inertia::render('CreateTeamMember');
+    return Inertia::render('SuperAdmin,CreateTeamMember');
   }
 
   public function createTeamMember(Request $request)
@@ -110,31 +105,31 @@ class SuperAdminController extends Controller
     if ($validator->fails()) {
       return back()
         ->withErrors($validator)
-        ->withError('There are errors in your form!');
+        ->withFlash(['error' => 'There are errors in your form!']);
     }
 
     $img_url = compress_image_upload('profile_photo', '/img/profile-photos/', '/img/profile-photos/thumbs/',  1400, true);
     TeamMember::create(collect($validator->validated())->merge($img_url)->toArray());
 
-    return back()->withSuccess('Team member profile created');
+    return back()->withFlash(['success' => 'Team member profile created']);
   }
 
   public function deleteTeamMember(TeamMember $teamMember)
   {
     $teamMember->delete();
-    return back()->withSuccess('Profile deleted');
+    return back()->withFlash(['success' => 'Profile deleted']);
   }
 
   public function viewJobListings(Request $request)
   {
-    return Inertia::render('ManageJobListings', [
+    return Inertia::render('SuperAdmin,ManageJobListings', [
       'jobListings' => JobListing::latest()->get()
     ]);
   }
 
   public function viewCreateJobListingPage(Request $request)
   {
-    return Inertia::render('CreateJobListing');
+    return Inertia::render('SuperAdmin,CreateJobListing');
   }
 
   public function createJobListing(Request $request)
@@ -150,23 +145,23 @@ class SuperAdminController extends Controller
     if ($validator->fails()) {
       return back()
         ->withErrors($validator)
-        ->withError('There are errors in your form!');
+        ->withFlash(['error' => 'There are errors in your form!']);
     }
 
     JobListing::create($validator->validated());
 
-    return back()->withSuccess('Job listing created');
+    return back()->withFlash(['success' => 'Job listing created']);
   }
 
   public function deleteJobListing(JobListing $jobListing)
   {
     $jobListing->delete();
-    return back()->withSuccess('Job listing deleted');
+    return back()->withFlash(['success' => 'Job listing deleted']);
   }
 
   public function viewBlogPosts(Request $request)
   {
-    return Inertia::render('ListBlogPosts', [
+    return Inertia::render('SuperAdmin,ListBlogPosts', [
       'blogPosts' => BlogPost::latest()->get(['id', 'title', 'thumb_url', 'author', 'created_at'])
     ]);
   }
@@ -174,14 +169,14 @@ class SuperAdminController extends Controller
   public function viewBlogPost(BlogPost $blogPost)
   {
 
-    return Inertia::render('ViewBlogPost', compact('blogPost'));
+    return Inertia::render('SuperAdmin,ViewBlogPost', compact('blogPost'));
   }
 
   public function viewCreateBlogPostPage(Request $request, BlogPost $blogPost = null)
   {
     $blogPost = $blogPost ?? (object)[];
     $categories = BlogPost::select('category')->distinct()->get();
-    return Inertia::render('CreateBlogPost', compact('blogPost', 'categories'));
+    return Inertia::render('SuperAdmin,CreateBlogPost', compact('blogPost', 'categories'));
   }
 
   public function createBlogPost(Request $request)
@@ -198,14 +193,14 @@ class SuperAdminController extends Controller
     if ($validator->fails()) {
       return back()
         ->withErrors($validator)
-        ->withError('There are errors in your form!');
+        ->withFlash(['error' => 'There are errors in your form!']);
     }
 
     $img_url = compress_image_upload('post_img', '/img/blog/', '/img/blog/thumbs/',  1400, true);
     // dd(collect($validator->validated())->except('content')->merge($img_url)->merge(['content' => strip_tags_content($request->content)])->toArray());
     BlogPost::create(collect($validator->validated())->except('content')->merge($img_url)->merge(['content' => strip_tags_content($request->content)])->toArray());
 
-    return back()->withSuccess('Job listing created');
+    return back()->withFlash(['success' => 'Job listing created']);
   }
 
   public function editBlogPost(Request $request)
@@ -221,17 +216,17 @@ class SuperAdminController extends Controller
     if ($validator->fails()) {
       return back()
         ->withErrors($validator)
-        ->withError('There are errors in your form!');
+        ->withFlash(['error' => 'There are errors in your form!']);
     }
 
     BlogPost::update($validator->validated());
 
-    return back()->withSuccess('Job listing created');
+    return back()->withFlash(['success' => 'Job listing created']);
   }
 
   public function deleteBlogPost(BlogPost $blogPost)
   {
     $blogPost->delete();
-    return back()->withSuccess('Blog Post deleted');
+    return back()->withFlash(['success' => 'Blog Post deleted']);
   }
 }

@@ -1,8 +1,7 @@
 <script>
   import { page, InertiaLink } from "@inertiajs/inertia-svelte";
   import Layout from "@p-shared/PublicPagesLayout";
-  import route from "ziggy";
-  $: ({ app } = $page);
+  $: ({ app } = $page.props);
 </script>
 
 <Layout title="Message From Our MD">

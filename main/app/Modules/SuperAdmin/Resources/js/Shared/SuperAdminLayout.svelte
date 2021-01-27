@@ -1,14 +1,12 @@
 <script>
-  import { page, InertiaLink } from "@inertiajs/inertia-svelte";
+  import { page } from "@inertiajs/inertia-svelte";
   import { onMount } from "svelte";
   import { fly } from "svelte/transition";
-  import route from "ziggy";
   import Sidebar from "@s-shared/Partials/Sidebar";
   import Header from "@s-shared/Partials/Header";
   import PageTitle from "@s-shared/Partials/PageTitle";
-  import Footer from "@s-shared/Partials/Footer";
 
-  $: ({ app, routes } = $page);
+  $: ({ app, routes } = $page.props);
 
   let isLoaded = false,
     isMounted = false;
@@ -21,9 +19,6 @@
 </script>
 
 <style lang="scss">
-:global{
-  @import "../../sass/app";
-}
   .auth-right {
     background-size: cover;
   }

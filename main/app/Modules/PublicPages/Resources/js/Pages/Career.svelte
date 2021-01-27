@@ -4,52 +4,37 @@
     import Layout from "@p-shared/PublicPagesLayout";
     import LatestNews from "@p-shared/Partials/LatestNews";
     import ReachUs from "@p-pages/Team/ReachUs";
-    import FlashMessage from "@p-shared/FlashMessage";
-    import route from "ziggy";
+    import FlashMessage from "@p-shared/FlashMessage.svelte";
 
-    $: ({ app, errors, flash, jobListings } = $page);
+    $: ({ app, errors, jobListings } = $page.props);
+
+    let details = {};
 
     let uploadCV = () => {
         BlockToast.fire({
             text: "Uploading CV...."
         });
 
-        let formData = new FormData();
-        _.forEach(details, (val, key) => {
-            formData.append(key, val);
-        });
         Inertia.post(
             route("app.upload_cv"),
-            formData,
+            details,
             {
-                headers: {
-                    "Content-Type": "multipart/form-data"
-                }
+              onSuccess:()  => {
+                details.cv = null;
+                details = {};
+              }
             },
             {
                 preserveState: true,
                 preserveScroll: true
             }
-        ).then(() => {
-            if (flash.success) {
-                details.cv = null;
-                details = {};
-                ToastLarge.fire({
-                    title: "Successful!",
-                    html: flash.success,
-                    timer: 10000
-                });
-            } else {
-                swal.close();
-            }
-        });
+        )
     };
     let attachFile = e => {
         details.cv = e.target.files[0];
     };
 
     let viewFullJobDescription = listing => {
-        console.log(listing);
         swal.fire({
             icon: "info",
             title: listing.job_title,
@@ -60,7 +45,7 @@
         });
     };
 
-    let details = {};
+
 </script>
 
 <style lang="scss">

@@ -1,11 +1,5 @@
 <script>
-  import { page, InertiaLink } from "@inertiajs/inertia-svelte";
-  import { Inertia } from "@inertiajs/inertia";
   import Layout from "@s-shared/SuperAdminLayout";
-  import FlashMessage from "@p-shared/FlashMessage";
-  import route from "ziggy";
-
-  $: ({ app, flash, status } = $page);
 
   export let blogPost = {};
 </script>

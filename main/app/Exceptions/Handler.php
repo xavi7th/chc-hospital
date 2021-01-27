@@ -63,13 +63,12 @@ class Handler extends ExceptionHandler
         $this->log404($request);
       }
       try {
-        Inertia::setRootView('publicpages::app');
         return Inertia::render('DisplayError', ['status' => $response->status()])
           ->toResponse($request)
           ->setStatusCode($response->status());
       } catch (\Throwable $th) { }
     } elseif (in_array($response->status(), [419])) {
-      return back()->withError('Your session has expired. Please try again');
+      return back()->withFlash(['error' => 'Your session has expired. Please try again']);
     }
 
     return $response;

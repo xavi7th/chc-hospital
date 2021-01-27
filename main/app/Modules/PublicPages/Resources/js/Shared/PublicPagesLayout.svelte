@@ -3,24 +3,15 @@
   import Header from "@p-shared/Partials/Header";
   import PageTitle from "@p-shared/Partials/PageTitle";
   import Footer from "@p-shared/Partials/Footer";
-  import { fade } from "svelte/transition";
-  import { page, InertiaLink } from "@inertiajs/inertia-svelte";
-  import { toCurrency } from "@p-shared/utils";
-  import { Inertia } from "@inertiajs/inertia";
-  import route from "ziggy";
-  import { afterUpdate } from "svelte";
+  import { page } from "@inertiajs/inertia-svelte";
 
   let isLoaded = false,
     pageLoaded = false;
 
-  $: ({ isInertiaRequest, app, routes } = $page);
+  $: ({ isInertiaRequest, app, routes } = $page.props);
 
   export let title;
 </script>
-
-<style lang="scss" global>
-  @import "../../sass/app";
-</style>
 
 {#if !pageLoaded && !isInertiaRequest}
   <PageLoader />

@@ -1,12 +1,11 @@
 <script>
-  import { page, InertiaLink } from "@inertiajs/inertia-svelte";
+  import { page } from "@inertiajs/inertia-svelte";
   import { Inertia } from "@inertiajs/inertia";
   import Layout from "@s-shared/SuperAdminLayout";
   import FlashMessage from "@p-shared/FlashMessage";
   import { onMount } from "svelte";
-  import route from "ziggy";
 
-  $: ({ app, flash, errors } = $page);
+  $: ({ flash, errors } = $page.props);
 
   let details = {},
     pageLoaded = false;

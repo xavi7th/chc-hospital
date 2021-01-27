@@ -1,5 +1,16 @@
-window._ = require('lodash');
+import { App } from '@inertiajs/inertia-svelte'
+import { InertiaProgress } from '@inertiajs/progress'
+import { Inertia } from "@inertiajs/inertia";
+import { getErrorString, mediaHandler } from "@p-shared/helpers";
+
 window.swal = require('sweetalert2')
+window._ = {
+	forEach: require('lodash/forEach'),
+	isString: require('lodash/isString'),
+	reduce: require('lodash/reduce'),
+	size: require('lodash/size'),
+	split: require('lodash/split'),
+}
 
 window.Toast = swal.mixin({
 	toast: true,
@@ -8,17 +19,6 @@ window.Toast = swal.mixin({
 	timer: 2000,
 	icon: "success"
 });
-
-window.BlockToast = swal.mixin({
-	showConfirmButton: true,
-	showCloseButton: false,
-	allowOutsideClick: false,
-	allowEscapeKey: false,
-	onBeforeOpen: () => {
-		swal.showLoading()
-	}
-});
-
 window.ToastLarge = swal.mixin({
 	icon: "success",
 	title: 'To be implemented!',
@@ -27,19 +27,18 @@ window.ToastLarge = swal.mixin({
 	timerProgressBar: true,
 	onBeforeOpen: () => {
 		swal.showLoading()
-		// timerInterval = setInterval( () => {
-		//     const content = swal.getContent()
-		//     if ( content ) {
-		//         const b = content.querySelector( 'b' )
-		//         if ( b ) {
-		//             b.textContent = Swal.getTimerLeft()
-		//         }
-		//     }
-		// }, 100 )
 	},
-	// onClose: () => {
-	//     clearInterval( timerInterval )
-	// }
+	// onClose: () => {}
+	})
+
+	window.BlockToast = swal.mixin({
+				showConfirmButton: true,
+				onBeforeOpen: () => {
+					swal.showLoading()
+				},
+				showCloseButton: false,
+				allowOutsideClick: false,
+				allowEscapeKey: false
 });
 
 window.swalPreconfirm = swal.mixin({
@@ -59,49 +58,97 @@ window.swalPreconfirm = swal.mixin({
 		/** Implement this when you call the mixin */
 	},
 })
-/**
- * Implement this when you call the mixin
- * .then( ( result ) => {} );
- */
+InertiaProgress.init({
+	// The delay after which the progress bar will
+	// appear during navigation, in milliseconds.
+	delay: 250,
 
-/**
- * Echo exposes an expressive API for subscribing to channels and listening
- * for events that are broadcast by Laravel. Echo and event broadcasting
- * allows your team to easily build robust real-time web applications.
- */
+	// The color of the progress bar.
+	color: '#29d',
 
-// import Echo from 'laravel-echo';
+	// Whether to include the default NProgress styles.
+	includeCSS: true,
 
-// window.Pusher = require('pusher-js');
+	// Whether the NProgress spinner will be shown.
+	showSpinner: true,
+})
 
-// window.Echo = new Echo({
-//     broadcaster: 'pusher',
-//     key: process.env.MIX_PUSHER_APP_KEY,
-//     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
-//     encrypted: true
-// });
+Inertia.on('progress', (event) => {
+	console.log(event);
+})
 
-import {
-	InertiaApp
-} from '@inertiajs/inertia-svelte'
+Inertia.on('success', (e) => {
+	if (e.detail.page.props.flash.success) {
+		ToastLarge.fire({
+			title: "Success",
+			html: e.detail.page.props.flash.success,
+			icon: "success",
+			timer: 1000,
+			allowEscapeKey: true
+		});
+	} else {
+		swal.close();
+	}
+})
+
+Inertia.on('error', (e) => {
+	console.log(`There were errors on your visit`)
+	console.log(e)
+	ToastLarge.fire({
+		title: "Error",
+		html: getErrorString(e.detail.errors),
+		icon: "error",
+		timer: 10000, //milliseconds
+		footer: `Our support email: &nbsp;&nbsp;&nbsp; <a target="_blank" href="mailto:hello@theelects.com">hello@theelects.com</a>`,
+	});
+})
+
+Inertia.on('invalid', (event) => {
+			console.log(`An invalid Inertia response was received.`)
+
+	console.log(event);
+
+	event.preventDefault()
+	Toast.fire({
+	position: 'top',
+	title: 'Oops!',
+	text: event.detail.response.statusText,
+	icon: 'error'
+	})
+	})
+
+	Inertia.on('exception', (event) => {
+		console.log(event);
+		console.log(`An unexpected error occurred during an Inertia visit.`)
+		console.log(event.detail.error)
+	})
+
+Inertia.on('finish', (e) => {
+	// console.log(e);
+})
+
+let { isMobile, isDesktop } = mediaHandler();
 
 const app = document.getElementById('app')
-
-new InertiaApp({
+new App({
 	target: app,
 	props: {
 		initialPage: JSON.parse(app.dataset.page),
-		resolveComponent: name => import( 
-			/* webpackChunkName: "js/[request]" */
+		resolveComponent: str => {
+				let [section, module] = _.split(str, ',');
+
+				return import(
+				/* webpackChunkName: "js/[request]" */
 				/* webpackPrefetch: true */
-				`./Pages/${name}.svelte`)
-			.then(module => module.default)
-			.catch(err => {
-				if (err.code == "MODULE_NOT_FOUND") {
-					location.href = '/'
-				} else {
-					console.error(err);
-				}
-			}),
+				`../../../${section}/Resources/js/Pages/${module}.svelte`)
+				},
+				resolveErrors: page => ((page.props.flash.error || page.props.errors) || {}),
+					transformProps: props => {
+						return {
+							...props,
+							isMobile,
+							isDesktop
+			}
+		}
 	},
 })

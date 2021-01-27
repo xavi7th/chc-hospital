@@ -36,7 +36,6 @@ class LoginController extends Controller
   public function __construct()
   {
     $this->middleware('guest')->except('logout');
-    // Inertia::setRootView('superadmin::app');
   }
 
   static function routes()
@@ -50,8 +49,7 @@ class LoginController extends Controller
 
   public function showLoginForm()
   {
-    // dd('ere');
-    return Inertia::render('Login')->withViewData([
+    return Inertia::render('SuperAdmin,Login')->withViewData([
       'title' => 'Login | ' . config('app.name') . ' Admin Dashboard'
     ]);
   }

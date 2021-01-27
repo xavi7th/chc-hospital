@@ -1,6 +1,6 @@
 <script>
   import { page } from "@inertiajs/inertia-svelte";
-  $: ({ flash } = $page);
+  $: ({ flash } = $page.props);
 
   export let msg,
     isGeneralError = false;

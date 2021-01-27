@@ -1,5 +1,4 @@
 <script>
-    import route from "ziggy";
     export let title;
 </script>
 

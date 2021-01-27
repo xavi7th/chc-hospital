@@ -1,14 +1,12 @@
 <script>
-  import { page, InertiaLink } from "@inertiajs/inertia-svelte";
-  import { Inertia } from "@inertiajs/inertia";
+  import { page } from "@inertiajs/inertia-svelte";
   import Layout from "@p-shared/PublicPagesLayout";
   import LatestNews from "@p-shared/Partials/LatestNews";
   import ReachUs from "@p-pages/Team/ReachUs";
   import FlashMessage from "@p-shared/FlashMessage";
-  import route from "ziggy";
   import { onMount } from "svelte";
 
-  $: ({ app, errors, flash, blogPost, categories, latestArticles } = $page);
+  $: ({ app, blogPost, categories, latestArticles } = $page.props);
 
   onMount(() => {
     jQuery("img[data-enlarge]").each(function() {

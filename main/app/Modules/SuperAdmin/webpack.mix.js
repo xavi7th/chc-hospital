@@ -28,3 +28,4 @@ mix.scripts([
 	], 'public_html/js/dashboard-init-22-06-2020.js');
 
 mix.js(__dirname + '/Resources/js/app.js', 'js/dashboard-app.js')
+mix.sass(__dirname + '/Resources/sass/app.scss', 'css/admin-app.css')

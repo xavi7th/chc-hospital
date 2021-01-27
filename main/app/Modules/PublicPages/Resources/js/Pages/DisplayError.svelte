@@ -1,5 +1,4 @@
 <script>
-  import route from "ziggy";
   import { page } from "@inertiajs/inertia-svelte";
 
   export let status;
@@ -119,7 +118,7 @@
 </style>
 
 <svelte:head>
-  <title>{title ? `${title} | ${$page.app.name}` : $page.app.name}</title>
+  <title>{title ? `${title} | ${$page.props.app.name}` : $page.props.app.name}</title>
   <link
     href="https://fonts.googleapis.com/css?family=Montserrat:400,700,900"
     rel="stylesheet" />

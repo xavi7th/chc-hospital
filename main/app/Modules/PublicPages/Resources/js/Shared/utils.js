@@ -80,3 +80,21 @@ export let truncateString = ( str, num, stripHtml = true ) => {
     }
     return str.slice( 0, num ) + '...'
 }
+
+export const getMonthString = (date, longMonth = false) => {
+	let longMonths = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October",
+    "November", "December"];
+	let months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sept", "Oct",
+    "Nov", "Dec"];
+
+	if (longMonth) return longMonths[date.getMonth()];
+	return months[date.getMonth()];
+}
+
+export const getDayString = (date, longDay = false) => {
+	let longDays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+	let days = ["Sun", "Mon", "Tue", "Wed", "Thurs", "Fri", "Sat"];
+
+	if (longDay) return longDays[date.getDay()];
+	return days[date.getDay()];
+}

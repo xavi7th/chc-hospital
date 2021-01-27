@@ -1,6 +1,7 @@
 <script>
   import { InertiaLink } from "@inertiajs/inertia-svelte";
-  import route from "ziggy";
+	import { inertia } from '@inertiajs/inertia-svelte'
+
 </script>
 
 <header>
@@ -163,13 +164,10 @@
           <i class="fa fa-cog mr-10" />
           Settings
         </a> -->
-        <InertiaLink
-          method="post"
-          href={route('superadmin.logout')}
-          class="dropdown-item">
+        <button class="dropdown-item" use:inertia="{{ href: route('superadmin.logout'), method:'post' }}">
           <i class="fas fa-sign-out-alt mr-10" />
           Log Out
-        </InertiaLink>
+        </button>
       </div>
     </div>
   </div>

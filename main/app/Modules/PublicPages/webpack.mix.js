@@ -44,3 +44,4 @@ mix.scripts([
 mix.scripts(__dirname + '/Resources/js/vendor/custom.js', 'public_html/js/app-init-06-06-20.js');
 
 mix.js(__dirname + '/Resources/js/app.js', 'js/app.js')
+mix.sass(__dirname + '/Resources/sass/app.scss', 'css')

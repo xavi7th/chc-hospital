@@ -1,7 +1,6 @@
 <script>
   import axios from "axios";
-  import { truncateString } from "@p-shared/utils";
-  import moment from "moment";
+  import { truncateString, getMonthString } from "@p-shared/utils";
 
   let articles = [];
   let randomPage = Math.floor(Math.random() * (+25 - +1)) + +1;
@@ -36,7 +35,7 @@
                 <div class="inner">
                   <div class="date">
                     <b>{new Date(newsItem.webPublicationDate).getDate()}</b>
-                    {moment(newsItem.webPublicationDate).format('MMM')}
+                    {getMonthString(new Date(newsItem.webPublicationDate))}
                   </div>
 
                 </div>
