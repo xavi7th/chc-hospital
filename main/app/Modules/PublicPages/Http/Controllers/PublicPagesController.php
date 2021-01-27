@@ -86,8 +86,7 @@ class PublicPagesController extends Controller
   {
     return Inertia::render('PublicPages,Career', [
       'jobListings' => JobListing::latest()->get()
-    ])->withViewData([
-      'title' => 'About Capitol Hill Hospital/Clinic Warri',
+    ])->withViewData(['title' => 'Work With Us',
     ]);
   }
 

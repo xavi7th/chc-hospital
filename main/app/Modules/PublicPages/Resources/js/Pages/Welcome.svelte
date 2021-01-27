@@ -804,9 +804,9 @@
           </div>
 
         </div>
-        <center>
-          <a href="services" class="thm-btn">See More</a>
-        </center>
+        <div class="col-md-12 text-center">
+          <InertiaLink class="thm-btn" href={route('app.services')}>See more</InertiaLink>
+        </div>
       </div>
 
     </div>
@@ -1218,7 +1218,7 @@
             <br />
             set us apart.
           </h2>
-          <a href="career" class="thm-btn inverse">Be a part of us</a>
+          <InertiaLink href="{route('app.career')}" class="thm-btn inverse">Be a part of us</InertiaLink>
         </div>
         <div class="col-lg-6 col-md-8">
           <div class="single-fact">

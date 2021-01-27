@@ -88,23 +88,23 @@
                         <li>
                             <span class="border" />
                             <div class="content">
-                                <a href="news-radiology">
+                                <InertiaLink href="news-radiology">
                                     Radiology and Imaging
-                                </a>
+                                </InertiaLink>
                                 <span>January 28, 2016</span>
                             </div>
                         </li>
                         <li>
                             <span class="border" />
                             <div class="content">
-                                <a href="news-ebola">Ebola Virus</a>
+                                <InertiaLink href="news-ebola">Ebola Virus</InertiaLink>
                                 <span>August 11, 2016</span>
                             </div>
                         </li>
                         <li>
                             <span class="border" />
                             <div class="content">
-                                <a href="news-patient">patients Experience</a>
+                                <InertiaLink href="news-patient">patients Experience</InertiaLink>
                                 <span>August 8, 2016</span>
                             </div>
                         </li>

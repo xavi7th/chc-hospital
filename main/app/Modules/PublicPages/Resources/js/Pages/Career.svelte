@@ -6,7 +6,9 @@
     import ReachUs from "@p-pages/Team/ReachUs";
     import FlashMessage from "@p-shared/FlashMessage.svelte";
 
-    $: ({ app, errors, jobListings } = $page.props);
+    $: ({ app, errors } = $page.props);
+
+    export let jobListings;
 
     let details = {};
 

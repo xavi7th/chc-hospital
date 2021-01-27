@@ -1,5 +1,5 @@
 <script>
-  import { page } from "@inertiajs/inertia-svelte";
+  import { InertiaLink, page } from "@inertiajs/inertia-svelte";
   import Layout from "@p-shared/PublicPagesLayout";
   $: ({ app } = $page.props);
 </script>
@@ -23,6 +23,7 @@
           <span class="inner" />
         </span>
       </div>
+
       <div class="row">
         <div class="col-md-4">
           <div class="single-service-home">
@@ -33,7 +34,7 @@
                 comprehensive / quality dental care and customizable dental
                 plans.
               </p>
-              <a href="dental-services">Read More</a>
+              <InertiaLink href="{route('app.service', 'dental-services')}">Read More</InertiaLink>
             </div>
           </div>
         </div>
@@ -46,7 +47,7 @@
                 that measures how well a person can move air in and out of their
                 lungs.
               </p>
-              <a href="spirometry">Read More</a>
+              <InertiaLink href="{route('app.service', 'spirometry')}">Read More</InertiaLink>
             </div>
           </div>
         </div>
@@ -58,7 +59,7 @@
                 We are able to provide quality neurology transcription service
                 that can meet your requirements in a cost-effective manner.
               </p>
-              <a href="neurology">Read More</a>
+              <InertiaLink href="{route('app.service', 'neurology')}">Read More</InertiaLink>
             </div>
           </div>
         </div>
@@ -73,7 +74,7 @@
                 Our professionals have provided specialized cared for patients
                 with renal disease for more than 40 years.
               </p>
-              <a href="dialysis">Read More</a>
+              <InertiaLink href="{route('app.service', 'dialysis')}">Read More</InertiaLink>
             </div>
           </div>
         </div>
@@ -85,7 +86,7 @@
                 Our team of board-certified radiologists offers services that
                 range from X-ray and fluoroscopy tests to CT scans
               </p>
-              <a href="radiological-services">Read More</a>
+              <InertiaLink href="{route('app.service', 'radiological-services')}">Read More</InertiaLink>
             </div>
           </div>
         </div>
@@ -97,7 +98,7 @@
                 Our obstetricians/gynecologists Clinic provide a broad range of
                 basic and specialized medical and surgical services,
               </p>
-              <a href="Obstetric">Read More</a>
+              <InertiaLink href="{route('app.service', 'Obstetric')}">Read More</InertiaLink>
             </div>
           </div>
         </div>
@@ -112,7 +113,7 @@
                 We evaluate and monitor dietetic intervention to help ensure a
                 positive effect on patients' nutritional status
               </p>
-              <a href="dietetic-services">Read More</a>
+              <InertiaLink href="{route('app.service', 'dietetic-services')}">Read More</InertiaLink>
             </div>
           </div>
         </div>
@@ -124,7 +125,7 @@
                 Our Ear, Nose and Throat Center delivers excellence,
                 compassionate and comprehensive ENT Care
               </p>
-              <a href="ent-services">Read More</a>
+              <InertiaLink href="{route('app.service', 'ent-services')}">Read More</InertiaLink>
             </div>
           </div>
         </div>
@@ -137,7 +138,7 @@
                 Developmental Medicine aims to provide optimum state-of-the-art
                 care for critically ill and recovering neonates and infants
               </p>
-              <a href="neonatology">Read More</a>
+              <InertiaLink href="{route('app.service', 'neonatology')}">Read More</InertiaLink>
             </div>
           </div>
         </div>
@@ -152,7 +153,7 @@
                 We offer Professional Diagnostic Services in every division of
                 its areas of expertise
               </p>
-              <a href="diagnostic">Read More</a>
+              <InertiaLink href="{route('app.service', 'diagnostic')}">Read More</InertiaLink>
             </div>
           </div>
         </div>
@@ -165,7 +166,7 @@
                 us one of the best hospitals in the area for Children & Young
                 People services
               </p>
-              <a href="paediatrics">Read More</a>
+              <InertiaLink href="{route('app.service', 'paediatrics')}">Read More</InertiaLink>
             </div>
           </div>
         </div>
@@ -177,7 +178,7 @@
                 We are fortunate to have many physicians who are skilled at both
                 minimally invasive and traditional surgical procedures.
               </p>
-              <a href="surgery">Read More</a>
+              <InertiaLink href="{route('app.service', 'surgery')}">Read More</InertiaLink>
             </div>
           </div>
         </div>
@@ -192,7 +193,7 @@
                 At Capitol Hill Hospital Laboratory, tests are carried out
                 in-house using state-of-the-art medical diagnostic equipment
               </p>
-              <a href="laboratory">Read More</a>
+              <InertiaLink href="{route('app.service', 'laboratory')}">Read More</InertiaLink>
             </div>
           </div>
         </div>
@@ -205,7 +206,7 @@
                 patient's skin is the largest organ of their body, and it is
                 also one of the first things people notice
               </p>
-              <a href="dermatology">Read More</a>
+              <InertiaLink href="{route('app.service', 'dermatology-clinic')}">Read More</InertiaLink>
             </div>
           </div>
         </div>
@@ -217,7 +218,7 @@
                 We provide comprehensive pharmaceutical services to a population
                 of over two hundred thousand (200,000) patients Annually
               </p>
-              <a href="pharmaceutical">Read More</a>
+              <InertiaLink href="{route('app.service', 'pharmaceutical-services')}">Read More</InertiaLink>
             </div>
           </div>
         </div>
@@ -233,7 +234,7 @@
                 you every step of the way, from consultation to surgery and
                 recovery
               </p>
-              <a href="plastic-surgery">Read More</a>
+              <InertiaLink href="{route('app.service', 'plastic-surgery')}">Read More</InertiaLink>
             </div>
           </div>
         </div>
@@ -246,7 +247,7 @@
                 a multi-purpose area designed to provide intensive comprehensive
                 care 24/7 to seriously ill patients
               </p>
-              <a href="intensive-care">Read More</a>
+              <InertiaLink href="{route('app.service', 'intensive-care')}">Read More</InertiaLink>
             </div>
           </div>
         </div>
@@ -259,7 +260,7 @@
                 Hospital is a 24-hour, 7-day a week, full service department
                 offering immediate and effective evaluation and treatment
               </p>
-              <a href="emergency-care">Read More</a>
+              <InertiaLink href="{route('app.service', 'emergency-care')}">Read More</InertiaLink>
             </div>
           </div>
         </div>
@@ -275,7 +276,7 @@
                 hundreds of thousands of treatments for critically ill adults,
                 children and
               </p>
-              <a href="high-dependency-care">Read More</a>
+              <InertiaLink href="{route('app.service', 'high-dependency-care')}">Read More</InertiaLink>
             </div>
           </div>
         </div>
@@ -288,7 +289,7 @@
                 specially trained to treat visual problems, disorders of the
                 eyelids, and ocular surface diseases
               </p>
-              <a href="ophthamology">Read More</a>
+              <InertiaLink href="{route('app.service', 'ophthalmology')}">Read More</InertiaLink>
             </div>
           </div>
         </div>
@@ -301,7 +302,7 @@
                 childhood infectious diseases, such as diphtheria, measles, and
                 Haemophilus influenzae type b (Hib)
               </p>
-              <a href="vaccination">Read More</a>
+              <InertiaLink href="{route('app.service', 'vaccination')}">Read More</InertiaLink>
             </div>
           </div>
         </div>
@@ -317,7 +318,7 @@
                 we make use of advanced technology that guarantees a life time
                 living comfort.
               </p>
-              <a href="hospital-services">Read More</a>
+              <InertiaLink href="{route('app.service', 'hospital-services')}">Read More</InertiaLink>
             </div>
           </div>
         </div>
@@ -330,7 +331,7 @@
                 of comprehensive health insurance our top priority and our
                 fundamental goal
               </p>
-              <a href="health-insurance">Read More</a>
+              <InertiaLink href="{route('app.service', 'health-insurance')}">Read More</InertiaLink>
             </div>
           </div>
         </div>
@@ -343,7 +344,7 @@
                 scheme to sell All Types of Private Insurance to well qualified
                 individual(s) or company(s)
               </p>
-              <a href="private-insurance">Read More</a>
+              <InertiaLink href="{route('app.service', 'private-insurance')}">Read More</InertiaLink>
             </div>
           </div>
         </div>
@@ -358,7 +359,7 @@
                 At Capitol Hill Clinic / Hospital We offer Professional
                 Diagnostic Audiological Evaluation Services.
               </p>
-              <a href="audiological-evaluation">Read More</a>
+              <InertiaLink href="{route('app.service', 'audiological-evaluation')}">Read More</InertiaLink>
             </div>
           </div>
         </div>
@@ -371,7 +372,7 @@
                 programs, can partner with your company to comply with the
                 Occupational Safety
               </p>
-              <a href="hearing-conservation">Read More</a>
+              <InertiaLink href="{route('app.service', 'hearing-conservation')}">Read More</InertiaLink>
             </div>
           </div>
         </div>
@@ -383,7 +384,7 @@
                 We are endorsed by various relevant bodies to train and issue
                 relevant medical certificate to qualified personnel
               </p>
-              <a href="medical-certification">Read More</a>
+              <InertiaLink href="{route('app.service', 'medical-certification')}">Read More</InertiaLink>
             </div>
           </div>
         </div>
@@ -398,7 +399,7 @@
                 We have a reasonable number of senior medical officers, who are
                 highly trained and have a great deal of experience.
               </p>
-              <a href="general-medicine">Read More</a>
+              <InertiaLink href="{route('app.service', 'general-medicine')}">Read More</InertiaLink>
             </div>
           </div>
         </div>
@@ -412,7 +413,7 @@
                 services for In-patient referrals, and Out-patient clinic
                 consultations
               </p>
-              <a href="specialist-consultation">Read More</a>
+              <InertiaLink href="{route('app.service', 'specialist-consultations')}">Read More</InertiaLink>
             </div>
           </div>
         </div>
@@ -427,7 +428,7 @@
                 workforce to optimal level, thereby achieving cost effective
                 business goals.
               </p>
-              <a href="occupational-health">Read More</a>
+              <InertiaLink href="{route('app.service', 'occupational-health')}">Read More</InertiaLink>
             </div>
           </div>
         </div>
@@ -443,7 +444,7 @@
                 specially trained to treat bone related problems, like disorders
                 of spines and joints
               </p>
-              <a href="orthopaedic">Read More</a>
+              <InertiaLink href="{route('app.service', 'orthopaedic')}">Read More</InertiaLink>
             </div>
           </div>
         </div>
@@ -456,7 +457,7 @@
                 specially trained to treat problems with the nervous system,
                 especially disorders of the brain.
               </p>
-              <a href="specialist-consultation">Read More</a>
+              <InertiaLink href="{route('app.service', 'neurosurgery')}">Read More</InertiaLink>
             </div>
           </div>
         </div>

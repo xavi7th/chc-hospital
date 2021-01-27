@@ -63,7 +63,7 @@ class Handler extends ExceptionHandler
         $this->log404($request);
       }
       try {
-        return Inertia::render('DisplayError', ['status' => $response->status()])
+        return Inertia::render('PublicPages,DisplayError', ['status' => $response->status()])
           ->toResponse($request)
           ->setStatusCode($response->status());
       } catch (\Throwable $th) { }

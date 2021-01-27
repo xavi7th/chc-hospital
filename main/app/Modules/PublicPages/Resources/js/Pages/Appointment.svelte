@@ -1,5 +1,5 @@
 <script>
-  import { page, InertiaLink } from "@inertiajs/inertia-svelte";
+  import { page } from "@inertiajs/inertia-svelte";
   import Layout from "@p-shared/PublicPagesLayout";
   $: ({ app } = $page.props);
 
@@ -8,30 +8,7 @@
   };
 </script>
 
-<Layout title="Our Quality Policy">
-  <section class="inner-header">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12 sec-title colored text-center">
-          <h2>Appointment</h2>
-          <ul class="breadcumb">
-            <li>
-              <a href="home">Home</a>
-            </li>
-            <li>
-              <i class="fa fa-angle-right" />
-            </li>
-            <li>
-              <span>Appointment</span>
-            </li>
-          </ul>
-          <span class="decor">
-            <span class="inner" />
-          </span>
-        </div>
-      </div>
-    </div>
-  </section>
+<Layout title="Book an Appointment">
 
   <section class="sec-padding contact-content appointment-content" id="form">
     <div class="container">
